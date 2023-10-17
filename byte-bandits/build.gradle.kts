@@ -21,6 +21,7 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
 	implementation("io.ktor:ktor-server-core-jvm")
 	implementation("io.ktor:ktor-server-auth-jvm")
@@ -33,5 +34,6 @@ dependencies {
 	implementation("io.ktor:ktor-server-netty-jvm")
 	implementation("ch.qos.logback:logback-classic:$logback_version")
 	testImplementation("io.ktor:ktor-server-tests-jvm")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+	testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
+	testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
 }
