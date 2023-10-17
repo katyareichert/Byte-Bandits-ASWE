@@ -1,32 +1,46 @@
 package bytebandits.plugins
 
 import bytebandits.encryption.encryptMe
-import bytebands.persistence.saveDataToFile
+import bytebandits.models.SimpleFileRequest
+import bytebands.persistence.SimpleFilePersister
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.LoggerFactory
-import java.util.logging.LogManager
+import java.lang.Exception
 
 val logger = LoggerFactory.getLogger("RoutesLogger")
 
+
+//TODO : move the routes into their own classes files
 fun Application.configureRouting() {
 	routing {
 		route("/storage/Submit", HttpMethod.Post){
 			handle {
-				val parameters =  call.parameters
 				//test code below, need to get the fields from http request
-				val encrypedData = encryptMe("Test", "test")
-				logger.info("Hi there, welcome ${call.parameters}")
+				try{
+					val requestData = call.receive<SimpleFileRequest>()
+					var saved = SimpleFilePersister.SimpleFilePersist(requestData)
+					call.respondText (status = HttpStatusCode.OK ){ "This worked: $saved" }
+				}catch (e: Exception) {
+					call.respondText( status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+				}
 			}
 		}
 
-		route("/storage/Get", HttpMethod.Get){
+		route("/storage/Get/{user}/{record_key}", HttpMethod.Get){
 			handle {
-				val parameters =  call.parameters
-				logger.info("Hi there, welcome ${call.parameters}")
-				call.respondText("hello")
+				try {
+					val user = call.parameters["user"] ?: "default_user"
+					val recordKey = call.parameters["record_key"] ?: "default_key"
+
+					val responseText = SimpleFilePersister.SimpleFileRetrieve(user, recordKey)
+					call.respondText(status = HttpStatusCode.OK) { responseText }
+				}catch (e: Exception){
+					call.respondText( status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+				}
 			}
 		}
 	}
