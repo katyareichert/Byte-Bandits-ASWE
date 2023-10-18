@@ -1,8 +1,8 @@
 package bytebandits.encryption
 
-import kotlin.random.Random
+import java.security.SecureRandom
 
-fun passGen(userLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String{
+fun passwordGen(userLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String{
     /* Returns password of user generated or default length. Specifications override default allowable characters*/
 
     //set password length
@@ -42,9 +42,19 @@ fun passGen(userLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacte
 
     //build password
     var password = ""
+    val rand = SecureRandom() //create secure random int
+    var randInt: Int = rand.nextInt(characterList.length)
     for (i: Int in 1.rangeTo(passLen)){
-        password += characterList[Random.nextInt(from = 0, until = characterList.length)]
+        password += characterList[randInt]
+        randInt = rand.nextInt(characterList.length)
     }
 
     return password
+}
+
+fun passkeyGen (passLen: Int?, password: String?): ByteArray{
+    /*Returns new passkey*/
+
+    //  PBKDF2(Password, Salt, PRF, c, dkLen)
+    return byteArrayOf(0b00000000) //temp return
 }
