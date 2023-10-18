@@ -1,15 +1,15 @@
 package bytebandits.plugins
 
-import bytebandits.encryption.encryptMe
 import bytebandits.models.SimpleFileRequest
 import bytebands.persistence.SimpleFilePersister
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.LoggerFactory
-import java.lang.Exception
 
 val logger = LoggerFactory.getLogger("RoutesLogger")
 
@@ -17,6 +17,24 @@ val logger = LoggerFactory.getLogger("RoutesLogger")
 //TODO : move the routes into their own classes files
 fun Application.configureRouting() {
 	routing {
+		//This addds authentication, the route is now protected
+		authenticate{
+			route("/storage/Test", HttpMethod.Get){
+				handle {
+					try{
+						val principal = call.principal<JWTPrincipal>()
+						val username = principal!!.payload.getClaim("username").asString()
+						val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
+						call.respondText (status = HttpStatusCode.OK ){ "This worked" }
+					}catch (e: Exception){
+
+					}
+				}
+
+			}
+		}
+
+
 		route("/storage/Submit", HttpMethod.Post){
 			handle {
 				//test code below, need to get the fields from http request
