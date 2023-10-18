@@ -2,6 +2,7 @@ package bytebandits.encryption
 
 import bytebandits.interfaces.Encrypter
 import javax.crypto.Cipher
+import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 
@@ -9,12 +10,18 @@ public class Encryption  {
 
   companion object : Encrypter {
     override fun FileEncrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
+      val secretKey: SecretKey
 
       if (!isValidScheme(scheme)) {
         throw IllegalArgumentException("Invalid encryption scheme: $scheme")
       }
 
-      val secretKey = validateAndPrepareKey(key)
+      try {
+        secretKey = validateAndPrepareKey(key)
+      } catch (e: IllegalArgumentException) {
+        throw IllegalArgumentException("Invalid key: ${e.message}")
+      }
+
       val cipher = Cipher.getInstance(scheme)
       cipher.init(Cipher.ENCRYPT_MODE, secretKey)
 
@@ -27,42 +34,45 @@ public class Encryption  {
       // Call FileEncrypt(contents, key, scheme)
       return "Hey, i'm a file".toByteArray()
     }
-
     override fun FileDecrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
+      val secretKey: SecretKey
+
       if (!isValidScheme(scheme)) {
         throw IllegalArgumentException("Invalid encryption scheme: $scheme")
       }
 
-      val secretKey = validateAndPrepareKey(key)
+      try {
+        secretKey = validateAndPrepareKey(key)
+      } catch (e: IllegalArgumentException) {
+        throw IllegalArgumentException("Invalid key: ${e.message}")
+      }
+
       val cipher = Cipher.getInstance(scheme)
       cipher.init(Cipher.DECRYPT_MODE, secretKey)
-
-      return cipher.doFinal(contents)
+      try {
+        return cipher.doFinal(contents)
+      } catch (e: Exception) {
+        throw IllegalArgumentException("Invalid key: ${e.message}")
+      }
     }
 
     override fun FileDecrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray {
       return "Hey, i'm a file".toByteArray()
     }
 
-    fun isValidScheme(scheme: String?): Boolean {
+    private fun isValidScheme(scheme: String?): Boolean {
       // Implement your scheme validation logic here
       // Return true if the scheme is valid, false otherwise
-      return scheme == "AES" || scheme == "AES192" || scheme == "AES256"
+      return scheme == "AES"
     }
-    fun validateAndPrepareKey(key: ByteArray?) : SecretKeySpec {
+    private fun validateAndPrepareKey(key: ByteArray?) : SecretKeySpec {
       if (key == null) {
         throw IllegalArgumentException("Key must not be null")
       }
-      if (key.size != 16 && key.size != 24 && key.size != 32) {
-        throw IllegalArgumentException("Key must be 16, 24, or 32 bytes in length")
+      if (key.size != 32) {
+        throw IllegalArgumentException("Key must be 32 bytes in length")
       }
       return SecretKeySpec(key, "AES")
     }
   }
 }
-
-//object KeyDeriver {
-//  fun deriveKeyFromPassword(password: String, keyLength: Int): ByteArray {
-//    // Implement key derivation logic here
-//  }
-//}
