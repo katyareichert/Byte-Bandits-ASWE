@@ -1,14 +1,15 @@
 package bytebandits.encryption
 
+import bytebandits.interfaces.PassKeyGeneration
 import java.security.SecureRandom
 
-fun passwordGen(userLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String{
+fun passwordGen(givenLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String{
     /* Returns password of user generated or default length. Specifications override default allowable characters*/
 
     //set password length
     var passLen = 14 //recommended strong password length
-    if (userLen != null) {
-        passLen = userLen //standard strong password length
+    if (givenLen != null) {
+        passLen = givenLen //standard strong password length
     }
 
     //gather set of valid characters
@@ -52,9 +53,10 @@ fun passwordGen(userLen: Int?, digits: Boolean?, capitals: Boolean?, specialChar
     return password
 }
 
-fun passkeyGen (passLen: Int?, password: String?): ByteArray{
-    /*Returns new passkey*/
+fun passkeyGen (givenLen: Int?, password: String?, salt: String?): ByteArray{
+    /*Returns new passkey (optionally generated from password)*/
 
-    //  PBKDF2(Password, Salt, PRF, c, dkLen)
+    // TODO: implement PBKDF2(Password, Salt, PRF, c, dkLen)
+
     return byteArrayOf(0b00000000) //temp return
 }
