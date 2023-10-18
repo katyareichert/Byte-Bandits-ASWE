@@ -35,8 +35,6 @@ dependencies {
 	implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 	implementation("io.ktor:ktor-server-netty-jvm")
 	implementation("ch.qos.logback:logback-classic:$logback_version")
-	implementation("dev.whyoleg.cryptography:cryptography-core:0.2.0")
-	implementation("dev.whyoleg.cryptography:cryptography-provider-jdk:0.2.0")
 	testImplementation("io.ktor:ktor-server-tests-jvm")
 	testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 	testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
