@@ -7,7 +7,7 @@ interface SimplePersister{
 	fun SimpleFileRetrieve(user: String, key: String): String
 }
 
-interface SimpleEncrypter{
+interface Encrypter{
 	fun SimpleFileEncrypt(contents:String, key: String?): Boolean
 	fun SimpleFileDecrypt(contents: String, key: String?, scheme:String): String
 	fun SimpleFileDecrypt(contents: ByteArray, key: String?, scheme:String): ByteArray
