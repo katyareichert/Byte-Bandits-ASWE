@@ -1,7 +1,7 @@
 package bytebandits.plugins
 
 import bytebandits.models.SimpleFileRequest
-import bytebands.persistence.SimpleFilePersister
+import bytebandits.persistence.SimpleFilePersister
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
