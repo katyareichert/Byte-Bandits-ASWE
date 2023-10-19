@@ -1,14 +1,23 @@
 openapi: "3.0.3"
 info:
-    title: "Application API"
-    description: "Application API"
+    title: "Security Tools API"
+    description: "This Security Tools Service will provide computer security-oriented tools.
+    Among the main features will be: basic antivirus check for files, generation of digital
+    certificates and signature verification, file encryption and decryption, secure file
+    archive, password and key generation, file integrity protection, and a password wallet.\n\n
+    Created by Team ByteBandits\n
+        - Aryana Mohammadi (am5723)\n
+        - Hugo Matousek (hm2953)\n
+        - Karthik Guda (kg2982)\n
+        - Katya Reichert (kpr2120)
+    "
     version: "1.0.0"
 servers:
     -   url: "http://0.0.0.0:8080"
 paths:
-    /storage/Get:
+    /storage/Test:
         get:
-            description: "Test storage"
+            summary: "Test secure storage"
             responses:
                 "200":
                     description: "OK"
@@ -36,7 +45,21 @@ paths:
                     description: Bad Gateway
     /storage/Get/{user}/{record_key}:
         get:
-            description: "Get file from storage"
+            summary: "Get file from storage"
+            parameters:
+                - name: user
+                  in: path
+                  description: User ID
+                  required: true
+                  schema:
+                      type: string
+                - name: record_key
+                  in: path
+                  description: Record Key of File to Retrieve
+                  required: true
+                  schema:
+                      type: string
+
             responses:
                 "200":
                     description: "OK"
