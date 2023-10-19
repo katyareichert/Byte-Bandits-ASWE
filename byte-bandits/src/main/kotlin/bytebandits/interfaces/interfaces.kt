@@ -22,7 +22,7 @@ interface PassKeyGenerator {
 }
 
 interface VirusChecker{
-	fun VirusCheck(file: File): String
+	fun virusCheck(file: File): String
 
-	fun ReportVirus(file: File): String
+	fun reportVirus(file: File): String
 }
