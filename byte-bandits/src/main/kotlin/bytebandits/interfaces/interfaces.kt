@@ -14,7 +14,7 @@ interface Encrypter{
 	fun FileDecrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray
 }
 
-interface PassKeyGeneration {
+interface PassKeyGenerator {
 	fun passwordGen(givenLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String
 	fun passkeyGen (givenLen: Int?, password: String?, salt: String?): ByteArray
 }
