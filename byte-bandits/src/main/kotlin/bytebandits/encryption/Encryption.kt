@@ -6,10 +6,10 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 
-public class Encryption  {
+public class Encryption {
 
   companion object : Encrypter {
-    override fun FileEncrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
+    override fun fileEncrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
       val secretKey: SecretKey
 
       if (!isValidScheme(scheme)) {
@@ -29,12 +29,12 @@ public class Encryption  {
     }
 
 
-    override fun FileEncrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray {
+    override fun fileEncrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray {
       // Derive key from password
       // Call FileEncrypt(contents, key, scheme)
       return "Hey, i'm a file".toByteArray()
     }
-    override fun FileDecrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
+    override fun fileDecrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
       val secretKey: SecretKey
 
       if (!isValidScheme(scheme)) {
@@ -56,7 +56,7 @@ public class Encryption  {
       }
     }
 
-    override fun FileDecrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray {
+    override fun fileDecrypt(contents: ByteArray, password: String?, scheme: String?): ByteArray {
       return "Hey, i'm a file".toByteArray()
     }
 

@@ -8,8 +8,8 @@ class EncryptionTests{
     val testFileContent = "This is a test file".toByteArray()
     val testValid256Key = "12345678901234567890123456789012".toByteArray()
 
-    val encryptedFile = Encryption.FileEncrypt(testFileContent, testValid256Key, "AES")
-    val decryptedFile = Encryption.FileDecrypt(encryptedFile, testValid256Key, "AES")
+    val encryptedFile = Encryption.fileEncrypt(testFileContent, testValid256Key, "AES")
+    val decryptedFile = Encryption.fileDecrypt(encryptedFile, testValid256Key, "AES")
 
     assertTrue(testFileContent.contentEquals(decryptedFile))
   }
@@ -20,10 +20,10 @@ class EncryptionTests{
     val testValid256Key = "12345678901234567890123456789012".toByteArray()
     val testValid256KeyWrong = "12345678901234567890123456789013".toByteArray()
 
-    val encryptedFile = Encryption.FileEncrypt(testFileContent, testValid256Key, "AES")
+    val encryptedFile = Encryption.fileEncrypt(testFileContent, testValid256Key, "AES")
 
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileDecrypt(encryptedFile, testValid256KeyWrong, "AES")
+      Encryption.fileDecrypt(encryptedFile, testValid256KeyWrong, "AES")
     }
   }
 
@@ -33,11 +33,11 @@ class EncryptionTests{
     val testValid256Key = "12345678901234567890123456789012".toByteArray()
 
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileEncrypt(testFileContent, testValid256Key, "WRONG")
+      Encryption.fileEncrypt(testFileContent, testValid256Key, "WRONG")
     }
 
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileDecrypt(testFileContent, testValid256Key, "WRONG")
+      Encryption.fileDecrypt(testFileContent, testValid256Key, "WRONG")
     }
   }
 
@@ -48,16 +48,16 @@ class EncryptionTests{
     val testInvalidKeyLong = "123456789012345678901234567890123".toByteArray()
 
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileEncrypt(testFileContent, testInvalidKeyShort, "AES")
+      Encryption.fileEncrypt(testFileContent, testInvalidKeyShort, "AES")
     }
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileEncrypt(testFileContent, testInvalidKeyLong, "AES")
+      Encryption.fileEncrypt(testFileContent, testInvalidKeyLong, "AES")
     }
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileDecrypt(testFileContent, testInvalidKeyShort, "AES")
+      Encryption.fileDecrypt(testFileContent, testInvalidKeyShort, "AES")
     }
     assertFailsWith(IllegalArgumentException::class){
-      Encryption.FileDecrypt(testFileContent, testInvalidKeyLong, "AES")
+      Encryption.fileDecrypt(testFileContent, testInvalidKeyLong, "AES")
     }
   }
 }
