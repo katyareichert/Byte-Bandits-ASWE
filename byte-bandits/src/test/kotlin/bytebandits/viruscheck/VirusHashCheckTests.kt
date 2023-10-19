@@ -20,7 +20,7 @@ class VirusHashCheckTests{
 
     @Test
     fun testVirusCheckInternalMatch(){
-        val testFile = File("../../../../../resources/samplefiles/sample1.pdf")
+        val testFile = File("../../../../../resources/samplefiles/knownVirus.pdf")
         val matchString = VirusHashChecker.VirusCheck(testFile)
 
         assertThat(matchString, equalTo("File is a known virus. Please delete immediately."))
@@ -28,7 +28,7 @@ class VirusHashCheckTests{
 
     @Test
     fun testVirusCheckNoMatches(){
-        val testFile = File("../../../../../resources/samplefiles/sample2.pdf")
+        val testFile = File("../../../../../resources/samplefiles/regularFile.pdf")
         val matchString = VirusHashChecker.VirusCheck(testFile)
 
         assertThat(matchString, equalTo("File did not match any known viruses."))
