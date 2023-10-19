@@ -6,9 +6,9 @@ info:
 servers:
     -   url: "http://0.0.0.0:8080"
 paths:
-    /:
+    /storage/Test:
         get:
-            description: "Hello World!"
+            description: "Test storage"
             responses:
                 "200":
                     description: "OK"
@@ -19,5 +19,35 @@ paths:
                             examples:
                                 Example#1:
                                     value: "Hello World!"
+    /storage/Submit:
+        post:
+            summary: "Submit file to storage"
+            requestBody:
+                description: "Optional description in *Markdown*"
+                required: true
+                content:
+                    text/plain:
+                        schema:
+                            type: string
+            responses:
+                '201':
+                    description: Created
+                '502':
+                    description: Bad Gateway
+    /storage/Get/{user}/{record_key}:
+        get:
+            description: "Get file from storage"
+            responses:
+                "200":
+                    description: "OK"
+                    content:
+                        text/plain:
+                            schema:
+                                type: "string"
+                            examples:
+                                Example#1:
+                                    value: "Hello World!"
+                "502":
+                    description: "Bad Gateway"
 components:
     schemas:
