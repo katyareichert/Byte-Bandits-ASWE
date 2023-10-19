@@ -16,5 +16,5 @@ interface Encrypter{
 
 interface PassKeyGenerator {
 	fun passwordGen(givenLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String
-	fun passkeyGen (givenLen: Int?, password: String?, salt: String?): ByteArray
+	fun passkeyGen (givenLen: Int?, password: String?, givenSalt: String?): ByteArray
 }
