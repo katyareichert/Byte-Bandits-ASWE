@@ -12,7 +12,7 @@ class VirusHashCheckTests{
         val exception = assertFailsWith<IllegalArgumentException>(
             message = "No exception found",
             block = {
-                VirusHashChecker.VirusCheck(testFile)
+                VirusHashChecker.virusCheck(testFile)
             }
         )
         assertThat(exception.message, equalTo("File does not exist"))
@@ -21,7 +21,7 @@ class VirusHashCheckTests{
     @Test
     fun testVirusCheckInternalMatch(){
         val testFile = File("../../../../../resources/samplefiles/knownVirus.pdf")
-        val matchString = VirusHashChecker.VirusCheck(testFile)
+        val matchString = VirusHashChecker.virusCheck(testFile)
 
         assertThat(matchString, equalTo("File is a known virus. Please delete immediately."))
     }
@@ -29,7 +29,7 @@ class VirusHashCheckTests{
     @Test
     fun testVirusCheckNoMatches(){
         val testFile = File("../../../../../resources/samplefiles/regularFile.pdf")
-        val matchString = VirusHashChecker.VirusCheck(testFile)
+        val matchString = VirusHashChecker.virusCheck(testFile)
 
         assertThat(matchString, equalTo("File did not match any known viruses."))
     }

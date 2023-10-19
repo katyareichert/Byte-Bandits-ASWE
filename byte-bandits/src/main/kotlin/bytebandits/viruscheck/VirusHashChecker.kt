@@ -7,7 +7,7 @@ import java.io.File
 public  class VirusHashChecker {
     //This is a static method
     companion object : VirusChecker {
-        override fun VirusCheck(file: File): String {
+        override fun virusCheck(file: File): String {
             if (!file.exists() || !file.isFile) {
                 throw IllegalArgumentException("File does not exist")
             }
@@ -27,7 +27,7 @@ public  class VirusHashChecker {
             }
             return "File did not match any known viruses."
         }
-        override fun ReportVirus(file: File): String {
+        override fun reportVirus(file: File): String {
             TODO("Not yet implemented")
         }
         private fun calculateMD5(file: File): String {
