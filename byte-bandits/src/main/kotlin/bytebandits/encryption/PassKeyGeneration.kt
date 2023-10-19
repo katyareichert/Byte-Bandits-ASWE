@@ -1,7 +1,12 @@
 package bytebandits.encryption
 
 import bytebandits.interfaces.PassKeyGenerator
+import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
+import java.security.spec.InvalidKeySpecException
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
+
 
 public class PassKeyGeneration {
 
@@ -12,7 +17,7 @@ public class PassKeyGeneration {
             //set password length
             var passLen = 14 //recommended strong password length
             if (givenLen != null) {
-                passLen = givenLen //standard strong password length
+                passLen = givenLen //client given password length
             }
 
             //gather set of valid characters
@@ -56,12 +61,42 @@ public class PassKeyGeneration {
             return password
         }
 
-        override fun passkeyGen(givenLen: Int?, password: String?, salt: String?): ByteArray {
+        @Throws(NoSuchAlgorithmException::class, InvalidKeySpecException::class)
+        override fun passkeyGen(givenLen: Int?, password: String?, givenSalt: String?): ByteArray {
             /*Returns new passkey (optionally generated from password)*/
 
-            // TODO: implement PBKDF2(Password, Salt, PRF, c, dkLen)
+            //set password length
+            var passLen = 32 //recommended strong password length in bytes
+            if (givenLen != null) {
+                passLen = givenLen //client given password length
+            }
 
-            return byteArrayOf(0b00000000) //temp return
+            //passkey not from password
+            if (password == null) {
+                return getRandomBytes(passLen)
+            }
+
+            //passkey from password with PBKDF2 algorithm
+            val iterations = 120_000 //OWASP recommended iterations
+            val chars = password.toCharArray()
+            val salt: ByteArray = givenSalt?.toByteArray() ?: getRandomBytes(passLen) //salt = given salt or random bytes
+
+            val spec = PBEKeySpec(chars, salt, iterations, passLen * 8) //key length in bits
+            val skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
+            var hash = skf.generateSecret(spec).encoded
+
+            hash = salt.plus(hash) //if password is given, hash is returned with salt as first bits
+
+            return hash
+        }
+
+        @Throws(NoSuchAlgorithmException::class)
+        private fun getRandomBytes(size: Int): ByteArray {
+            /*Returns <size> random bytes with SHA1PRNG algorithm*/
+            val rand = SecureRandom.getInstance("SHA1PRNG")
+            val bytes = ByteArray(size)
+            rand.nextBytes(bytes)
+            return bytes
         }
 
     }
