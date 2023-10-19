@@ -12,12 +12,13 @@ public  class VirusHashChecker {
                 throw IllegalArgumentException("File does not exist")
             }
 
-            val mdHash = calculateMD5(file)
+            val searchHash = calculateMD5(file)
+            val internalDatabase = File("db.txt")
 
-            val matchFound = file.useLines { lines ->
+            val matchFound = internalDatabase.useLines { lines ->
                 lines.any { line ->
                     val md5Hash = line.trim()
-                    md5Hash == mdHash
+                    md5Hash == searchHash
                 }
             }
 
