@@ -8,7 +8,7 @@ fun main(){
 	val token = JWT.create()
 		.withAudience("jwt-audience")
 		.withIssuer("https://jwt-provider-domain/")
-		.withClaim("username", "adf")
+		.withClaim("clientId", "sample")
 		.withExpiresAt(Date(System.currentTimeMillis() + 600000))
 		.sign(Algorithm.HMAC256("secret"))
 	print(token)
