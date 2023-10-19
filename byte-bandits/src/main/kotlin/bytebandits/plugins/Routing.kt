@@ -7,6 +7,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.plugins.swagger.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -112,6 +113,10 @@ fun Application.configureRouting() {
 						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 					}
 				}
+			}
+
+			swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml") {
+				version = "4.15.5"
 			}
 		}
 	}
