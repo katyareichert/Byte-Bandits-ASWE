@@ -70,7 +70,7 @@ fun Application.configureRouting() {
 						val userId = call.parameters["userId"]
 
 						val responseText = FilePersister.simpleFileDelete(fileName, "storage", clientId, userId)
-						call.respondText(status = HttpStatusCode.OK) { responseText }
+						call.respondText(status = HttpStatusCode.OK) { responseText.toString() }
 					} catch (e: Exception) {
 						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 					}
