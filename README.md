@@ -18,7 +18,7 @@ Advanced Software Engineering Fall 2023 Project
 - For each endpoint, we forced each possible status code (OK or Bad Gateway)
 - We simulated multiple clients by using different JWT tokens, we have simulated this via postman tests by using multiple tokens.
 - Our storage endpoint is our persistent data aspect, and this was tested through Postman as well
-- For Postman responses, see: [here](/Byte-Bandits-ASWE/testing-screenshots/Iteration1/tests.md)
+- For Postman responses, see: [here](/testing-screenshots/Iteration1/tests.md)
 
 
 ### Unit Tests
@@ -42,15 +42,15 @@ Advanced Software Engineering Fall 2023 Project
 - Style checked with the IntelliJ integrated tool (as per our Project Proposal)
 - All issues reported by the IntelliJ integrated style check tool were addressed
 - In addition to the style check apporach from the proposal, we decided to also use Detekt, which is significantly more detailed and strict (as we aim to have the cleanest code possible in our final stage)
-- For the Detekt style checker report, see: [here - all formats](Byte-Bandits-ASWE/detekt) or [here - txt](/Byte-Bandits-ASWE/detekt/detekt.txt)
+- For the Detekt style checker report, see: [here - all formats](/detekt) or [here - txt](/detekt/detekt.txt)
 - Note that we still have some style issues (predominantly WildcardImport, MagicNumber, and Exception related). This is still work in progress as we try to address these - where applicable (which is not always the case). A portion of these is caused by the development stage (not all custom Exceptions are defined, a number of variables is hard-coded, etc.) and a portion of these is caused by using the standard rule set, which is extremely pedantic. We could use the @Supress notation, but since we plan to address the issues as much as possible, we decided againts it.
 
 
 ### Build, Run, & Test Instructions
-- Load the project into IntelliJ (or build directly with `gradle build` from the project [directory](/Byte-Bandits-ASWE/byte-bandits))
+- Load the project into IntelliJ (or build directly with `gradle build` from the project [directory](/byte-bandits))
 - Run the Gradle Build
 - Grade build will run the tests
-- To run, use either IntelliJ or run directly with `gradle run` from the project [directory](/Byte-Bandits-ASWE/byte-bandits)
+- To run, use either IntelliJ or run directly with `gradle run` from the project [directory](/byte-bandits)
 
 
 ### Tagged Revisions
