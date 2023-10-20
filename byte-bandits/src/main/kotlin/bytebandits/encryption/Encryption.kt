@@ -12,9 +12,7 @@ public class Encryption {
     override fun fileEncrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
       val secretKey: SecretKey
 
-      if (!isValidScheme(scheme)) {
-        throw IllegalArgumentException("Invalid encryption scheme: $scheme")
-      }
+      require(isValidScheme(scheme)) { "Invalid encryption scheme: $scheme" }
 
       try {
         secretKey = validateAndPrepareKey(key)
@@ -37,9 +35,7 @@ public class Encryption {
     override fun fileDecrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {
       val secretKey: SecretKey
 
-      if (!isValidScheme(scheme)) {
-        throw IllegalArgumentException("Invalid encryption scheme: $scheme")
-      }
+      require(isValidScheme(scheme)) { "Invalid encryption scheme: $scheme" }
 
       try {
         secretKey = validateAndPrepareKey(key)
