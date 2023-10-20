@@ -10,7 +10,7 @@ import kotlin.test.assertTrue
 
 class RoutingTest {
 
-	val sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJqd3QtYXVkaWVuY2UiLCJpc3MiOiJodHRwczovL2p3dC1wcm92aWRlci1kb21haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE2OTc3NTY3ODh9.VHAUM9sp-6RdRO1ClXeikdGVT0J6IrkhHJQhAaHLem0"
+	val sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJqd3QtYXVkaWVuY2UiLCJpc3MiOiJodHRwczovL2p3dC1wcm92aWRlci1kb21haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE2OTc4MjIzMDl9.kpVMPuIH94OQJW5935PYQJcxtNyuXk5CKQ9LfjQqG5k"
 
 	@Test
 	fun `invalid endpoint should fail`() {

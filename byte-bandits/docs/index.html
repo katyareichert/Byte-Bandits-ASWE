@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Application API</title>
+  <title>Security Tools API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -706,14 +706,23 @@
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
-                    <li data-group="Default" data-name="storageGetGet" class="">
-                      <a href="#api-Default-storageGetGet">storageGetGet</a>
+                    <li data-group="Default" data-name="passKeyGetLenPasswordSaltGet" class="">
+                      <a href="#api-Default-passKeyGetLenPasswordSaltGet">passKeyGetLenPasswordSaltGet</a>
                     </li>
-                    <li data-group="Default" data-name="storageGetUserRecordKeyGet" class="">
-                      <a href="#api-Default-storageGetUserRecordKeyGet">storageGetUserRecordKeyGet</a>
+                    <li data-group="Default" data-name="passwordGetLenDigitsCaseSpecialCharsGet" class="">
+                      <a href="#api-Default-passwordGetLenDigitsCaseSpecialCharsGet">passwordGetLenDigitsCaseSpecialCharsGet</a>
+                    </li>
+                    <li data-group="Default" data-name="storageDeleteGet" class="">
+                      <a href="#api-Default-storageDeleteGet">storageDeleteGet</a>
+                    </li>
+                    <li data-group="Default" data-name="storageGetFileNameGet" class="">
+                      <a href="#api-Default-storageGetFileNameGet">storageGetFileNameGet</a>
                     </li>
                     <li data-group="Default" data-name="storageSubmitPost" class="">
                       <a href="#api-Default-storageSubmitPost">storageSubmitPost</a>
+                    </li>
+                    <li data-group="Default" data-name="virusCheckerPost" class="">
+                      <a href="#api-Default-virusCheckerPost">virusCheckerPost</a>
                     </li>
           </ul>
         </nav>
@@ -721,7 +730,7 @@
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Application API</h1>
+            <h1>Security Tools API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -730,49 +739,57 @@
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <hr>
-            <div>Application API</div>
+            <div><p>This Security Tools Service will provide computer security-oriented tools. Among the main features will be: basic antivirus check for files, generation of digital certificates and signature verification, file encryption and decryption, secure file archive, password and key generation, file integrity protection, and a password wallet.</p>
+<p>Created by Team ByteBandits</p>
+<ul>
+<li>Aryana Mohammadi (am5723)</li>
+<li>Hugo Matousek (hm2953)</li>
+<li>Karthik Guda (kg2982)</li>
+<li>Katya Reichert (kpr2120)</li>
+</ul>
+</div>
           </div>
         </div>
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
-                    <div id="api-Default-storageGetGet">
-                      <article id="api-Default-storageGetGet-0" data-group="User" data-name="storageGetGet" data-version="0">
+                    <div id="api-Default-passKeyGetLenPasswordSaltGet">
+                      <article id="api-Default-passKeyGetLenPasswordSaltGet-0" data-group="User" data-name="passKeyGetLenPasswordSaltGet" data-version="0">
                         <div class="pull-left">
-                          <h1>storageGetGet</h1>
-                          <p></p>
+                          <h1>passKeyGetLenPasswordSaltGet</h1>
+                          <p>Generate new passkey</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Test storage</p>
+                        <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Get</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/passKey/Get/{len?}/{password?}/{salt?}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-storageGetGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageGetGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-storageGetGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageGetGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-storageGetGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-storageGetGet-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-passKeyGetLenPasswordSaltGet-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-storageGetGet-0-curl">
+                          <div class="tab-pane active" id="examples-Default-passKeyGetLenPasswordSaltGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/storage/Get"</code></pre>
+"http://0.0.0.0:8080/passKey/Get/{len?}/{password?}/{salt?}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-storageGetGet-0-java">
+                          <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -786,44 +803,56 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
+        int64 len = ; // int64 | Length of Passkey
+        Boolean password = true; // Boolean | Password to Generate From
+        Boolean salt = true; // Boolean | Cryptographic Salt
         try {
-            'String' result = apiInstance.storageGetGet();
+            'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageGetGet");
+            System.err.println("Exception when calling DefaultApi#passKeyGetLenPasswordSaltGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-storageGetGet-0-android">
+                          <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
 
 public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
+        int64 len = ; // int64 | Length of Passkey
+        Boolean password = true; // Boolean | Password to Generate From
+        Boolean salt = true; // Boolean | Cryptographic Salt
         try {
-            'String' result = apiInstance.storageGetGet();
+            'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageGetGet");
+            System.err.println("Exception when calling DefaultApi#passKeyGetLenPasswordSaltGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-storageGetGet-0-groovy">
+  <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">int64 *len = ; // Length of Passkey
+Boolean *password = true; // Password to Generate From
+Boolean *salt = true; // Cryptographic Salt
+
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance storageGetGetWithCompletionHandler: 
-              ^('String' output, NSError* error) {
+// Generate new passkey
+[apiInstance passKeyGetLenPasswordSaltGetWith:len
+    password:password
+    salt:salt
+              completionHandler: ^('String' output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -834,10 +863,14 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApplicationApi = require('application_api');
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
-var api = new ApplicationApi.DefaultApi()
+var api = new SecurityToolsApi.DefaultApi()
+var len = ; // {{int64}} Length of Passkey
+var password = true; // {{Boolean}} Password to Generate From
+var salt = true; // {{Boolean}} Cryptographic Salt
+
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -845,14 +878,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.storageGetGet(callback);
+api.passKeyGetLenPasswordSaltGet(len, password, salt, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-storageGetGet-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-csharp">
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -861,21 +894,25 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class storageGetGetExample
+    public class passKeyGetLenPasswordSaltGetExample
     {
         public void main()
         {
 
             var apiInstance = new DefaultApi();
+            var len = new int64(); // int64 | Length of Passkey
+            var password = true;  // Boolean | Password to Generate From
+            var salt = true;  // Boolean | Cryptographic Salt
 
             try
             {
-                'String' result = apiInstance.storageGetGet();
+                // Generate new passkey
+                'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.storageGetGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.passKeyGetLenPasswordSaltGet: " + e.Message );
             }
         }
     }
@@ -883,38 +920,44 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-php">
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
+$len = ; // int64 | Length of Passkey
+$password = true; // Boolean | Password to Generate From
+$salt = true; // Boolean | Cryptographic Salt
 
 try {
-    $result = $api_instance->storageGetGet();
+    $result = $api_instance->passKeyGetLenPasswordSaltGet($len, $password, $salt);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->storageGetGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-perl">
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $len = ; # int64 | Length of Passkey
+my $password = true; # Boolean | Password to Generate From
+my $salt = true; # Boolean | Cryptographic Salt
 
 eval { 
-    my $result = $api_instance->storageGetGet();
+    my $result = $api_instance->passKeyGetLenPasswordSaltGet(len => $len, password => $password, salt => $salt);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->storageGetGet: $@\n";
+    warn "Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetGet-0-python">
+                            <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -923,17 +966,94 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
+len =  # int64 | Length of Passkey
+password = true # Boolean | Password to Generate From
+salt = true # Boolean | Cryptographic Salt
 
 try: 
-    api_response = api_instance.storage_get_get()
+    # Generate new passkey
+    api_response = api_instance.pass_key_get_len_password_salt_get(len, password, salt)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DefaultApi->storageGetGet: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
                           <h2>Parameters</h2>
 
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">len*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passKeyGetLenPasswordSaltGet_len">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      int64
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Length of Passkey
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">password*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passKeyGetLenPasswordSaltGet_password">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Boolean
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Password to Generate From
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">salt*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passKeyGetLenPasswordSaltGet_salt">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Boolean
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Cryptographic Salt
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
 
 
 
@@ -944,14 +1064,14 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-storageGetGet-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-passKeyGetLenPasswordSaltGet-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-storageGetGet-200-schema">
-                                  <div id='responses-storageGetGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-passKeyGetLenPasswordSaltGet-200-schema">
+                                  <div id='responses-passKeyGetLenPasswordSaltGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -964,7 +1084,7 @@ except ApiException as e:
       },
       "examples" : {
         "Example#1" : {
-          "value" : "Hello World!"
+          "value" : "620580"
         }
       }
     }
@@ -983,57 +1103,65 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-storageGetGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-storageGetGet-200-schema-200');
+                                        $('#responses-passKeyGetLenPasswordSaltGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-passKeyGetLenPasswordSaltGet-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-storageGetGet-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-passKeyGetLenPasswordSaltGet-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
                         </article>
                       </div>
                       <hr>
-                    <div id="api-Default-storageGetUserRecordKeyGet">
-                      <article id="api-Default-storageGetUserRecordKeyGet-0" data-group="User" data-name="storageGetUserRecordKeyGet" data-version="0">
+                    <div id="api-Default-passwordGetLenDigitsCaseSpecialCharsGet">
+                      <article id="api-Default-passwordGetLenDigitsCaseSpecialCharsGet-0" data-group="User" data-name="passwordGetLenDigitsCaseSpecialCharsGet" data-version="0">
                         <div class="pull-left">
-                          <h1>storageGetUserRecordKeyGet</h1>
-                          <p></p>
+                          <h1>passwordGetLenDigitsCaseSpecialCharsGet</h1>
+                          <p>Generate a new password</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get file from storage</p>
+                        <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Get/{user}/{record_key}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/password/Get/{len?}/{digits?}/{case?}/{specialChars?}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-storageGetUserRecordKeyGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-storageGetUserRecordKeyGet-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-storageGetUserRecordKeyGet-0-curl">
+                          <div class="tab-pane active" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/storage/Get/{user}/{record_key}"</code></pre>
+"http://0.0.0.0:8080/password/Get/{len?}/{digits?}/{case?}/{specialChars?}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-java">
+                          <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -1047,44 +1175,60 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
+        int64 len = ; // int64 | Length of Password
+        Boolean digits = true; // Boolean | Include Numbers in Password?
+        Boolean case = true; // Boolean | Include Capital Letters in Password?
+        Boolean specialChars = true; // Boolean | Include Special Characters in Password?
         try {
-            'String' result = apiInstance.storageGetUserRecordKeyGet();
+            'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageGetUserRecordKeyGet");
+            System.err.println("Exception when calling DefaultApi#passwordGetLenDigitsCaseSpecialCharsGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-android">
+                          <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
 
 public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
+        int64 len = ; // int64 | Length of Password
+        Boolean digits = true; // Boolean | Include Numbers in Password?
+        Boolean case = true; // Boolean | Include Capital Letters in Password?
+        Boolean specialChars = true; // Boolean | Include Special Characters in Password?
         try {
-            'String' result = apiInstance.storageGetUserRecordKeyGet();
+            'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageGetUserRecordKeyGet");
+            System.err.println("Exception when calling DefaultApi#passwordGetLenDigitsCaseSpecialCharsGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-groovy">
+  <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">int64 *len = ; // Length of Password
+Boolean *digits = true; // Include Numbers in Password?
+Boolean *case = true; // Include Capital Letters in Password?
+Boolean *specialChars = true; // Include Special Characters in Password?
+
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance storageGetUserRecordKeyGetWithCompletionHandler: 
-              ^('String' output, NSError* error) {
+// Generate a new password
+[apiInstance passwordGetLenDigitsCaseSpecialCharsGetWith:len
+    digits:digits
+    case:case
+    specialChars:specialChars
+              completionHandler: ^('String' output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1095,10 +1239,15 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApplicationApi = require('application_api');
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
-var api = new ApplicationApi.DefaultApi()
+var api = new SecurityToolsApi.DefaultApi()
+var len = ; // {{int64}} Length of Password
+var digits = true; // {{Boolean}} Include Numbers in Password?
+var case = true; // {{Boolean}} Include Capital Letters in Password?
+var specialChars = true; // {{Boolean}} Include Special Characters in Password?
+
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -1106,14 +1255,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.storageGetUserRecordKeyGet(callback);
+api.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-csharp">
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1122,21 +1271,26 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class storageGetUserRecordKeyGetExample
+    public class passwordGetLenDigitsCaseSpecialCharsGetExample
     {
         public void main()
         {
 
             var apiInstance = new DefaultApi();
+            var len = new int64(); // int64 | Length of Password
+            var digits = true;  // Boolean | Include Numbers in Password?
+            var case = true;  // Boolean | Include Capital Letters in Password?
+            var specialChars = true;  // Boolean | Include Special Characters in Password?
 
             try
             {
-                'String' result = apiInstance.storageGetUserRecordKeyGet();
+                // Generate a new password
+                'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.storageGetUserRecordKeyGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.passwordGetLenDigitsCaseSpecialCharsGet: " + e.Message );
             }
         }
     }
@@ -1144,38 +1298,46 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-php">
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
+$len = ; // int64 | Length of Password
+$digits = true; // Boolean | Include Numbers in Password?
+$case = true; // Boolean | Include Capital Letters in Password?
+$specialChars = true; // Boolean | Include Special Characters in Password?
 
 try {
-    $result = $api_instance->storageGetUserRecordKeyGet();
+    $result = $api_instance->passwordGetLenDigitsCaseSpecialCharsGet($len, $digits, $case, $specialChars);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->storageGetUserRecordKeyGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-perl">
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $len = ; # int64 | Length of Password
+my $digits = true; # Boolean | Include Numbers in Password?
+my $case = true; # Boolean | Include Capital Letters in Password?
+my $specialChars = true; # Boolean | Include Special Characters in Password?
 
 eval { 
-    my $result = $api_instance->storageGetUserRecordKeyGet();
+    my $result = $api_instance->passwordGetLenDigitsCaseSpecialCharsGet(len => $len, digits => $digits, case => $case, specialChars => $specialChars);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->storageGetUserRecordKeyGet: $@\n";
+    warn "Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageGetUserRecordKeyGet-0-python">
+                            <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1184,17 +1346,117 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
+len =  # int64 | Length of Password
+digits = true # Boolean | Include Numbers in Password?
+case = true # Boolean | Include Capital Letters in Password?
+specialChars = true # Boolean | Include Special Characters in Password?
 
 try: 
-    api_response = api_instance.storage_get_user_record_key_get()
+    # Generate a new password
+    api_response = api_instance.password_get_len_digits_case_special_chars_get(len, digits, case, specialChars)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DefaultApi->storageGetUserRecordKeyGet: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
                           <h2>Parameters</h2>
 
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">len*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passwordGetLenDigitsCaseSpecialCharsGet_len">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      int64
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Length of Password
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">digits*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passwordGetLenDigitsCaseSpecialCharsGet_digits">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Boolean
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Include Numbers in Password?
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">case*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passwordGetLenDigitsCaseSpecialCharsGet_case">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Boolean
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Include Capital Letters in Password?
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">specialChars*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_passwordGetLenDigitsCaseSpecialCharsGet_specialChars">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Boolean
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Include Special Characters in Password?
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
 
 
 
@@ -1205,14 +1467,324 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-storageGetUserRecordKeyGet-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-storageGetUserRecordKeyGet-200-schema">
-                                  <div id='responses-storageGetUserRecordKeyGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema">
+                                  <div id='responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      },
+      "examples" : {
+        "Example#1" : {
+          "value" : "sUJs81Nd01JF3o"
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-storageDeleteGet">
+                      <article id="api-Default-storageDeleteGet-0" data-group="User" data-name="storageDeleteGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>storageDeleteGet</h1>
+                          <p>Delete file from storage</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Delete</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-storageDeleteGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageDeleteGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageDeleteGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-storageDeleteGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: text/plain"\
+"http://0.0.0.0:8080/storage/Delete"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-storageDeleteGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        try {
+            'String' result = apiInstance.storageDeleteGet(client ID);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageDeleteGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-storageDeleteGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        try {
+            'String' result = apiInstance.storageDeleteGet(client ID);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageDeleteGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-storageDeleteGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">UUID *client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Delete file from storage
+[apiInstance storageDeleteGetWith:client ID
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // {{UUID}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.storageDeleteGet(client ID, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-storageDeleteGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class storageDeleteGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var client ID = new UUID(); // UUID | 
+
+            try
+            {
+                // Delete file from storage
+                'String' result = apiInstance.storageDeleteGet(client ID);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.storageDeleteGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+
+try {
+    $result = $api_instance->storageDeleteGet($client ID);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->storageDeleteGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
+
+eval { 
+    my $result = $api_instance->storageDeleteGet(client ID => $client ID);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->storageDeleteGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | 
+
+try: 
+    # Delete file from storage
+    api_response = api_instance.storage_delete_get(client ID)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->storageDeleteGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+                            <div class="methodsubtabletitle">Header parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                  <tr><td style="width:150px;">Client ID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageDeleteGet_client ID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      UUID
+                                                  </span>
+                                                      <span class="format">
+                                                          (uuid)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-storageDeleteGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-storageDeleteGet-200-schema">
+                                  <div id='responses-storageDeleteGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1244,14 +1816,362 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-storageGetUserRecordKeyGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-storageGetUserRecordKeyGet-200-schema-200');
+                                        $('#responses-storageDeleteGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-storageDeleteGet-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-storageGetUserRecordKeyGet-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-storageDeleteGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-storageGetFileNameGet">
+                      <article id="api-Default-storageGetFileNameGet-0" data-group="User" data-name="storageGetFileNameGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>storageGetFileNameGet</h1>
+                          <p>Get file from storage</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Get/{file_name}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-storageGetFileNameGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageGetFileNameGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageGetFileNameGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-storageGetFileNameGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-storageGetFileNameGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: text/plain"\
+"http://0.0.0.0:8080/storage/Get/{file_name}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        String fileName = fileName_example; // String | Name of File to Retrieve
+        try {
+            'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageGetFileNameGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        String fileName = fileName_example; // String | Name of File to Retrieve
+        try {
+            'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageGetFileNameGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">UUID *client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // 
+String *fileName = fileName_example; // Name of File to Retrieve
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Get file from storage
+[apiInstance storageGetFileNameGetWith:client ID
+    fileName:fileName
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // {{UUID}} 
+var fileName = fileName_example; // {{String}} Name of File to Retrieve
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.storageGetFileNameGet(client ID, fileName, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class storageGetFileNameGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var client ID = new UUID(); // UUID | 
+            var fileName = fileName_example;  // String | Name of File to Retrieve
+
+            try
+            {
+                // Get file from storage
+                'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.storageGetFileNameGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+$fileName = fileName_example; // String | Name of File to Retrieve
+
+try {
+    $result = $api_instance->storageGetFileNameGet($client ID, $fileName);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->storageGetFileNameGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
+my $fileName = fileName_example; # String | Name of File to Retrieve
+
+eval { 
+    my $result = $api_instance->storageGetFileNameGet(client ID => $client ID, fileName => $fileName);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->storageGetFileNameGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | 
+fileName = fileName_example # String | Name of File to Retrieve
+
+try: 
+    # Get file from storage
+    api_response = api_instance.storage_get_file_name_get(client ID, fileName)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->storageGetFileNameGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">file_name*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageGetFileNameGet_fileName">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          Name of File to Retrieve
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+                            <div class="methodsubtabletitle">Header parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                  <tr><td style="width:150px;">Client ID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageGetFileNameGet_client ID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      UUID
+                                                  </span>
+                                                      <span class="format">
+                                                          (uuid)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-storageGetFileNameGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-storageGetFileNameGet-200-schema">
+                                  <div id='responses-storageGetFileNameGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      },
+      "examples" : {
+        "Example#1" : {
+          "value" : "Hello World!"
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-storageGetFileNameGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-storageGetFileNameGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-storageGetFileNameGet-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -1316,9 +2236,10 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        String body = ; // String | Optional description in *Markdown*
+        String body = ; // String | 
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         try {
-            apiInstance.storageSubmitPost(body);
+            apiInstance.storageSubmitPost(body, client ID);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageSubmitPost");
             e.printStackTrace();
@@ -1334,9 +2255,10 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        String body = ; // String | Optional description in *Markdown*
+        String body = ; // String | 
+        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         try {
-            apiInstance.storageSubmitPost(body);
+            apiInstance.storageSubmitPost(body, client ID);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageSubmitPost");
             e.printStackTrace();
@@ -1349,12 +2271,14 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-storageSubmitPost-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *body = ; // Optional description in *Markdown*
+                              <pre class="prettyprint"><code class="language-cpp">String *body = ; // 
+UUID *client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 // Submit file to storage
 [apiInstance storageSubmitPostWith:body
+    client ID:client ID
               completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
@@ -1364,10 +2288,11 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
                             </div>
 
                             <div class="tab-pane" id="examples-Default-storageSubmitPost-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApplicationApi = require('application_api');
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
-var api = new ApplicationApi.DefaultApi()
-var body = ; // {{String}} Optional description in *Markdown*
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{String}} 
+var client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // {{UUID}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -1376,7 +2301,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.storageSubmitPost(body, callback);
+api.storageSubmitPost(bodyclient ID, callback);
 </code></pre>
                             </div>
 
@@ -1398,12 +2323,13 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new String(); // String | Optional description in *Markdown*
+            var body = new String(); // String | 
+            var client ID = new UUID(); // UUID | 
 
             try
             {
                 // Submit file to storage
-                apiInstance.storageSubmitPost(body);
+                apiInstance.storageSubmitPost(body, client ID);
             }
             catch (Exception e)
             {
@@ -1420,10 +2346,11 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // String | Optional description in *Markdown*
+$body = ; // String | 
+$client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
 
 try {
-    $api_instance->storageSubmitPost($body);
+    $api_instance->storageSubmitPost($body, $client ID);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->storageSubmitPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -1436,10 +2363,11 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::String->new(); # String | Optional description in *Markdown*
+my $body = WWW::SwaggerClient::Object::String->new(); # String | 
+my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
 
 eval { 
-    $api_instance->storageSubmitPost(body => $body);
+    $api_instance->storageSubmitPost(body => $body, client ID => $client ID);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->storageSubmitPost: $@\n";
@@ -1455,11 +2383,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # String | Optional description in *Markdown*
+body =  # String | 
+client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | 
 
 try: 
     # Submit file to storage
-    api_instance.storage_submit_post(body)
+    api_instance.storage_submit_post(body, client ID)
 except ApiException as e:
     print("Exception when calling DefaultApi->storageSubmitPost: %s\n" % e)</code></pre>
                             </div>
@@ -1468,6 +2397,35 @@ except ApiException as e:
                           <h2>Parameters</h2>
 
 
+                            <div class="methodsubtabletitle">Header parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                  <tr><td style="width:150px;">Client ID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageSubmitPost_client ID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      UUID
+                                                  </span>
+                                                      <span class="format">
+                                                          (uuid)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
 
                             <div class="methodsubtabletitle">Body parameters</div>
                             <table id="methodsubtable">
@@ -1482,7 +2440,6 @@ except ApiException as e:
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "Optional description in *Markdown*",
   "content" : {
     "text/plain" : {
       "schema" : {
@@ -1510,6 +2467,276 @@ except ApiException as e:
                                 });
                                 </script>
                                 <div id="d2e199_storageSubmitPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 201 - Created </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-virusCheckerPost">
+                      <article id="api-Default-virusCheckerPost-0" data-group="User" data-name="virusCheckerPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>virusCheckerPost</h1>
+                          <p>Check a file for viruses</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/virusChecker/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-virusCheckerPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-virusCheckerPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-virusCheckerPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-virusCheckerPost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-virusCheckerPost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Content-Type: application/octet-stream"\
+"http://0.0.0.0:8080/virusChecker/"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-virusCheckerPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        Object body = ; // Object | 
+        try {
+            apiInstance.virusCheckerPost(body);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#virusCheckerPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-virusCheckerPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Object body = ; // Object | 
+        try {
+            apiInstance.virusCheckerPost(body);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#virusCheckerPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-virusCheckerPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Object *body = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Check a file for viruses
+[apiInstance virusCheckerPostWith:body
+              completionHandler: ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{Object}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.virusCheckerPost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-virusCheckerPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class virusCheckerPostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new Object(); // Object | 
+
+            try
+            {
+                // Check a file for viruses
+                apiInstance.virusCheckerPost(body);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.virusCheckerPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // Object | 
+
+try {
+    $api_instance->virusCheckerPost($body);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->virusCheckerPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::Object->new(); # Object | 
+
+eval { 
+    $api_instance->virusCheckerPost(body => $body);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->virusCheckerPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-virusCheckerPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # Object | 
+
+try: 
+    # Check a file for viruses
+    api_instance.virus_checker_post(body)
+except ApiException as e:
+    print("Exception when calling DefaultApi->virusCheckerPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/octet-stream"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_virusCheckerPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_virusCheckerPost_body"></div>
                                 </td>
                                 </tr>
                             </table>
