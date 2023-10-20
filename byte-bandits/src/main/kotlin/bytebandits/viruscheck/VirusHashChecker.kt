@@ -1,8 +1,8 @@
 package bytebandits.viruscheck
 
 import bytebandits.interfaces.VirusChecker
-import java.security.MessageDigest
 import java.io.File
+import java.security.MessageDigest
 
 public  class VirusHashChecker {
     //This is a static method
@@ -13,7 +13,7 @@ public  class VirusHashChecker {
             }
 
             val searchHash = calculateMD5(file)
-            val internalDatabase = File("db.txt")
+            val internalDatabase = File("src/main/resources/db.txt")
 
             val matchFound = internalDatabase.useLines { lines ->
                 lines.any { line ->
