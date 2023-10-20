@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="4.3">
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt">
+	<error line="22" column="17" severity="warning" message="The function configureRouting is too long (92). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="40" column="15" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="57" column="15" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="74" column="15" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="91" column="14" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="106" column="14" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="120" column="14" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="57" column="15" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="74" column="15" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="91" column="14" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="106" column="14" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="120" column="14" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="7" column="1" severity="warning" message="io.ktor.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="8" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="9" column="1" severity="warning" message="io.ktor.server.auth.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="io.ktor.server.auth.jwt.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="io.ktor.server.plugins.swagger.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="12" column="1" severity="warning" message="io.ktor.server.request.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="13" column="1" severity="warning" message="io.ktor.server.response.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="14" column="1" severity="warning" message="io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="83" column="51" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt">
+	<error line="50" column="16" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="19" column="16" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="42" column="16" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="50" column="16" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="9" column="1" severity="warning" message="The class Encryption only contains utility functions. Consider defining it as an object." source="detekt.UtilityClassWithPublicConstructor" />
+	<error line="68" column="23" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="66" column="9" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="69" column="9" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt">
+	<error line="47" column="31" severity="warning" message="String.format(&quot;%02x&quot;, byte) uses implicitly default locale for string formatting." source="detekt.ImplicitDefaultLocale" />
+	<error line="60" column="31" severity="warning" message="String.format(&quot;%02x&quot;, byte) uses implicitly default locale for string formatting." source="detekt.ImplicitDefaultLocale" />
+	<error line="7" column="1" severity="warning" message="The class VirusHashChecker only contains utility functions. Consider defining it as an object." source="detekt.UtilityClassWithPublicConstructor" />
+	<error line="36" column="40" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="12" column="17" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/Application.kt">
+	<error line="7" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="8" column="1" severity="warning" message="io.ktor.server.engine.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="9" column="1" severity="warning" message="io.ktor.server.netty.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt">
+	<error line="11" column="1" severity="warning" message="The class PassKeyGeneration only contains utility functions. Consider defining it as an object." source="detekt.UtilityClassWithPublicConstructor" />
+	<error line="24" column="27" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="75" column="27" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="86" column="30" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="91" column="70" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="62" column="18" severity="warning" message="Private property `i` is unused." source="detekt.UnusedPrivateProperty" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt">
+	<error line="9" column="1" severity="warning" message="The class FilePersister only contains utility functions. Consider defining it as an object." source="detekt.UtilityClassWithPublicConstructor" />
+	<error line="28" column="17" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="47" column="17" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="62" column="17" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="74" column="21" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="87" column="17" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="112" column="21" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+	<error line="115" column="21" severity="warning" message="Use require() instead of throwing an IllegalArgumentException." source="detekt.UseRequire" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt">
+	<error line="3" column="1" severity="warning" message="io.ktor.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="4" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="5" column="1" severity="warning" message="io.ktor.server.plugins.cors.routing.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="6" column="1" severity="warning" message="io.ktor.server.plugins.openapi.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="io.ktor.server.plugins.swagger.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="8" column="1" severity="warning" message="io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="18" column="13" severity="warning" message="Forbidden TODO todo marker in comment, please do the changes." source="detekt.ForbiddenComment" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt">
+	<error line="5" column="1" severity="warning" message="io.ktor.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="6" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="io.ktor.server.auth.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="8" column="1" severity="warning" message="io.ktor.server.auth.jwt.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="9" column="1" severity="warning" message="io.ktor.server.response.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt">
+	<error line="3" column="1" severity="warning" message="io.ktor.serialization.gson.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="4" column="1" severity="warning" message="io.ktor.serialization.kotlinx.json.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="5" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="6" column="1" severity="warning" message="io.ktor.server.plugins.contentnegotiation.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/tokengen/JWTGenerator.kt">
+	<error line="12" column="52" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/encryption/EncryptionTests.kt">
+	<error line="3" column="1" severity="warning" message="kotlin.test.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/encryption/PassKeyGenerationTests.kt">
+	<error line="3" column="1" severity="warning" message="kotlin.test.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/routing/RoutingTests.kt">
+	<error line="4" column="1" severity="warning" message="io.ktor.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="5" column="1" severity="warning" message="io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="6" column="1" severity="warning" message="io.ktor.server.testing.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+</checkstyle>

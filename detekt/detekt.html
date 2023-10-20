@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+    </style>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            width: fit-content;
+            background: -webkit-linear-gradient(left, rgba(105, 33, 224, 1), rgba(247, 44, 67, 1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            background: rgb(105, 33, 224);
+            background: linear-gradient(90deg, rgba(105, 33, 224, 0.8) 0%, rgba(158, 41, 156, 0.8) 50%, rgba(247, 44, 67, 0.8) 100%);
+            padding: 0.2em;
+            color: #ffffff;
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, rgba(105, 33, 224, 0.4) 0%, rgba(158, 41, 156, 0.4) 50%, rgba(247, 44, 67, 0.4) 100%);
+            padding: 0.5em;
+            border-radius: 4px;
+        }
+
+        .rule-container {
+            background: linear-gradient(90deg, rgba(105, 33, 224, 0.2) 0%, rgba(158, 41, 156, 0.2) 100%);
+            border-radius: 4px;
+            padding-left: 1em;
+            padding-bottom: 0.3em;
+            padding-top: 0.3em;
+            padding-right: 1em;
+            line-height: 1.5em;
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+
+        .rule {
+            font-family: Arial, sans-serif;
+            padding: 0.3em;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .description {
+            font-family: Arial, sans-serif;
+            color: #000000;
+            padding: 0.3em;
+        }
+
+        .location {
+            font-family: Jetbrains Mono, monospace;
+            font-weight: 500;
+            color: #000000;
+            display: block;
+        }
+
+        .message {
+            font-family: Arial, sans-serif;
+            font-size: 0.8em;
+            color: #444444;
+            display: block;
+            margin-top: 1pt;
+        }
+
+        code {
+            font-family: JetBrains Mono, monospace;
+            font-weight: 400;
+        }
+
+        pre {
+            font-family: JetBrains Mono, monospace;
+            font-weight: 500;
+            border: 1px solid #e0e0e0;
+            overflow: auto;
+        }
+
+        .lineno {
+            margin-right: 24px;
+            color: #9771c3;
+            background-color: rgba(230, 211, 243, 0.51);
+        }
+
+        .error {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+        }
+
+        .exception {
+            color: #b60808;
+            display: inline-block;
+            background-color: #ecdada;
+            border-color: #b60808;
+            border-radius: 10px;
+            border: solid 2px;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="225" height="53" viewBox="0 0 225 53" fill="none"
+     style="padding-top: 8px">
+    <path d="M88.8883 42.2665V7.99487H81.6954V20.389C79.9918 18.3703 77.6257 16.6332 73.7926 16.6332C67.7828 16.6332 62.2461 21.2341 62.2461 29.6377V29.7316C62.2461 38.1352 67.8774 42.736 73.7926 42.736C77.5311 42.736 79.9445 40.9989 81.6954 38.6516V42.2665H88.8883ZM81.79 29.7316C81.79 33.9099 78.998 36.6798 75.6382 36.6798C72.2783 36.6798 69.439 33.9099 69.439 29.7316V29.6377C69.439 25.4124 72.2783 22.6894 75.6382 22.6894C78.998 22.6894 81.79 25.4593 81.79 29.6377V29.7316Z"
+          fill="#222222"/>
+    <path d="M120.325 30.3888V30.2949C120.325 23.1589 116.444 16.6332 107.974 16.6332C100.591 16.6332 95.4334 22.5486 95.4334 29.7316V29.8254C95.4334 37.5248 101.065 42.8299 108.683 42.8299C113.274 42.8299 116.681 41.0459 119.047 38.1352L114.93 34.5202C112.942 36.3511 111.192 37.1023 108.778 37.1023C105.56 37.1023 103.289 35.4122 102.579 32.1728H120.23C120.277 31.5156 120.325 31.093 120.325 30.3888ZM113.321 27.7128H102.484C103.052 24.4734 104.992 22.3608 107.974 22.3608C111.002 22.3608 112.895 24.5204 113.321 27.7128Z"
+          fill="#222222"/>
+    <path d="M141.278 41.2337V35.5061C140.237 36.0695 139.054 36.3981 137.729 36.3981C136.12 36.3981 135.41 35.6 135.41 33.9568V23.2059H141.373V17.1027H135.41V10.6709H128.217V17.1027H125.189V23.2059H128.217V35.1305C128.217 40.952 131.199 42.6891 135.599 42.6891C138.013 42.6891 139.764 42.1257 141.278 41.2337Z"
+          fill="#222222"/>
+    <path d="M172.008 30.3888V30.2949C172.008 23.1589 168.128 16.6332 159.657 16.6332C152.275 16.6332 147.117 22.5486 147.117 29.7316V29.8254C147.117 37.5248 152.748 42.8299 160.367 42.8299C164.958 42.8299 168.365 41.0459 170.731 38.1352L166.614 34.5202C164.626 36.3511 162.875 37.1023 160.462 37.1023C157.244 37.1023 154.973 35.4122 154.263 32.1728H171.914C171.961 31.5156 172.008 31.093 172.008 30.3888ZM165.005 27.7128H154.168C154.736 24.4734 156.676 22.3608 159.657 22.3608C162.686 22.3608 164.579 24.5204 165.005 27.7128Z"
+          fill="#222222"/>
+    <path d="M203.278 42.2665L193.293 27.0086L202.947 17.1027H194.334L185.911 26.2574V7.99487H178.718V42.2665H185.911V34.6141L188.419 31.985L195.044 42.2665H203.278Z"
+          fill="#222222"/>
+    <path d="M224.905 41.2337V35.5061C223.864 36.0695 222.681 36.3981 221.356 36.3981C219.747 36.3981 219.037 35.6 219.037 33.9568V23.2059H225V17.1027H219.037V10.6709H211.844V17.1027H208.816V23.2059H211.844V35.1305C211.844 40.952 214.826 42.6891 219.227 42.6891C221.64 42.6891 223.391 42.1257 224.905 41.2337Z"
+          fill="#222222"/>
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M2.18611 0C0.978755 0 0 0.978755 0 2.18611V40.771C0 41.9783 0.978755 42.9571 2.18611 42.9571H24.2534C25.6525 42.9571 26.6258 41.5473 26.3774 40.1705C26.2109 39.2481 26.124 38.2981 26.124 37.3279C26.124 28.5443 33.2445 21.4239 42.028 21.4239C42.8689 21.4239 43.6945 21.4892 44.5001 21.6149C45.8578 21.8268 47.22 20.8585 47.22 19.4844V2.18611C47.22 0.978755 46.2412 0 45.0339 0H2.18611Z"
+          fill="url(#paint0_linear)"/>
+    <path d="M55.3358 48.6166L54.7673 48.0481L53.2421 46.5229L52.9516 46.2324C52.2427 45.5234 52.1855 44.4067 52.673 43.5306C53.6299 41.8109 54.1762 39.833 54.1762 37.7293C54.1762 32.9104 51.3147 28.7499 47.2029 26.8501C46.5196 26.5344 45.8024 26.2808 45.0573 26.0974C44.3636 25.9268 43.6467 25.8164 42.9118 25.7727C42.6749 25.7587 42.4369 25.7495 42.1966 25.7495C38.5166 25.7495 35.2203 27.4188 33.0211 30.0381C31.9784 31.2802 31.1838 32.7357 30.7114 34.3293C30.3916 35.4079 30.217 36.5481 30.217 37.7291C30.217 38.0293 30.2319 38.3259 30.2537 38.6205C30.3082 39.3559 30.4265 40.0733 30.6082 40.766C30.8038 41.5117 31.0689 42.2296 31.3974 42.9116C33.3332 46.9295 37.4465 49.7089 42.1967 49.7089C43.957 49.7089 45.6291 49.3259 47.1357 48.6403C47.9841 48.2543 49.0046 48.3536 49.6636 49.0127L50.0894 49.4385L51.6301 50.9794L52.3016 51.6509C52.7205 52.0699 53.2697 52.2794 53.8186 52.2794C54.3677 52.2794 54.9169 52.0699 55.3357 51.6509C56.1738 50.8129 56.1738 49.4544 55.3358 48.6166ZM42.1967 45.418C39.9525 45.418 37.93 44.451 36.5232 42.9122C35.9485 42.2836 35.4772 41.5594 35.135 40.7667C34.845 40.0954 34.6493 39.3746 34.5617 38.6211C34.5277 38.3283 34.5084 38.0314 34.5084 37.7297C34.5084 33.4903 37.9574 30.0413 42.1968 30.0413C42.4379 30.0413 42.6762 30.0539 42.912 30.0756C43.6638 30.1455 44.3837 30.3242 45.0576 30.5956C45.8458 30.9127 46.5689 31.3564 47.2031 31.902C48.8434 33.3131 49.8852 35.4015 49.8852 37.7297C49.885 41.9688 46.4361 45.418 42.1967 45.418Z"
+          fill="url(#paint1_linear)"/>
+    <path d="M9.9936 25.6979C9.34217 25.6979 8.84618 25.4958 8.50566 25.0914C8.16514 24.6709 7.99487 24.1695 7.99487 23.5873V23.4903C7.99487 22.908 8.16514 22.4147 8.50566 22.0104C8.84618 21.5899 9.34217 21.3796 9.9936 21.3796C10.645 21.3796 11.141 21.5899 11.4815 22.0104C11.8221 22.4147 11.9923 22.908 11.9923 23.4903V23.5873C11.9923 24.1695 11.8221 24.6709 11.4815 25.0914C11.141 25.4958 10.645 25.6979 9.9936 25.6979ZM8.17254 10.8158V7.99487H11.8147V10.8158L10.6598 19.1612H9.32736L8.17254 10.8158Z"
+          fill="white"/>
+    <path d="M20.2729 25.6979C19.6215 25.6979 19.1255 25.4958 18.785 25.0914C18.4444 24.6709 18.2742 24.1695 18.2742 23.5873V23.4903C18.2742 22.908 18.4444 22.4147 18.785 22.0104C19.1255 21.5899 19.6215 21.3796 20.2729 21.3796C20.9243 21.3796 21.4203 21.5899 21.7608 22.0104C22.1014 22.4147 22.2716 22.908 22.2716 23.4903V23.5873C22.2716 24.1695 22.1014 24.6709 21.7608 25.0914C21.4203 25.4958 20.9243 25.6979 20.2729 25.6979ZM18.4518 10.8158V7.99487H22.094V10.8158L20.9391 19.1612H19.6067L18.4518 10.8158Z"
+          fill="white"/>
+    <defs>
+        <linearGradient id="paint0_linear" x1="5.222e-07" y1="41.3361" x2="51.982" y2="33.29"
+                        gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7942EE"/>
+            <stop offset="1" stop-color="#FF4651"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear" x1="53.0121" y1="51.5465" x2="60.9801" y2="30.2423"
+                        gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7942EE"/>
+            <stop offset="1" stop-color="#FF4651"/>
+        </linearGradient>
+    </defs>
+</svg>
+
+<h2>Metrics</h2>
+
+<div>
+  <ul>
+    <li>177 number of properties</li>
+    <li>65 number of functions</li>
+    <li>15 number of classes</li>
+    <li>9 number of packages</li>
+    <li>17 number of kt files</li>
+  </ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul>
+    <li>1,142 lines of code (loc)</li>
+    <li>889 source lines of code (sloc)</li>
+    <li>638 logical lines of code (lloc)</li>
+    <li>66 comment lines of code (cloc)</li>
+    <li>129 cyclomatic complexity (mcc)</li>
+    <li>87 cognitive complexity</li>
+    <li>74 number of total code smells</li>
+    <li>7% comment source ratio</li>
+    <li>202 mcc per 1,000 lloc</li>
+    <li>115 code smells per 1,000 lloc</li>
+  </ul>
+</div>
+
+
+<h2>Findings</h2>
+<div>Total: 74
+  <h3>complexity: 1</h3>
+  <details id="LongMethod" open="open">
+    <summary class="rule-container"><span class="rule">LongMethod: 1 </span><span class="description">One method should have one responsibility. Long methods tend to handle many things at once. Prefer smaller methods to make them easier to understand.</span></summary>
+<a href="https://detekt.dev/docs/rules/complexity#longmethod">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:22:17</span><span class="message">The function configureRouting is too long (92). The maximum length is 60.</span>
+        <pre><code><span class="lineno">  19 </span>
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span>//TODO : move the routes into their own classes files
+<span class="lineno">  22 </span>fun Application.<span class="error">configureRouting</span>() {
+<span class="lineno">  23 </span>	routing {
+<span class="lineno">  24 </span>		//This addds authentication, the routes are now protected
+<span class="lineno">  25 </span>		authenticate {
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>exceptions: 15</h3>
+  <details id="SwallowedException" open="open">
+    <summary class="rule-container"><span class="rule">SwallowedException: 8 </span><span class="description">The caught exception is swallowed. The original exception could be lost.</span></summary>
+<a href="https://detekt.dev/docs/rules/exceptions#swallowedexception">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:19:16</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  16 </span>
+<span class="lineno">  17 </span>      try {
+<span class="lineno">  18 </span>        secretKey = validateAndPrepareKey(key)
+<span class="lineno">  19 </span>      } catch (<span class="error">e: IllegalArgumentException</span>) {
+<span class="lineno">  20 </span>        throw IllegalArgumentException(&quot;Invalid key: ${e.message}&quot;)
+<span class="lineno">  21 </span>      }
+<span class="lineno">  22 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:42:16</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  39 </span>
+<span class="lineno">  40 </span>      try {
+<span class="lineno">  41 </span>        secretKey = validateAndPrepareKey(key)
+<span class="lineno">  42 </span>      } catch (<span class="error">e: IllegalArgumentException</span>) {
+<span class="lineno">  43 </span>        throw IllegalArgumentException(&quot;Invalid key: ${e.message}&quot;)
+<span class="lineno">  44 </span>      }
+<span class="lineno">  45 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:50:16</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  47 </span>      cipher.init(Cipher.DECRYPT_MODE, secretKey)
+<span class="lineno">  48 </span>      try {
+<span class="lineno">  49 </span>        return cipher.doFinal(contents)
+<span class="lineno">  50 </span>      } catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  51 </span>        throw IllegalArgumentException(&quot;Invalid key: ${e.message}&quot;)
+<span class="lineno">  52 </span>      }
+<span class="lineno">  53 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:57:15</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  54 </span>
+<span class="lineno">  55 </span>						val responseText = FilePersister.simpleFileRetrieve(fileName, &quot;storage&quot;, clientId, userId)
+<span class="lineno">  56 </span>						call.respondText(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
+<span class="lineno">  57 </span>					} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  58 </span>						call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  59 </span>					}
+<span class="lineno">  60 </span>				}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:74:15</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  71 </span>
+<span class="lineno">  72 </span>						val responseText = FilePersister.simpleFileDelete(fileName, &quot;storage&quot;, clientId, userId)
+<span class="lineno">  73 </span>						call.respondText(status = HttpStatusCode.OK) { responseText.toString() }
+<span class="lineno">  74 </span>					} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  75 </span>						call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  76 </span>					}
+<span class="lineno">  77 </span>				}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:91:14</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno">  88 </span>					val pwd = PassKeyGeneration.passwordGen(len, digits, casing, specialChars)
+<span class="lineno">  89 </span>
+<span class="lineno">  90 </span>					call.respondText(status = HttpStatusCode.OK) { pwd }
+<span class="lineno">  91 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  92 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  93 </span>				}
+<span class="lineno">  94 </span>			}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:106:14</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno"> 103 </span>
+<span class="lineno"> 104 </span>					val responseText = PassKeyGeneration.passkeyGen(len, password, salt)
+<span class="lineno"> 105 </span>					call.respondText(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
+<span class="lineno"> 106 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno"> 107 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno"> 108 </span>				}
+<span class="lineno"> 109 </span>			}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:120:14</span><span class="message">The caught exception is swallowed. The original exception could be lost.</span>
+        <pre><code><span class="lineno"> 117 </span>
+<span class="lineno"> 118 </span>					//val responseText = FilePersister.simpleFileRetrieve(user, recordKey)
+<span class="lineno"> 119 </span>					call.respondText(status = HttpStatusCode.OK) { &quot;responseText&quot; }
+<span class="lineno"> 120 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno"> 121 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno"> 122 </span>				}
+<span class="lineno"> 123 </span>			}
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="TooGenericExceptionCaught" open="open">
+    <summary class="rule-container"><span class="rule">TooGenericExceptionCaught: 7 </span><span class="description">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span></summary>
+<a href="https://detekt.dev/docs/rules/exceptions#toogenericexceptioncaught">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:50:16</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  47 </span>      cipher.init(Cipher.DECRYPT_MODE, secretKey)
+<span class="lineno">  48 </span>      try {
+<span class="lineno">  49 </span>        return cipher.doFinal(contents)
+<span class="lineno">  50 </span>      } catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  51 </span>        throw IllegalArgumentException(&quot;Invalid key: ${e.message}&quot;)
+<span class="lineno">  52 </span>      }
+<span class="lineno">  53 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:40:15</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  37 </span>						val clientId = principal!!.payload.getClaim(&quot;clientId&quot;).asString()
+<span class="lineno">  38 </span>						val saved = FilePersister.simpleFilePersist(request, &quot;storage&quot;, clientId, true)
+<span class="lineno">  39 </span>						call.respondText(status = HttpStatusCode.OK) { &quot;This worked: $saved&quot; }
+<span class="lineno">  40 </span>					} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  41 </span>						logger.error(&quot;error serving request&quot;, e)
+<span class="lineno">  42 </span>						call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  43 </span>					}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:57:15</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  54 </span>
+<span class="lineno">  55 </span>						val responseText = FilePersister.simpleFileRetrieve(fileName, &quot;storage&quot;, clientId, userId)
+<span class="lineno">  56 </span>						call.respondText(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
+<span class="lineno">  57 </span>					} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  58 </span>						call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  59 </span>					}
+<span class="lineno">  60 </span>				}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:74:15</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  71 </span>
+<span class="lineno">  72 </span>						val responseText = FilePersister.simpleFileDelete(fileName, &quot;storage&quot;, clientId, userId)
+<span class="lineno">  73 </span>						call.respondText(status = HttpStatusCode.OK) { responseText.toString() }
+<span class="lineno">  74 </span>					} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  75 </span>						call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  76 </span>					}
+<span class="lineno">  77 </span>				}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:91:14</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  88 </span>					val pwd = PassKeyGeneration.passwordGen(len, digits, casing, specialChars)
+<span class="lineno">  89 </span>
+<span class="lineno">  90 </span>					call.respondText(status = HttpStatusCode.OK) { pwd }
+<span class="lineno">  91 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  92 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno">  93 </span>				}
+<span class="lineno">  94 </span>			}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:106:14</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno"> 103 </span>
+<span class="lineno"> 104 </span>					val responseText = PassKeyGeneration.passkeyGen(len, password, salt)
+<span class="lineno"> 105 </span>					call.respondText(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
+<span class="lineno"> 106 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno"> 107 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno"> 108 </span>				}
+<span class="lineno"> 109 </span>			}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:120:14</span><span class="message">The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno"> 117 </span>
+<span class="lineno"> 118 </span>					//val responseText = FilePersister.simpleFileRetrieve(user, recordKey)
+<span class="lineno"> 119 </span>					call.respondText(status = HttpStatusCode.OK) { &quot;responseText&quot; }
+<span class="lineno"> 120 </span>				} catch (<span class="error">e: Exception</span>) {
+<span class="lineno"> 121 </span>					call.respondText(status = HttpStatusCode.BadGateway, provider = { &quot;This had an error&quot; })
+<span class="lineno"> 122 </span>				}
+<span class="lineno"> 123 </span>			}
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>potential-bugs: 2</h3>
+  <details id="ImplicitDefaultLocale" open="open">
+    <summary class="rule-container"><span class="rule">ImplicitDefaultLocale: 2 </span><span class="description">Implicit default locale used for string processing. Consider using explicit locale.</span></summary>
+<a href="https://detekt.dev/docs/rules/potential-bugs#implicitdefaultlocale">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt:47:31</span><span class="message">String.format(&quot;%02x&quot;, byte) uses implicitly default locale for string formatting.</span>
+        <pre><code><span class="lineno">  44 </span>
+<span class="lineno">  45 </span>            val md5Hex = StringBuilder()
+<span class="lineno">  46 </span>            for (byte in digest) {
+<span class="lineno">  47 </span>                md5Hex.append(<span class="error">String.format(&quot;%02x&quot;, byte)</span>)
+<span class="lineno">  48 </span>            }
+<span class="lineno">  49 </span>
+<span class="lineno">  50 </span>            return md5Hex.toString()
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt:60:31</span><span class="message">String.format(&quot;%02x&quot;, byte) uses implicitly default locale for string formatting.</span>
+        <pre><code><span class="lineno">  57 </span>
+<span class="lineno">  58 </span>            val md5Hex = StringBuilder()
+<span class="lineno">  59 </span>            for (byte in digest) {
+<span class="lineno">  60 </span>                md5Hex.append(<span class="error">String.format(&quot;%02x&quot;, byte)</span>)
+<span class="lineno">  61 </span>            }
+<span class="lineno">  62 </span>
+<span class="lineno">  63 </span>            return md5Hex.toString()
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>style: 56</h3>
+  <details id="ForbiddenComment" open="open">
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 1 </span><span class="description">Flags a forbidden comment.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#forbiddencomment">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:18:13</span><span class="message">Forbidden TODO todo marker in comment, please do the changes.</span>
+        <pre><code><span class="lineno">  15 </span>		allowMethod(HttpMethod.Patch)
+<span class="lineno">  16 </span>		allowHeader(HttpHeaders.Authorization)
+<span class="lineno">  17 </span>		allowHeader(&quot;MyCustomHeader&quot;)
+<span class="lineno">  18 </span>		anyHost() <span class="error">// @TODO: Don't do this in production if possible. Try to limit it.</span>
+<span class="lineno">  19 </span>	}
+<span class="lineno">  20 </span>	routing {
+<span class="lineno">  21 </span>		openAPI(path = &quot;openapi&quot;)
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="MagicNumber" open="open">
+    <summary class="rule-container"><span class="rule">MagicNumber: 8 </span><span class="description">Report magic numbers. Magic number is a numeric literal that is not defined as a constant and hence it's unclear what the purpose of this number is. It's better to declare such numbers as constants and give them a proper name. By default, -1, 0, 1, and 2 are not considered to be magic numbers.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#magicnumber">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:68:23</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  65 </span>      if (key == null) {
+<span class="lineno">  66 </span>        throw IllegalArgumentException(&quot;Key must not be null&quot;)
+<span class="lineno">  67 </span>      }
+<span class="lineno">  68 </span>      if (key.size != <span class="error">32</span>) {
+<span class="lineno">  69 </span>        throw IllegalArgumentException(&quot;Key must be 32 bytes in length&quot;)
+<span class="lineno">  70 </span>      }
+<span class="lineno">  71 </span>      return SecretKeySpec(key, &quot;AES&quot;)
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:24:27</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  21 </span>            Specifications override default allowable characters*/
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>            //set password length
+<span class="lineno">  24 </span>            var passLen = <span class="error">14</span> //recommended strong password length
+<span class="lineno">  25 </span>            if (givenLen != null) {
+<span class="lineno">  26 </span>                passLen = givenLen //client given password length
+<span class="lineno">  27 </span>            }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:75:27</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  72 </span>            /*Returns new passkey (optionally generated from password)*/
+<span class="lineno">  73 </span>
+<span class="lineno">  74 </span>            //set password length
+<span class="lineno">  75 </span>            var passLen = <span class="error">32</span> //recommended strong password length in bytes
+<span class="lineno">  76 </span>            if (givenLen != null) {
+<span class="lineno">  77 </span>                passLen = givenLen //client given password length
+<span class="lineno">  78 </span>            }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:86:30</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  83 </span>            }
+<span class="lineno">  84 </span>
+<span class="lineno">  85 </span>            //passkey from password with PBKDF2 algorithm
+<span class="lineno">  86 </span>            val iterations = <span class="error">120_000</span> //OWASP recommended iterations
+<span class="lineno">  87 </span>            val chars = password.toCharArray()
+<span class="lineno">  88 </span>            val salt: ByteArray =
+<span class="lineno">  89 </span>                givenSalt?.toByteArray() ?: getRandomBytes(passLen) //salt = given salt or random bytes
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:91:70</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  88 </span>            val salt: ByteArray =
+<span class="lineno">  89 </span>                givenSalt?.toByteArray() ?: getRandomBytes(passLen) //salt = given salt or random bytes
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>            val spec = PBEKeySpec(chars, salt, iterations, passLen * <span class="error">8</span>) //key length in bits
+<span class="lineno">  92 </span>            val skf = SecretKeyFactory.getInstance(&quot;PBKDF2WithHmacSHA1&quot;)
+<span class="lineno">  93 </span>            var hash = skf.generateSecret(spec).encoded
+<span class="lineno">  94 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:83:51</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  80 </span>		route(&quot;/password/Get/{len?}/{digits?}/{case?}/{specialChars?}&quot;, HttpMethod.Get) {
+<span class="lineno">  81 </span>			handle {
+<span class="lineno">  82 </span>				try {
+<span class="lineno">  83 </span>					val len = call.parameters[&quot;len&quot;]?.toInt() ?: <span class="error">14</span>
+<span class="lineno">  84 </span>					val digits = call.parameters[&quot;digits&quot;]?.toBoolean() ?: false
+<span class="lineno">  85 </span>					val casing = call.parameters[&quot;case&quot;]?.toBoolean() ?: false
+<span class="lineno">  86 </span>					val specialChars = call.parameters[&quot;specialChars&quot;]?.toBoolean() ?: false
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/tokengen/JWTGenerator.kt:12:52</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">   9 </span>		.withAudience(&quot;jwt-audience&quot;)
+<span class="lineno">  10 </span>		.withIssuer(&quot;https://jwt-provider-domain/&quot;)
+<span class="lineno">  11 </span>		.withClaim(&quot;clientId&quot;, &quot;sample&quot;)
+<span class="lineno">  12 </span>		.withExpiresAt(Date(System.currentTimeMillis() + <span class="error">60000000</span>))
+<span class="lineno">  13 </span>		.sign(Algorithm.HMAC256(&quot;secret&quot;))
+<span class="lineno">  14 </span>	print(token)
+<span class="lineno">  15 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt:36:40</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  33 </span>        private fun calculateMD5(file: File): String {
+<span class="lineno">  34 </span>            val md = MessageDigest.getInstance(&quot;MD5&quot;)
+<span class="lineno">  35 </span>            file.inputStream().use { input -&gt;
+<span class="lineno">  36 </span>                val buffer = ByteArray(<span class="error">8192</span>)
+<span class="lineno">  37 </span>                var bytesRead = input.read(buffer)
+<span class="lineno">  38 </span>                while (bytesRead &gt; 0) {
+<span class="lineno">  39 </span>                    md.update(buffer, 0, bytesRead)
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UnusedPrivateProperty" open="open">
+    <summary class="rule-container"><span class="rule">UnusedPrivateProperty: 1 </span><span class="description">Property is unused and should be removed.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#unusedprivateproperty">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:62:18</span><span class="message">Private property `i` is unused.</span>
+        <pre><code><span class="lineno">  59 </span>            var password = &quot;&quot;
+<span class="lineno">  60 </span>            val rand = SecureRandom() //create secure random int
+<span class="lineno">  61 </span>            var randInt: Int = rand.nextInt(characterList.length)
+<span class="lineno">  62 </span>            for (<span class="error">i</span>: Int in 1.rangeTo(passLen)) {
+<span class="lineno">  63 </span>                password += characterList[randInt]
+<span class="lineno">  64 </span>                randInt = rand.nextInt(characterList.length)
+<span class="lineno">  65 </span>            }
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UseRequire" open="open">
+    <summary class="rule-container"><span class="rule">UseRequire: 10 </span><span class="description">Use require() instead of throwing an IllegalArgumentException.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#userequire">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:66:9</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  63 </span>    }
+<span class="lineno">  64 </span>    private fun validateAndPrepareKey(key: ByteArray?) : SecretKeySpec {
+<span class="lineno">  65 </span>      if (key == null) {
+<span class="lineno">  66 </span>        <span class="error">throw IllegalArgumentException(&quot;Key must not be null&quot;)</span>
+<span class="lineno">  67 </span>      }
+<span class="lineno">  68 </span>      if (key.size != 32) {
+<span class="lineno">  69 </span>        throw IllegalArgumentException(&quot;Key must be 32 bytes in length&quot;)
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:69:9</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  66 </span>        throw IllegalArgumentException(&quot;Key must not be null&quot;)
+<span class="lineno">  67 </span>      }
+<span class="lineno">  68 </span>      if (key.size != 32) {
+<span class="lineno">  69 </span>        <span class="error">throw IllegalArgumentException(&quot;Key must be 32 bytes in length&quot;)</span>
+<span class="lineno">  70 </span>      }
+<span class="lineno">  71 </span>      return SecretKeySpec(key, &quot;AES&quot;)
+<span class="lineno">  72 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:28:17</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  25 </span>                    return false //could not create file
+<span class="lineno">  26 </span>                }
+<span class="lineno">  27 </span>            } else if (!overwrite) { //check if overwrite is allowed
+<span class="lineno">  28 </span>                <span class="error">throw IllegalArgumentException(&quot;File already exists and overwrite is not allowed&quot;)</span>
+<span class="lineno">  29 </span>            }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>            file.writeBytes(request.contents) //write contents to file
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:47:17</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  44 </span>
+<span class="lineno">  45 </span>            val file = File(path + File.separator + fileName)
+<span class="lineno">  46 </span>            if (!file.exists()) {
+<span class="lineno">  47 </span>                <span class="error">throw IllegalArgumentException(&quot;File does not exist&quot;)</span>
+<span class="lineno">  48 </span>            }
+<span class="lineno">  49 </span>            return file.readBytes()
+<span class="lineno">  50 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:62:17</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  59 </span>
+<span class="lineno">  60 </span>            val file = File(path + File.separator + fileName)
+<span class="lineno">  61 </span>            if (!file.exists()) {
+<span class="lineno">  62 </span>                <span class="error">throw IllegalArgumentException(&quot;File does not exist&quot;)</span>
+<span class="lineno">  63 </span>            }
+<span class="lineno">  64 </span>            return file.delete()
+<span class="lineno">  65 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:74:21</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  71 </span>            var dir = File(path + File.separator + &quot;SecurityTools&quot;)
+<span class="lineno">  72 </span>            if (!dir.isDirectory) { //check if directory exists
+<span class="lineno">  73 </span>                if (!dir.mkdirs()) {  //create directory and check success
+<span class="lineno">  74 </span>                    <span class="error">throw IllegalArgumentException(&quot;Could not create directory&quot;)</span>
+<span class="lineno">  75 </span>                }
+<span class="lineno">  76 </span>            }
+<span class="lineno">  77 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:87:17</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">  84 </span>                path = openCreateDir(path, clientID, create)
+<span class="lineno">  85 </span>            }
+<span class="lineno">  86 </span>            if (userID != null &amp;&amp; clientID == null) {
+<span class="lineno">  87 </span>                <span class="error">throw IllegalArgumentException(&quot;Client ID must be specified to use user ID&quot;)</span>
+<span class="lineno">  88 </span>            } else if (userID != null) {
+<span class="lineno">  89 </span>                path = openCreateDir(path, userID, create)
+<span class="lineno">  90 </span>            }
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:112:21</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno"> 109 </span>            val dirNew = File(pathNew)
+<span class="lineno"> 110 </span>            if (!dirNew.isDirectory) { //check if directory exists
+<span class="lineno"> 111 </span>                if (!create) {
+<span class="lineno"> 112 </span>                    <span class="error">throw IllegalArgumentException(&quot;Directory does not exist&quot;)</span>
+<span class="lineno"> 113 </span>                }
+<span class="lineno"> 114 </span>                if (!dirNew.mkdirs()) {  //create directory and check success
+<span class="lineno"> 115 </span>                    throw IllegalArgumentException(&quot;Could not create directory&quot;)
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:115:21</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno"> 112 </span>                    throw IllegalArgumentException(&quot;Directory does not exist&quot;)
+<span class="lineno"> 113 </span>                }
+<span class="lineno"> 114 </span>                if (!dirNew.mkdirs()) {  //create directory and check success
+<span class="lineno"> 115 </span>                    <span class="error">throw IllegalArgumentException(&quot;Could not create directory&quot;)</span>
+<span class="lineno"> 116 </span>                }
+<span class="lineno"> 117 </span>            }
+<span class="lineno"> 118 </span>            return pathNew
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt:12:17</span><span class="message">Use require() instead of throwing an IllegalArgumentException.</span>
+        <pre><code><span class="lineno">   9 </span>    companion object : VirusChecker {
+<span class="lineno">  10 </span>        override fun virusCheck(file: File): String {
+<span class="lineno">  11 </span>            if (!file.exists() || !file.isFile) {
+<span class="lineno">  12 </span>                <span class="error">throw IllegalArgumentException(&quot;File does not exist&quot;)</span>
+<span class="lineno">  13 </span>            }
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>            val searchHash = calculateMD5(file)
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UtilityClassWithPublicConstructor" open="open">
+    <summary class="rule-container"><span class="rule">UtilityClassWithPublicConstructor: 4 </span><span class="description">The class declaration is unnecessary because it only contains utility functions. An object declaration should be used instead.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#utilityclasswithpublicconstructor">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/Encryption.kt:9:1</span><span class="message">The class Encryption only contains utility functions. Consider defining it as an object.</span>
+        <pre><code><span class="lineno">   6 </span>import javax.crypto.spec.SecretKeySpec
+<span class="lineno">   7 </span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span><span class="error">public class Encryption {</span>
+<span class="lineno">  10 </span><span class="error"></span>
+<span class="lineno">  11 </span><span class="error">  companion object : Encrypter {</span>
+<span class="lineno">  12 </span><span class="error">    override fun fileEncrypt(contents: ByteArray, key: ByteArray?, scheme: String?): ByteArray {</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/encryption/PassKeyGeneration.kt:11:1</span><span class="message">The class PassKeyGeneration only contains utility functions. Consider defining it as an object.</span>
+        <pre><code><span class="lineno">   8 </span>import javax.crypto.spec.PBEKeySpec
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span><span class="error">public class PassKeyGeneration {</span>
+<span class="lineno">  12 </span><span class="error"></span>
+<span class="lineno">  13 </span><span class="error">    companion object : PassKeyGenerator {</span>
+<span class="lineno">  14 </span><span class="error">        override fun passwordGen(</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/persistence/FilePersister.kt:9:1</span><span class="message">The class FilePersister only contains utility functions. Consider defining it as an object.</span>
+        <pre><code><span class="lineno">   6 </span>import java.util.*
+<span class="lineno">   7 </span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span><span class="error">public class FilePersister {</span>
+<span class="lineno">  10 </span><span class="error">    //This is a static method</span>
+<span class="lineno">  11 </span><span class="error">    companion object : Persister {</span>
+<span class="lineno">  12 </span><span class="error">        override fun simpleFilePersist(</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/viruscheck/VirusHashChecker.kt:7:1</span><span class="message">The class VirusHashChecker only contains utility functions. Consider defining it as an object.</span>
+        <pre><code><span class="lineno">   4 </span>import java.io.File
+<span class="lineno">   5 </span>import java.security.MessageDigest
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span><span class="error">public  class VirusHashChecker {</span>
+<span class="lineno">   8 </span><span class="error">    //This is a static method</span>
+<span class="lineno">   9 </span><span class="error">    companion object : VirusChecker {</span>
+<span class="lineno">  10 </span><span class="error">        override fun virusCheck(file: File): String {</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="WildcardImport" open="open">
+    <summary class="rule-container"><span class="rule">WildcardImport: 32 </span><span class="description">Wildcard imports should be replaced with imports using fully qualified class names. Wildcard imports can lead to naming conflicts. A library update can introduce naming clashes with your classes which results in compilation errors.</span></summary>
+<a href="https://detekt.dev/docs/rules/style#wildcardimport">Documentation</a>
+    <ul>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/Application.kt:7:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import bytebandits.plugins.configureRouting
+<span class="lineno">   5 </span>import bytebandits.plugins.configureSecurity
+<span class="lineno">   6 </span>import bytebandits.plugins.configureSerialization
+<span class="lineno">   7 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   8 </span>import io.ktor.server.engine.*
+<span class="lineno">   9 </span>import io.ktor.server.netty.*
+<span class="lineno">  10 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/Application.kt:8:1</span><span class="message">io.ktor.server.engine.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   5 </span>import bytebandits.plugins.configureSecurity
+<span class="lineno">   6 </span>import bytebandits.plugins.configureSerialization
+<span class="lineno">   7 </span>import io.ktor.server.application.*
+<span class="lineno">   8 </span><span class="error">import io.ktor.server.engine.*</span>
+<span class="lineno">   9 </span>import io.ktor.server.netty.*
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>fun main() {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/Application.kt:9:1</span><span class="message">io.ktor.server.netty.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   6 </span>import bytebandits.plugins.configureSerialization
+<span class="lineno">   7 </span>import io.ktor.server.application.*
+<span class="lineno">   8 </span>import io.ktor.server.engine.*
+<span class="lineno">   9 </span><span class="error">import io.ktor.server.netty.*</span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>fun main() {
+<span class="lineno">  12 </span>	embeddedServer(Netty, port = 8080, host = &quot;0.0.0.0&quot;, module = Application::module)
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:3:1</span><span class="message">io.ktor.http.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.plugins
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span><span class="error">import io.ktor.http.*</span>
+<span class="lineno">   4 </span>import io.ktor.server.application.*
+<span class="lineno">   5 </span>import io.ktor.server.plugins.cors.routing.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.openapi.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:4:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.plugins
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import io.ktor.http.*
+<span class="lineno">   4 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   5 </span>import io.ktor.server.plugins.cors.routing.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.openapi.*
+<span class="lineno">   7 </span>import io.ktor.server.plugins.swagger.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:5:1</span><span class="message">io.ktor.server.plugins.cors.routing.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import io.ktor.http.*
+<span class="lineno">   4 </span>import io.ktor.server.application.*
+<span class="lineno">   5 </span><span class="error">import io.ktor.server.plugins.cors.routing.*</span>
+<span class="lineno">   6 </span>import io.ktor.server.plugins.openapi.*
+<span class="lineno">   7 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">   8 </span>import io.ktor.server.routing.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:6:1</span><span class="message">io.ktor.server.plugins.openapi.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   3 </span>import io.ktor.http.*
+<span class="lineno">   4 </span>import io.ktor.server.application.*
+<span class="lineno">   5 </span>import io.ktor.server.plugins.cors.routing.*
+<span class="lineno">   6 </span><span class="error">import io.ktor.server.plugins.openapi.*</span>
+<span class="lineno">   7 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">   8 </span>import io.ktor.server.routing.*
+<span class="lineno">   9 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:7:1</span><span class="message">io.ktor.server.plugins.swagger.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import io.ktor.server.application.*
+<span class="lineno">   5 </span>import io.ktor.server.plugins.cors.routing.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.openapi.*
+<span class="lineno">   7 </span><span class="error">import io.ktor.server.plugins.swagger.*</span>
+<span class="lineno">   8 </span>import io.ktor.server.routing.*
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>fun Application.configureHTTP() {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/HTTP.kt:8:1</span><span class="message">io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   5 </span>import io.ktor.server.plugins.cors.routing.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.openapi.*
+<span class="lineno">   7 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">   8 </span><span class="error">import io.ktor.server.routing.*</span>
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>fun Application.configureHTTP() {
+<span class="lineno">  11 </span>	install(CORS) {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:7:1</span><span class="message">io.ktor.http.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import bytebandits.models.SimpleFileRequest
+<span class="lineno">   5 </span>import bytebandits.models.WebSimpleFileRequest
+<span class="lineno">   6 </span>import bytebandits.persistence.FilePersister
+<span class="lineno">   7 </span><span class="error">import io.ktor.http.*</span>
+<span class="lineno">   8 </span>import io.ktor.server.application.*
+<span class="lineno">   9 </span>import io.ktor.server.auth.*
+<span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:8:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   5 </span>import bytebandits.models.WebSimpleFileRequest
+<span class="lineno">   6 </span>import bytebandits.persistence.FilePersister
+<span class="lineno">   7 </span>import io.ktor.http.*
+<span class="lineno">   8 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   9 </span>import io.ktor.server.auth.*
+<span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:9:1</span><span class="message">io.ktor.server.auth.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   6 </span>import bytebandits.persistence.FilePersister
+<span class="lineno">   7 </span>import io.ktor.http.*
+<span class="lineno">   8 </span>import io.ktor.server.application.*
+<span class="lineno">   9 </span><span class="error">import io.ktor.server.auth.*</span>
+<span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">  12 </span>import io.ktor.server.request.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:10:1</span><span class="message">io.ktor.server.auth.jwt.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   7 </span>import io.ktor.http.*
+<span class="lineno">   8 </span>import io.ktor.server.application.*
+<span class="lineno">   9 </span>import io.ktor.server.auth.*
+<span class="lineno">  10 </span><span class="error">import io.ktor.server.auth.jwt.*</span>
+<span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">  12 </span>import io.ktor.server.request.*
+<span class="lineno">  13 </span>import io.ktor.server.response.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:11:1</span><span class="message">io.ktor.server.plugins.swagger.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   8 </span>import io.ktor.server.application.*
+<span class="lineno">   9 </span>import io.ktor.server.auth.*
+<span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">  11 </span><span class="error">import io.ktor.server.plugins.swagger.*</span>
+<span class="lineno">  12 </span>import io.ktor.server.request.*
+<span class="lineno">  13 </span>import io.ktor.server.response.*
+<span class="lineno">  14 </span>import io.ktor.server.routing.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:12:1</span><span class="message">io.ktor.server.request.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   9 </span>import io.ktor.server.auth.*
+<span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">  12 </span><span class="error">import io.ktor.server.request.*</span>
+<span class="lineno">  13 </span>import io.ktor.server.response.*
+<span class="lineno">  14 </span>import io.ktor.server.routing.*
+<span class="lineno">  15 </span>import org.slf4j.LoggerFactory
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:13:1</span><span class="message">io.ktor.server.response.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">  10 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">  12 </span>import io.ktor.server.request.*
+<span class="lineno">  13 </span><span class="error">import io.ktor.server.response.*</span>
+<span class="lineno">  14 </span>import io.ktor.server.routing.*
+<span class="lineno">  15 </span>import org.slf4j.LoggerFactory
+<span class="lineno">  16 </span>import java.util.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Routing.kt:14:1</span><span class="message">io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">  11 </span>import io.ktor.server.plugins.swagger.*
+<span class="lineno">  12 </span>import io.ktor.server.request.*
+<span class="lineno">  13 </span>import io.ktor.server.response.*
+<span class="lineno">  14 </span><span class="error">import io.ktor.server.routing.*</span>
+<span class="lineno">  15 </span>import org.slf4j.LoggerFactory
+<span class="lineno">  16 </span>import java.util.*
+<span class="lineno">  17 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt:5:1</span><span class="message">io.ktor.http.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import com.auth0.jwt.JWT
+<span class="lineno">   4 </span>import com.auth0.jwt.algorithms.Algorithm
+<span class="lineno">   5 </span><span class="error">import io.ktor.http.*</span>
+<span class="lineno">   6 </span>import io.ktor.server.application.*
+<span class="lineno">   7 </span>import io.ktor.server.auth.*
+<span class="lineno">   8 </span>import io.ktor.server.auth.jwt.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt:6:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   3 </span>import com.auth0.jwt.JWT
+<span class="lineno">   4 </span>import com.auth0.jwt.algorithms.Algorithm
+<span class="lineno">   5 </span>import io.ktor.http.*
+<span class="lineno">   6 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   7 </span>import io.ktor.server.auth.*
+<span class="lineno">   8 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">   9 </span>import io.ktor.server.response.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt:7:1</span><span class="message">io.ktor.server.auth.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import com.auth0.jwt.algorithms.Algorithm
+<span class="lineno">   5 </span>import io.ktor.http.*
+<span class="lineno">   6 </span>import io.ktor.server.application.*
+<span class="lineno">   7 </span><span class="error">import io.ktor.server.auth.*</span>
+<span class="lineno">   8 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">   9 </span>import io.ktor.server.response.*
+<span class="lineno">  10 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt:8:1</span><span class="message">io.ktor.server.auth.jwt.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   5 </span>import io.ktor.http.*
+<span class="lineno">   6 </span>import io.ktor.server.application.*
+<span class="lineno">   7 </span>import io.ktor.server.auth.*
+<span class="lineno">   8 </span><span class="error">import io.ktor.server.auth.jwt.*</span>
+<span class="lineno">   9 </span>import io.ktor.server.response.*
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>fun Application.configureSecurity() {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Security.kt:9:1</span><span class="message">io.ktor.server.response.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   6 </span>import io.ktor.server.application.*
+<span class="lineno">   7 </span>import io.ktor.server.auth.*
+<span class="lineno">   8 </span>import io.ktor.server.auth.jwt.*
+<span class="lineno">   9 </span><span class="error">import io.ktor.server.response.*</span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>fun Application.configureSecurity() {
+<span class="lineno">  12 </span>	// Please read the jwt property from the config file if you are using EngineMain
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt:3:1</span><span class="message">io.ktor.serialization.gson.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.plugins
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span><span class="error">import io.ktor.serialization.gson.*</span>
+<span class="lineno">   4 </span>import io.ktor.serialization.kotlinx.json.*
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.contentnegotiation.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt:4:1</span><span class="message">io.ktor.serialization.kotlinx.json.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.plugins
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import io.ktor.serialization.gson.*
+<span class="lineno">   4 </span><span class="error">import io.ktor.serialization.kotlinx.json.*</span>
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.contentnegotiation.*
+<span class="lineno">   7 </span>import io.ktor.server.routing.*
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt:5:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import io.ktor.serialization.gson.*
+<span class="lineno">   4 </span>import io.ktor.serialization.kotlinx.json.*
+<span class="lineno">   5 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   6 </span>import io.ktor.server.plugins.contentnegotiation.*
+<span class="lineno">   7 </span>import io.ktor.server.routing.*
+<span class="lineno">   8 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt:6:1</span><span class="message">io.ktor.server.plugins.contentnegotiation.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   3 </span>import io.ktor.serialization.gson.*
+<span class="lineno">   4 </span>import io.ktor.serialization.kotlinx.json.*
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span><span class="error">import io.ktor.server.plugins.contentnegotiation.*</span>
+<span class="lineno">   7 </span>import io.ktor.server.routing.*
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>fun Application.configureSerialization() {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/main/kotlin/bytebandits/plugins/Serialization.kt:7:1</span><span class="message">io.ktor.server.routing.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import io.ktor.serialization.kotlinx.json.*
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span>import io.ktor.server.plugins.contentnegotiation.*
+<span class="lineno">   7 </span><span class="error">import io.ktor.server.routing.*</span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>fun Application.configureSerialization() {
+<span class="lineno">  10 </span>	install(ContentNegotiation) {
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/encryption/EncryptionTests.kt:3:1</span><span class="message">kotlin.test.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.encryption
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span><span class="error">import kotlin.test.*</span>
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>class EncryptionTests{
+<span class="lineno">   6 </span>  @Test
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/encryption/PassKeyGenerationTests.kt:3:1</span><span class="message">kotlin.test.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.encryption
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span><span class="error">import kotlin.test.*</span>
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>class PassKeyGenerationTests {
+<span class="lineno">   6 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/routing/RoutingTests.kt:4:1</span><span class="message">io.ktor.http.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package bytebandits.routing
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import bytebandits.module
+<span class="lineno">   4 </span><span class="error">import io.ktor.http.*</span>
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span>import io.ktor.server.testing.*
+<span class="lineno">   7 </span>import kotlin.test.Test
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/routing/RoutingTests.kt:5:1</span><span class="message">io.ktor.server.application.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import bytebandits.module
+<span class="lineno">   4 </span>import io.ktor.http.*
+<span class="lineno">   5 </span><span class="error">import io.ktor.server.application.*</span>
+<span class="lineno">   6 </span>import io.ktor.server.testing.*
+<span class="lineno">   7 </span>import kotlin.test.Test
+<span class="lineno">   8 </span>import kotlin.test.assertEquals
+</code></pre>
+      </li>
+      <li><span class="location">C:/Users/hugom/OneDrive/CUiNYC/Classes/2023-F/CS4156/Byte-Bandits-ASWE/byte-bandits/src/test/kotlin/bytebandits/routing/RoutingTests.kt:6:1</span><span class="message">io.ktor.server.testing.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   3 </span>import bytebandits.module
+<span class="lineno">   4 </span>import io.ktor.http.*
+<span class="lineno">   5 </span>import io.ktor.server.application.*
+<span class="lineno">   6 </span><span class="error">import io.ktor.server.testing.*</span>
+<span class="lineno">   7 </span>import kotlin.test.Test
+<span class="lineno">   8 </span>import kotlin.test.assertEquals
+<span class="lineno">   9 </span>import kotlin.test.assertTrue
+</code></pre>
+      </li>
+    </ul>
+  </details>
+</div>
+
+
+generated with <a href="https://detekt.dev/">detekt version 1.23.1</a> on 2023-10-20 02:57:49 UTC.
+
+</body>
+</html>
