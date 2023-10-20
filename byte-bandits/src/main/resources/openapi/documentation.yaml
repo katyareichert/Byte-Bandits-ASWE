@@ -15,24 +15,11 @@ info:
 servers:
     -   url: "http://0.0.0.0:8080"
 paths:
-    /storage/Test:
-        get:
-            summary: "Test secure storage"
-            responses:
-                "200":
-                    description: "OK"
-                    content:
-                        text/plain:
-                            schema:
-                                type: "string"
-                            examples:
-                                Example#1:
-                                    value: "Hello World!"
     /storage/Submit:
         post:
             summary: "Submit file to storage"
             requestBody:
-                description: "Optional description in *Markdown*"
+                description:
                 required: true
                 content:
                     text/plain:
@@ -43,19 +30,14 @@ paths:
                     description: Created
                 '502':
                     description: Bad Gateway
-    /storage/Get/{user}/{record_key}:
+
+    /storage/Get/{file_name}:
         get:
             summary: "Get file from storage"
             parameters:
-                - name: user
+                - name: file_name
                   in: path
-                  description: User ID
-                  required: true
-                  schema:
-                      type: string
-                - name: record_key
-                  in: path
-                  description: Record Key of File to Retrieve
+                  description: Name of File to Retrieve
                   required: true
                   schema:
                       type: string
@@ -72,5 +54,112 @@ paths:
                                     value: "Hello World!"
                 "502":
                     description: "Bad Gateway"
+    /storage/Delete:
+        get:
+            summary: "Delete file from storage"
+            responses:
+                "200":
+                    description: "OK"
+                    content:
+                        text/plain:
+                            schema:
+                                type: "string"
+                            examples:
+                                Example#1:
+                                    value: "Hello World!"
+                "502":
+                    description: "Bad Gateway"
+    /password/Get/{len?}/{digits?}/{case?}/{specialChars?}:
+        get:
+            summary: "Generate a new password"
+            parameters:
+                - name: len
+                  in: path
+                  description: Length of Password
+                  required: false
+                  schema:
+                      type: int64
+                - name: digits
+                  in: path
+                  description: Include Numbers in Password?
+                  required: false
+                  schema:
+                      type: boolean
+                - name: case
+                  in: path
+                  description: Include Capital Letters in Password?
+                  required: false
+                  schema:
+                      type: boolean
+                - name: specialChars
+                  in: path
+                  description: Include Special Characters in Password?
+                  required: false
+                  schema:
+                      type: boolean
+
+            responses:
+                "200":
+                    description: "OK"
+                    content:
+                        text/plain:
+                            schema:
+                                type: "string"
+                            examples:
+                                Example#1:
+                                    value: "sUJs81Nd01JF3o"
+                "502":
+                    description: "Bad Gateway"
+
+    /passKey/Get/{len?}/{password?}/{salt?}:
+        get:
+            summary: "Generate new passkey"
+            parameters:
+                - name: len
+                  in: path
+                  description: Length of Passkey
+                  required: false
+                  schema:
+                      type: int64
+                - name: password
+                  in: path
+                  description: Password to Generate From
+                  required: false
+                  schema:
+                      type: boolean
+                - name: salt
+                  in: path
+                  description: Cryptographic Salt
+                  required: false
+                  schema:
+                      type: boolean
+
+            responses:
+                "200":
+                    description: "OK"
+                    content:
+                        text/plain:
+                            schema:
+                                type: "string"
+                            examples:
+                                Example#1:
+                                    value: "620580"
+                "502":
+                    description: "Bad Gateway"
+    /virusChecker/:
+        post:
+            summary: "Check a file for viruses"
+            requestBody:
+                description:
+                required: true
+                content:
+                    text/plain:
+                        schema:
+                            type: string
+            responses:
+                '201':
+                    description: Created
+                '502':
+                    description: Bad Gateway
 components:
     schemas:
