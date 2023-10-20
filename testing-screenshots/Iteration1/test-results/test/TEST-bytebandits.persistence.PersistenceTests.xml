@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="bytebandits.persistence.PersistenceTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-10-20T02:30:44" hostname="tomorrow.lan" time="0.004">
+  <properties/>
+  <testcase name="testSimpleFilePersistNoOverwrite" classname="bytebandits.persistence.PersistenceTests" time="0.003"/>
+  <testcase name="testSimpleFilePersistNoUserID" classname="bytebandits.persistence.PersistenceTests" time="0.0"/>
+  <testcase name="testSimpleFilePersistNoClientIDNoUserID" classname="bytebandits.persistence.PersistenceTests" time="0.0"/>
+  <testcase name="testSimpleFilePersistNoClientID" classname="bytebandits.persistence.PersistenceTests" time="0.0"/>
+  <testcase name="testSimpleFilePersistFull" classname="bytebandits.persistence.PersistenceTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
