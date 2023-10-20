@@ -16,16 +16,16 @@ Advanced Software Engineering Fall 2023 Project
 ### System Tests Corresponding to API
 - We used Postman to conduct code-calls-code-over-network system-level tests exercising every API entry point
 - For each endpoint, we forced each possible status code (OK or Bad Gateway)
-- We simulated multiple clients by [DESCRIBE]
+- We simulated multiple clients by using different JWT tokens, we have simulated this via postman tests by using multiple tokens.
 - Our storage endpoint is our persistent data aspect, and this was tested through Postman as well
-- For Postman responses, see: [ADD PATH TO POSTMAN FOLDER]
+- For Postman responses, see: [https://github.com/katyareichert/Byte-Bandits-ASWE/blob/main/testing-screenshots/Iteration1/tests.md]
 
 
 ### Unit Tests
 - In addition to over-network tests, we run unit tests, which run as a part of the gradle build
 - Tests contain both Unit & Integration test
 - Setup/Teardown: our file persistence tests add and then delete files used for testing
-- [MOCKING]
+- Ktor also spins up the entire application to test the full lifecycle of the webserver
 - For unit tests, see: byte-bandits/src/test/kotlin/bytebandits
 
 
@@ -50,4 +50,4 @@ Advanced Software Engineering Fall 2023 Project
 
 
 ### Tagged Revisions
-- Current iteration is tagged as [TAG]
+- Current iteration is tagged as 0.0.1
