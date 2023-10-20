@@ -152,10 +152,11 @@ paths:
             requestBody:
                 description:
                 required: true
-                content:
-                    text/plain:
-                        schema:
-                            type: string
+              content:
+                application/octet-stream:
+                  schema:
+                    type: string
+                    format: binary
             responses:
                 '201':
                     description: Created
