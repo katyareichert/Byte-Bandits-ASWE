@@ -2,8 +2,9 @@ package bytebandits.viruscheck
 
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
-import kotlin.test.*
 import java.io.File
+import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 class VirusHashCheckTests{
     @Test

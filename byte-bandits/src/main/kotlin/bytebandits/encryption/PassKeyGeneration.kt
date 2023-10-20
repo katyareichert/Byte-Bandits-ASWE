@@ -10,9 +10,15 @@ import javax.crypto.spec.PBEKeySpec
 
 public class PassKeyGeneration {
 
-    companion object: PassKeyGenerator {
-        override fun passwordGen(givenLen: Int?, digits: Boolean?, capitals: Boolean?, specialCharacters: Boolean?): String {
-            /* Returns password of user generated or default length. Specifications override default allowable characters*/
+    companion object : PassKeyGenerator {
+        override fun passwordGen(
+            givenLen: Int?,
+            digits: Boolean?,
+            capitals: Boolean?,
+            specialCharacters: Boolean?
+        ): String {
+            /* Returns password of user generated or default length.
+            Specifications override default allowable characters*/
 
             //set password length
             var passLen = 14 //recommended strong password length
@@ -79,7 +85,8 @@ public class PassKeyGeneration {
             //passkey from password with PBKDF2 algorithm
             val iterations = 120_000 //OWASP recommended iterations
             val chars = password.toCharArray()
-            val salt: ByteArray = givenSalt?.toByteArray() ?: getRandomBytes(passLen) //salt = given salt or random bytes
+            val salt: ByteArray =
+                givenSalt?.toByteArray() ?: getRandomBytes(passLen) //salt = given salt or random bytes
 
             val spec = PBEKeySpec(chars, salt, iterations, passLen * 8) //key length in bits
             val skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")

@@ -112,8 +112,8 @@ fun Application.configureRouting() {
 		route("/virusChecker/", HttpMethod.Post) {
 			handle {
 				try {
-					val user = call.parameters["client_id"] ?: "default_user"
-					val recordKey = call.parameters["record_key"] ?: "default_key"
+					// val user = call.parameters["client_id"] ?: "default_user"
+					// val recordKey = call.parameters["record_key"] ?: "default_key"
 
 					//val responseText = FilePersister.simpleFileRetrieve(user, recordKey)
 					call.respondText(status = HttpStatusCode.OK) { "responseText" }

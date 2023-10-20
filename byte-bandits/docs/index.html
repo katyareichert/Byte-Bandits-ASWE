@@ -689,6 +689,20 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+            defs["SimpleFileRequest"] = {
+  "required" : [ "clientId", "principal" ],
+  "type" : "object",
+  "properties" : {
+    "principal" : {
+      "type" : "JWTPrincipal",
+      "description" : "JWT Token of Client"
+    },
+    "clientId" : {
+      "type" : "string",
+      "description" : "Client ID"
+    }
+  }
+};
   </script>
 
   <div class="container-fluid">
@@ -807,8 +821,7 @@ public class DefaultApiExample {
         Boolean password = true; // Boolean | Password to Generate From
         Boolean salt = true; // Boolean | Cryptographic Salt
         try {
-            'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
-            System.out.println(result);
+            apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#passKeyGetLenPasswordSaltGet");
             e.printStackTrace();
@@ -828,8 +841,7 @@ public class DefaultApiExample {
         Boolean password = true; // Boolean | Password to Generate From
         Boolean salt = true; // Boolean | Cryptographic Salt
         try {
-            'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
-            System.out.println(result);
+            apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#passKeyGetLenPasswordSaltGet");
             e.printStackTrace();
@@ -852,10 +864,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 [apiInstance passKeyGetLenPasswordSaltGetWith:len
     password:password
     salt:salt
-              completionHandler: ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -875,7 +884,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log('API called successfully.');
   }
 };
 api.passKeyGetLenPasswordSaltGet(len, password, salt, callback);
@@ -907,8 +916,7 @@ namespace Example
             try
             {
                 // Generate new passkey
-                'String' result = apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
-                Debug.WriteLine(result);
+                apiInstance.passKeyGetLenPasswordSaltGet(len, password, salt);
             }
             catch (Exception e)
             {
@@ -930,8 +938,7 @@ $password = true; // Boolean | Password to Generate From
 $salt = true; // Boolean | Cryptographic Salt
 
 try {
-    $result = $api_instance->passKeyGetLenPasswordSaltGet($len, $password, $salt);
-    print_r($result);
+    $api_instance->passKeyGetLenPasswordSaltGet($len, $password, $salt);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -949,8 +956,7 @@ my $password = true; # Boolean | Password to Generate From
 my $salt = true; # Boolean | Cryptographic Salt
 
 eval { 
-    my $result = $api_instance->passKeyGetLenPasswordSaltGet(len => $len, password => $password, salt => $salt);
-    print Dumper($result);
+    $api_instance->passKeyGetLenPasswordSaltGet(len => $len, password => $password, salt => $salt);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: $@\n";
@@ -972,8 +978,7 @@ salt = true # Boolean | Cryptographic Salt
 
 try: 
     # Generate new passkey
-    api_response = api_instance.pass_key_get_len_password_salt_get(len, password, salt)
-    pprint(api_response)
+    api_instance.pass_key_get_len_password_salt_get(len, password, salt)
 except ApiException as e:
     print("Exception when calling DefaultApi->passKeyGetLenPasswordSaltGet: %s\n" % e)</code></pre>
                             </div>
@@ -1060,58 +1065,12 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-passKeyGetLenPasswordSaltGet-200-schema">Schema</a>
-                                </li>
-
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-passKeyGetLenPasswordSaltGet-200-schema">
-                                  <div id='responses-passKeyGetLenPasswordSaltGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "text/plain" : {
-      "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      },
-      "examples" : {
-        "Example#1" : {
-          "value" : "620580"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["text/plain"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-passKeyGetLenPasswordSaltGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-passKeyGetLenPasswordSaltGet-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-passKeyGetLenPasswordSaltGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
                             </div>
 
                             <h3> Status: 502 - Bad Gateway </h3>
@@ -1180,8 +1139,7 @@ public class DefaultApiExample {
         Boolean case = true; // Boolean | Include Capital Letters in Password?
         Boolean specialChars = true; // Boolean | Include Special Characters in Password?
         try {
-            'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
-            System.out.println(result);
+            apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#passwordGetLenDigitsCaseSpecialCharsGet");
             e.printStackTrace();
@@ -1202,8 +1160,7 @@ public class DefaultApiExample {
         Boolean case = true; // Boolean | Include Capital Letters in Password?
         Boolean specialChars = true; // Boolean | Include Special Characters in Password?
         try {
-            'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
-            System.out.println(result);
+            apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#passwordGetLenDigitsCaseSpecialCharsGet");
             e.printStackTrace();
@@ -1228,10 +1185,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
     digits:digits
     case:case
     specialChars:specialChars
-              completionHandler: ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1252,7 +1206,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log('API called successfully.');
   }
 };
 api.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars, callback);
@@ -1285,8 +1239,7 @@ namespace Example
             try
             {
                 // Generate a new password
-                'String' result = apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
-                Debug.WriteLine(result);
+                apiInstance.passwordGetLenDigitsCaseSpecialCharsGet(len, digits, case, specialChars);
             }
             catch (Exception e)
             {
@@ -1309,8 +1262,7 @@ $case = true; // Boolean | Include Capital Letters in Password?
 $specialChars = true; // Boolean | Include Special Characters in Password?
 
 try {
-    $result = $api_instance->passwordGetLenDigitsCaseSpecialCharsGet($len, $digits, $case, $specialChars);
-    print_r($result);
+    $api_instance->passwordGetLenDigitsCaseSpecialCharsGet($len, $digits, $case, $specialChars);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -1329,8 +1281,7 @@ my $case = true; # Boolean | Include Capital Letters in Password?
 my $specialChars = true; # Boolean | Include Special Characters in Password?
 
 eval { 
-    my $result = $api_instance->passwordGetLenDigitsCaseSpecialCharsGet(len => $len, digits => $digits, case => $case, specialChars => $specialChars);
-    print Dumper($result);
+    $api_instance->passwordGetLenDigitsCaseSpecialCharsGet(len => $len, digits => $digits, case => $case, specialChars => $specialChars);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: $@\n";
@@ -1353,8 +1304,7 @@ specialChars = true # Boolean | Include Special Characters in Password?
 
 try: 
     # Generate a new password
-    api_response = api_instance.password_get_len_digits_case_special_chars_get(len, digits, case, specialChars)
-    pprint(api_response)
+    api_instance.password_get_len_digits_case_special_chars_get(len, digits, case, specialChars)
 except ApiException as e:
     print("Exception when calling DefaultApi->passwordGetLenDigitsCaseSpecialCharsGet: %s\n" % e)</code></pre>
                             </div>
@@ -1463,58 +1413,12 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema">Schema</a>
-                                </li>
-
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema">
-                                  <div id='responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "text/plain" : {
-      "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      },
-      "examples" : {
-        "Example#1" : {
-          "value" : "sUJs81Nd01JF3o"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["text/plain"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-passwordGetLenDigitsCaseSpecialCharsGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
                             </div>
 
                             <h3> Status: 502 - Bad Gateway </h3>
@@ -1580,8 +1484,7 @@ public class DefaultApiExample {
         DefaultApi apiInstance = new DefaultApi();
         UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         try {
-            'String' result = apiInstance.storageDeleteGet(client ID);
-            System.out.println(result);
+            apiInstance.storageDeleteGet(client ID);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageDeleteGet");
             e.printStackTrace();
@@ -1599,8 +1502,7 @@ public class DefaultApiExample {
         DefaultApi apiInstance = new DefaultApi();
         UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         try {
-            'String' result = apiInstance.storageDeleteGet(client ID);
-            System.out.println(result);
+            apiInstance.storageDeleteGet(client ID);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageDeleteGet");
             e.printStackTrace();
@@ -1619,10 +1521,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 // Delete file from storage
 [apiInstance storageDeleteGetWith:client ID
-              completionHandler: ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1640,7 +1539,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log('API called successfully.');
   }
 };
 api.storageDeleteGet(client ID, callback);
@@ -1670,8 +1569,7 @@ namespace Example
             try
             {
                 // Delete file from storage
-                'String' result = apiInstance.storageDeleteGet(client ID);
-                Debug.WriteLine(result);
+                apiInstance.storageDeleteGet(client ID);
             }
             catch (Exception e)
             {
@@ -1691,8 +1589,7 @@ $api_instance = new Swagger\Client\ApiDefaultApi();
 $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
 
 try {
-    $result = $api_instance->storageDeleteGet($client ID);
-    print_r($result);
+    $api_instance->storageDeleteGet($client ID);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->storageDeleteGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -1708,8 +1605,7 @@ my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
 
 eval { 
-    my $result = $api_instance->storageDeleteGet(client ID => $client ID);
-    print Dumper($result);
+    $api_instance->storageDeleteGet(client ID => $client ID);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->storageDeleteGet: $@\n";
@@ -1729,8 +1625,7 @@ client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID |
 
 try: 
     # Delete file from storage
-    api_response = api_instance.storage_delete_get(client ID)
-    pprint(api_response)
+    api_instance.storage_delete_get(client ID)
 except ApiException as e:
     print("Exception when calling DefaultApi->storageDeleteGet: %s\n" % e)</code></pre>
                             </div>
@@ -1773,58 +1668,12 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-storageDeleteGet-200-schema">Schema</a>
-                                </li>
-
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-storageDeleteGet-200-schema">
-                                  <div id='responses-storageDeleteGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "text/plain" : {
-      "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      },
-      "examples" : {
-        "Example#1" : {
-          "value" : "Hello World!"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["text/plain"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-storageDeleteGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-storageDeleteGet-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-storageDeleteGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
                             </div>
 
                             <h3> Status: 502 - Bad Gateway </h3>
@@ -1891,8 +1740,7 @@ public class DefaultApiExample {
         UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         String fileName = fileName_example; // String | Name of File to Retrieve
         try {
-            'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
-            System.out.println(result);
+            apiInstance.storageGetFileNameGet(client ID, fileName);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageGetFileNameGet");
             e.printStackTrace();
@@ -1911,8 +1759,7 @@ public class DefaultApiExample {
         UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
         String fileName = fileName_example; // String | Name of File to Retrieve
         try {
-            'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
-            System.out.println(result);
+            apiInstance.storageGetFileNameGet(client ID, fileName);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageGetFileNameGet");
             e.printStackTrace();
@@ -1933,10 +1780,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 // Get file from storage
 [apiInstance storageGetFileNameGetWith:client ID
     fileName:fileName
-              completionHandler: ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1955,7 +1799,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log('API called successfully.');
   }
 };
 api.storageGetFileNameGet(client ID, fileName, callback);
@@ -1986,8 +1830,7 @@ namespace Example
             try
             {
                 // Get file from storage
-                'String' result = apiInstance.storageGetFileNameGet(client ID, fileName);
-                Debug.WriteLine(result);
+                apiInstance.storageGetFileNameGet(client ID, fileName);
             }
             catch (Exception e)
             {
@@ -2008,8 +1851,7 @@ $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID |
 $fileName = fileName_example; // String | Name of File to Retrieve
 
 try {
-    $result = $api_instance->storageGetFileNameGet($client ID, $fileName);
-    print_r($result);
+    $api_instance->storageGetFileNameGet($client ID, $fileName);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->storageGetFileNameGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -2026,8 +1868,7 @@ my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID |
 my $fileName = fileName_example; # String | Name of File to Retrieve
 
 eval { 
-    my $result = $api_instance->storageGetFileNameGet(client ID => $client ID, fileName => $fileName);
-    print Dumper($result);
+    $api_instance->storageGetFileNameGet(client ID => $client ID, fileName => $fileName);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->storageGetFileNameGet: $@\n";
@@ -2048,8 +1889,7 @@ fileName = fileName_example # String | Name of File to Retrieve
 
 try: 
     # Get file from storage
-    api_response = api_instance.storage_get_file_name_get(client ID, fileName)
-    pprint(api_response)
+    api_instance.storage_get_file_name_get(client ID, fileName)
 except ApiException as e:
     print("Exception when calling DefaultApi->storageGetFileNameGet: %s\n" % e)</code></pre>
                             </div>
@@ -2121,58 +1961,12 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-storageGetFileNameGet-200-schema">Schema</a>
-                                </li>
-
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-storageGetFileNameGet-200-schema">
-                                  <div id='responses-storageGetFileNameGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "text/plain" : {
-      "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      },
-      "examples" : {
-        "Example#1" : {
-          "value" : "Hello World!"
-        }
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["text/plain"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-storageGetFileNameGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-storageGetFileNameGet-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-storageGetFileNameGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
                             </div>
 
                             <h3> Status: 502 - Bad Gateway </h3>
@@ -2190,7 +1984,7 @@ except ApiException as e:
                       <article id="api-Default-storageSubmitPost-0" data-group="User" data-name="storageSubmitPost" data-version="0">
                         <div class="pull-left">
                           <h1>storageSubmitPost</h1>
-                          <p>Submit file to storage</p>
+                          <p>Submit a simple file</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2219,7 +2013,8 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Default-storageSubmitPost-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
--H "Content-Type: text/plain"\
+-H "Accept: text/plain"\
+-H "Content-Type: application/json"\
 "http://0.0.0.0:8080/storage/Submit"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-storageSubmitPost-0-java">
@@ -2236,10 +2031,9 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        String body = ; // String | 
-        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        SimpleFileRequest body = ; // SimpleFileRequest | 
         try {
-            apiInstance.storageSubmitPost(body, client ID);
+            apiInstance.storageSubmitPost(body);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageSubmitPost");
             e.printStackTrace();
@@ -2255,10 +2049,9 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        String body = ; // String | 
-        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        SimpleFileRequest body = ; // SimpleFileRequest | 
         try {
-            apiInstance.storageSubmitPost(body, client ID);
+            apiInstance.storageSubmitPost(body);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#storageSubmitPost");
             e.printStackTrace();
@@ -2271,14 +2064,12 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-storageSubmitPost-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *body = ; // 
-UUID *client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // 
+                              <pre class="prettyprint"><code class="language-cpp">SimpleFileRequest *body = ; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-// Submit file to storage
+// Submit a simple file
 [apiInstance storageSubmitPostWith:body
-    client ID:client ID
               completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
@@ -2291,8 +2082,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
                               <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
 var api = new SecurityToolsApi.DefaultApi()
-var body = ; // {{String}} 
-var client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // {{UUID}} 
+var body = ; // {{SimpleFileRequest}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -2301,7 +2091,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.storageSubmitPost(bodyclient ID, callback);
+api.storageSubmitPost(body, callback);
 </code></pre>
                             </div>
 
@@ -2323,13 +2113,12 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new String(); // String | 
-            var client ID = new UUID(); // UUID | 
+            var body = new SimpleFileRequest(); // SimpleFileRequest | 
 
             try
             {
-                // Submit file to storage
-                apiInstance.storageSubmitPost(body, client ID);
+                // Submit a simple file
+                apiInstance.storageSubmitPost(body);
             }
             catch (Exception e)
             {
@@ -2346,11 +2135,10 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // String | 
-$client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+$body = ; // SimpleFileRequest | 
 
 try {
-    $api_instance->storageSubmitPost($body, $client ID);
+    $api_instance->storageSubmitPost($body);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->storageSubmitPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -2363,11 +2151,10 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::String->new(); # String | 
-my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
+my $body = WWW::SwaggerClient::Object::SimpleFileRequest->new(); # SimpleFileRequest | 
 
 eval { 
-    $api_instance->storageSubmitPost(body => $body, client ID => $client ID);
+    $api_instance->storageSubmitPost(body => $body);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->storageSubmitPost: $@\n";
@@ -2383,12 +2170,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # String | 
-client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | 
+body =  # SimpleFileRequest | 
 
 try: 
-    # Submit file to storage
-    api_instance.storage_submit_post(body, client ID)
+    # Submit a simple file
+    api_instance.storage_submit_post(body)
 except ApiException as e:
     print("Exception when calling DefaultApi->storageSubmitPost: %s\n" % e)</code></pre>
                             </div>
@@ -2397,35 +2183,6 @@ except ApiException as e:
                           <h2>Parameters</h2>
 
 
-                            <div class="methodsubtabletitle">Header parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                  <tr><td style="width:150px;">Client ID*</td>
-                                  <td>
-                                  
-                                  
-                                      <div id="d2e199_storageSubmitPost_client ID">
-                                          <div class="json-schema-view">
-                                              <div class="primitive">
-                                                  <span class="type">
-                                                      UUID
-                                                  </span>
-                                                      <span class="format">
-                                                          (uuid)
-                                                      </span>
-                                  
-                                              </div>
-                                                  <div class="inner required">
-                                                      Required
-                                                  </div>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  </tr>
-                            </table>
 
                             <div class="methodsubtabletitle">Body parameters</div>
                             <table id="methodsubtable">
@@ -2441,15 +2198,15 @@ except ApiException as e:
                                 $(document).ready(function() {
                                   var schemaWrapper = {
   "content" : {
-    "text/plain" : {
+    "application/json" : {
       "schema" : {
-        "type" : "string"
+        "$ref" : "#/components/schemas/SimpleFileRequest"
       }
     }
   },
   "required" : true
 };
-                                  var schema = schemaWrapper.content["text/plain"].schema;
+                                  var schema = schemaWrapper.content["application/json"].schema;
                                   if (schema.$ref != null) {
                                     schema = defsParser.$refs.get(schema.$ref);
                                   } else {
@@ -2474,7 +2231,7 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 201 - Created </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -2526,6 +2283,7 @@ except ApiException as e:
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Default-virusCheckerPost-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: text/plain"\
 -H "Content-Type: application/octet-stream"\
 "http://0.0.0.0:8080/virusChecker/"</code></pre>
                           </div>
@@ -2744,7 +2502,7 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 201 - Created </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
