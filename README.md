@@ -7,14 +7,16 @@ Advanced Software Engineering Fall 2023 Project
 
 
 ### Documented API
-- byte-bandits/resources/openapi/documentation.yaml
-- [ADD EXTERNAL LINK]
+- Our API is a code-calls-code-over-network API, not a user-facing CLI
+- Documentation for all implemented entry points can be found via our Swagger
+- For documentation, see: byte-bandits/resources/openapi/documentation.yaml
+- [EXTERNAL DOCUMENTATION]
 
 
 ### System Tests Corresponding to API
 - We used Postman to conduct code-calls-code-over-network system-level tests exercising every API entry point
 - For each endpoint, we forced each possible status code (OK or Bad Gateway)
-- We tested multiple clients by [DESCRIBE]
+- We simulated multiple clients by [DESCRIBE]
 - Our storage endpoint is our persistent data aspect, and this was tested through Postman as well
 - For Postman responses, see: [ADD PATH TO POSTMAN FOLDER]
 
@@ -32,12 +34,12 @@ Advanced Software Engineering Fall 2023 Project
 
 
 ### Self-Documenting Code
-- All main functions are commented for readability
+- All main functions are documented with comments for readability
 - Function and parameter names are self explanatory
 
 
 ### Style Compliant
-- Style checked with [ADD STYLE CHECKER]
+- Style checked with Detekt
 - For style checker report, see: [ADD PATH TO REPORT FILE]
 
 
