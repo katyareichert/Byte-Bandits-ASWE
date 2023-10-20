@@ -17,26 +17,24 @@ servers:
 paths:
   /storage/Submit:
     post:
-      summary: "Submit file to storage"
-      parameters:
-        - in: header
-          name: Client ID
-          schema:
-            type: string
-            format: uuid
-          required: true
+      summary: Submit a simple file
       requestBody:
-        description:
         required: true
         content:
-          text/plain:
+          application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/SimpleFileRequest'
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Success
+          content:
+            text/plain:
+              example: "This worked: true"
         '502':
           description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
 
   /storage/Get/{file_name}:
     get:
@@ -54,19 +52,21 @@ paths:
           required: true
           schema:
             type: string
-
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: Success
           content:
             text/plain:
-              schema:
-                type: "string"
               examples:
-                Example#1:
-                  value: "Hello World!"
-        "502":
-          description: "Bad Gateway"
+                Success:
+                  value: "True"
+                FileNotFound:
+                  value: "File does not exist"
+        '502':
+          description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
 
   /storage/Delete:
     get:
@@ -79,17 +79,21 @@ paths:
             format: uuid
           required: true
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: Success
           content:
             text/plain:
-              schema:
-                type: "string"
               examples:
-                Example#1:
-                  value: "Hello World!"
-        "502":
-          description: "Bad Gateway"
+                Success:
+                  value: "True"
+                FileNotFound:
+                  value: "File does not exist"
+        '502':
+          description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
+
   /password/Get/{len?}/{digits?}/{case?}/{specialChars?}:
     get:
       summary: "Generate a new password"
@@ -118,19 +122,18 @@ paths:
           required: false
           schema:
             type: boolean
-
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: Success
           content:
             text/plain:
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "sUJs81Nd01JF3o"
-        "502":
-          description: "Bad Gateway"
+              example:
+                value: "sUJs81Nd01JF3o"
+        '502':
+          description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
 
   /passKey/Get/{len?}/{password?}/{salt?}:
     get:
@@ -154,19 +157,19 @@ paths:
           required: false
           schema:
             type: boolean
-
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: Success
           content:
             text/plain:
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "620580"
-        "502":
-          description: "Bad Gateway"
+              example:
+                value: "890750"
+        '502':
+          description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
+
   /virusChecker/:
     post:
       summary: "Check a file for viruses"
@@ -179,9 +182,34 @@ paths:
               type: string
               format: binary
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Success
+          content:
+            text/plain:
+              examples:
+                VirusDetected:
+                  value: "File is a known virus. Please delete immediately."
+                NoVirusDetected:
+                  value: "File did not match any known viruses."
+                FileNotFound:
+                  value: "File does not exist"
         '502':
           description: Bad Gateway
+          content:
+            text/plain:
+              example: "This had an error"
+
 components:
   schemas:
+    SimpleFileRequest:
+      type: object
+      properties:
+        principal:
+          type: JWTPrincipal
+          description: JWT Token of Client
+        clientId:
+          type: string
+          description: Client ID
+      required:
+        - principal
+        - clientId
