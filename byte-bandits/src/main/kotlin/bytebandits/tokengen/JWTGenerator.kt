@@ -9,7 +9,7 @@ fun main(){
 		.withAudience("jwt-audience")
 		.withIssuer("https://jwt-provider-domain/")
 		.withClaim("clientId", "sample")
-		.withExpiresAt(Date(System.currentTimeMillis() + 600000))
+		.withExpiresAt(Date(System.currentTimeMillis() + 60000000))
 		.sign(Algorithm.HMAC256("secret"))
 	print(token)
 }

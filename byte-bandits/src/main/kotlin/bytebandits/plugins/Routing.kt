@@ -2,6 +2,7 @@ package bytebandits.plugins
 
 import bytebandits.encryption.PassKeyGeneration
 import bytebandits.models.SimpleFileRequest
+import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -12,6 +13,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.LoggerFactory
+import java.util.*
 
 val logger = LoggerFactory.getLogger("RoutesLogger")
 
@@ -21,32 +23,33 @@ fun Application.configureRouting() {
 	routing {
 		//This addds authentication, the route is now protected
 		authenticate {
-			route("/storage/Submit", HttpMethod.Post) {
+			route("/storage/Submit/", HttpMethod.Post) {
 				handle {
 					//test code below, need to get the fields from http request
 					try {
-						val requestData = call.receive<SimpleFileRequest>()
+						val requestData = call.receive<WebSimpleFileRequest>()
+						var request = SimpleFileRequest(Base64.getDecoder().decode(requestData.contents), requestData.userID, requestData.fileName)
 						val principal = call.principal<JWTPrincipal>()
 						val clientId = principal!!.payload.getClaim("clientId").asString()
-						val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
-						var saved = FilePersister.simpleFilePersist(requestData, "storage", clientId, true)
+						var saved = FilePersister.simpleFilePersist(request, "storage", clientId, true)
 						call.respondText(status = HttpStatusCode.OK) { "This worked: $saved" }
 					} catch (e: Exception) {
+						logger.error("error serving request", e)
 						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 					}
 				}
 			}
 
-			route("/storage/Get/{file_name}", HttpMethod.Get) {
+			route("/storage/Get/{fileName}/{userId?}", HttpMethod.Get) {
 				handle {
 					try {
-
 						val principal = call.principal<JWTPrincipal>()
 						val clientId = principal!!.payload.getClaim("clientId").asString()
-						val fileName = call.parameters["file_name"] ?: "default_key"
+						val fileName = call.parameters["fileName"] ?: "default_key"
+						val userId = call.parameters["userId"]
 
-						val responseText = FilePersister.simpleFileRetrieve(fileName, "storage", clientId, "")
-						call.respond(status = HttpStatusCode.OK) { responseText }
+						val responseText = FilePersister.simpleFileRetrieve(fileName, "storage", clientId, userId)
+						call.respond(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
 					} catch (e: Exception) {
 						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 					}

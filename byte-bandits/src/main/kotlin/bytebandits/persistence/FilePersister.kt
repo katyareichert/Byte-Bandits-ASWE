@@ -82,7 +82,7 @@ public class FilePersister {
 			var path: String = if (osName.indexOf("windows") > -1) { //get env for windows
 				System.getenv("APPDATA")
 			} else if (osName.indexOf("mac") > -1) { // get the env for Mac
-				System.getenv("?")
+				System.getenv("HOME")
 			} else { //anything else
 				System.getProperty("user.home")
 			}

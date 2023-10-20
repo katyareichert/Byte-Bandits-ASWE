@@ -3,6 +3,9 @@ package bytebandits.models
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class WebSimpleFileRequest(val contents: String, val userID: String?, val fileName: String)
+
+@Serializable
 data class SimpleFileRequest(val contents: ByteArray, val userID: String?, val fileName: String) {
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
