@@ -17,3 +17,9 @@
 ##File Delete
 ![file_delete_bad](https://github.com/katyareichert/Byte-Bandits-ASWE/assets/95659920/5afd0447-aebe-407f-b212-838e76d4f5e5)
 ![file_delete](https://github.com/katyareichert/Byte-Bandits-ASWE/assets/95659920/cab1d17c-9265-4f4b-8345-aa5cee48b933)
+
+Invalid Submit
+![Screenshot 2023-10-19 at 10 49 21 PM](https://github.com/katyareichert/Byte-Bandits-ASWE/assets/95659920/28f96b49-828f-44a4-bff5-bf886880a7cd)
+
+Invalid Get
+![Screenshot 2023-10-19 at 10 50 06 PM](https://github.com/katyareichert/Byte-Bandits-ASWE/assets/95659920/707cee2e-b8be-48c2-8165-d49d07799e30)
