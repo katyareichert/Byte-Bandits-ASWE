@@ -5,9 +5,9 @@ import org.hamcrest.MatcherAssert.assertThat
 import kotlin.test.*
 import java.io.File
 
-class VirusHashCheckTests{
+class VirusHashCheckTests {
     @Test
-    fun testVirusCheckWithInvalidFile(){
+    fun testVirusCheckWithInvalidFile() {
         val testFile = File("fileName")
         val exception = assertFailsWith<IllegalArgumentException>(
             message = "No exception found",
@@ -19,7 +19,7 @@ class VirusHashCheckTests{
     }
 
     @Test
-    fun testVirusCheckInternalMatch(){
+    fun testVirusCheckInternalMatch() {
         val testFile = File("../../../../../resources/samplefiles/knownVirus.pdf")
         val matchString = VirusHashChecker.virusCheck(testFile)
 
@@ -27,7 +27,7 @@ class VirusHashCheckTests{
     }
 
     @Test
-    fun testVirusCheckNoMatches(){
+    fun testVirusCheckNoMatches() {
         val testFile = File("../../../../../resources/samplefiles/regularFile.pdf")
         val matchString = VirusHashChecker.virusCheck(testFile)
 
