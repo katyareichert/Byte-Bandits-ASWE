@@ -9,8 +9,8 @@ Advanced Software Engineering Fall 2023 Project
 ### Documented API
 - Our API is a code-calls-code-over-network API, not a user-facing CLI
 - Documentation for all implemented entry points can be found via our Swagger
-- For documentation, see: [here](byte-bandits/resources/openapi/documentation.yaml)
-- [EXTERNAL DOCUMENTATION]
+- For documentation, see: [here - yaml format](/byte-bandits/src/main/resources/openapi/documentation.yaml) or [here - swagger UI](https://app.swaggerhub.com/apis-docs/HUGOMATOUSEK/security-tools_api/0.0.3)
+
 
 
 ### System Tests Corresponding to API
