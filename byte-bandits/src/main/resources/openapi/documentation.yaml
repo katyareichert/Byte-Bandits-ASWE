@@ -13,7 +13,7 @@ info:
     "
   version: "1.0.0"
 servers:
-  -   url: "http://0.0.0.0:8080"
+  -   url: "http://ec2-107-22-87-117.compute-1.amazonaws.com:8080/"
 paths:
   /storage/Submit:
     post:
