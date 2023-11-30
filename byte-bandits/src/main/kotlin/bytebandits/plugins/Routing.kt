@@ -4,6 +4,7 @@ import bytebandits.encryption.PassKeyGeneration
 import bytebandits.models.SimpleFileRequest
 import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
+import bytebandits.viruscheck.VirusHashChecker
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -109,14 +110,17 @@ fun Application.configureRouting() {
 			}
 		}
 
-		route("/virusChecker/", HttpMethod.Post) {
+		route("/virusChecker/CheckFile/", HttpMethod.Post) {
 			handle {
 				try {
-					// val user = call.parameters["client_id"] ?: "default_user"
-					// val recordKey = call.parameters["record_key"] ?: "default_key"
-
-					//val responseText = FilePersister.simpleFileRetrieve(user, recordKey)
-					call.respondText(status = HttpStatusCode.OK) { "responseText" }
+					val requestData = call.receive<WebSimpleFileRequest>()
+					val request = SimpleFileRequest(
+						Base64.getDecoder().decode(requestData.contents),
+						requestData.userID,
+						requestData.fileName
+					)
+					val saved = VirusHashChecker.virusCheck(request)
+					call.respondText(status = HttpStatusCode.OK) { saved }
 				} catch (e: Exception) {
 					call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 				}

@@ -1,17 +1,17 @@
 package bytebandits.viruscheck
 
 import bytebandits.interfaces.VirusChecker
+import bytebandits.models.SimpleFileRequest
+import bytebandits.persistence.FilePersister
 import java.io.File
 import java.security.MessageDigest
 
 public  class VirusHashChecker {
     //This is a static method
     companion object : VirusChecker {
-        override fun virusCheck(file: File): String {
-            if (!file.exists() || !file.isFile) {
-                throw IllegalArgumentException("File does not exist")
-            }
+        override fun virusCheck(request: SimpleFileRequest): String {
 
+            val file = request.contents
             val searchHash = calculateMD5(file)
             val internalDatabase = File("src/main/resources/db.txt")
 
@@ -30,7 +30,7 @@ public  class VirusHashChecker {
         override fun reportVirus(file: File): String {
             TODO("Not yet implemented")
         }
-        private fun calculateMD5(file: File): String {
+        private fun calculateMD5File(file: File): String {
             val md = MessageDigest.getInstance("MD5")
             file.inputStream().use { input ->
                 val buffer = ByteArray(8192)
@@ -50,10 +50,10 @@ public  class VirusHashChecker {
             return md5Hex.toString()
         }
 
-        // byte array parsing to be implemented later
         private fun calculateMD5(byteArray: ByteArray): String {
             val md = MessageDigest.getInstance("MD5")
-            val digest = md.digest(byteArray)
+            md.update(byteArray)
+            val digest = md.digest()
 
             val md5Hex = StringBuilder()
             for (byte in digest) {
