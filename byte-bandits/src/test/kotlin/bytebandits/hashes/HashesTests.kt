@@ -21,6 +21,8 @@ class HashesTest {
 
     @Test
     fun testHashRetrieve() {
+        val request = SimpleFileRequest("validBase64Contents".toByteArray(), "validUserID", "validFileName")
+        Hashes.hashStore(request, "validClientID")
         val fileContents = Hashes.hashRetrieve("01d5e622b1eb13b30f5dacdb25df4e78", "validClientID", "validUserID")
         assertEquals("validBase64Contents", String(fileContents))
     }
