@@ -88,6 +88,76 @@ fun Application.configureRouting() {
 					}
 				}
 			}
+			route("/file/encrypt/{b64key?}/{scheme?}", HttpMethod.Post) {
+				handle {
+					//test code below, need to get the fields from http request
+					try {
+						val requestData = call.receive<WebSimpleFileRequest>()
+						val request = SimpleFileRequest(
+							Base64.getDecoder().decode(requestData.contents),
+							requestData.userID,
+							requestData.fileName
+						)
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+
+						var b64key = call.parameters["b64key"]
+						var scheme = call.parameters["scheme"]
+
+						var key: ByteArray
+
+						if (b64key.isNullOrEmpty()) {
+							key = EncKeyGeneration.generateKey(clientId, true, null)
+						} else {
+							val decodedKey = b64key.replace('-', '+').replace('_', '/')
+							key = Base64.getDecoder().decode(decodedKey)
+						}
+						if (scheme.isNullOrEmpty()) {
+							scheme = "AES"
+						}
+						val encrypted = Encryption.fileEncrypt(request.contents, key, scheme)
+						call.respondBytes(status = HttpStatusCode.OK, provider = { encrypted })
+					} catch (e: Exception) {
+						logger.error("error serving request", e)
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+			route("/file/decrypt/{b64key?}/{scheme?}", HttpMethod.Post) {
+				handle {
+					//test code below, need to get the fields from http request
+					try {
+						val requestData = call.receive<WebSimpleFileRequest>()
+						val request = SimpleFileRequest(
+							Base64.getDecoder().decode(requestData.contents),
+							requestData.userID,
+							requestData.fileName
+						)
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+
+						var b64key = call.parameters["b64key"]
+						var scheme = call.parameters["scheme"]
+						var key: ByteArray
+
+						if (b64key.isNullOrEmpty()) {
+							key = EncKeyGeneration.generateKey(clientId, true, null)
+						} else {
+							val decodedKey = b64key.replace('-', '+').replace('_', '/')
+							key = Base64.getDecoder().decode(decodedKey)
+						}
+						if (scheme.isNullOrEmpty()) {
+							scheme = "AES"
+						}
+
+						val decrypted = Encryption.fileDecrypt(request.contents, key, scheme)
+						call.respondBytes(status = HttpStatusCode.OK, provider = { decrypted })
+					} catch (e: Exception) {
+						logger.error("error serving request", e)
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
 		}
 		route("/password/Get/{len?}/{digits?}/{case?}/{specialChars?}", HttpMethod.Get) {
 			handle {
