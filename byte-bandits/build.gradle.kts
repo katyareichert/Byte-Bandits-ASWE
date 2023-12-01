@@ -24,7 +24,7 @@ repositories {
 }
 
 tasks.named<Test>("test") {
-	ignoreFailures=true
+	ignoreFailures=false
 }
 dependencies {
 	implementation("io.ktor:ktor-server-core-jvm")

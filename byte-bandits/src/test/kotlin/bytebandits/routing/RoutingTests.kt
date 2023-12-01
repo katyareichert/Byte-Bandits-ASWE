@@ -12,7 +12,8 @@ class RoutingTests {
 
     val sampleJWT =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJqd3QtYXVkaWVuY2UiLCJpc3MiOiJodHRwczovL2p3dC1wcm92aWRlci1kb21" +
-                "haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE2OTc4MjIzMDl9.kpVMPuIH94OQJW5935PYQJcxtNyuXk5CKQ9LfjQqG5k"
+                "haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE3MDE0NTA2MTh9.bjsON6-Rk_NRrWvw5M0Uluxcwdj9bs52wUtBsqCeRiQ"
+
 
     @Test
     fun `invalid endpoint should fail`() {
