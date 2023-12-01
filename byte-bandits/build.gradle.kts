@@ -7,6 +7,7 @@ plugins {
 	id("io.ktor.plugin") version "2.3.5"
 	kotlin("plugin.serialization") version "1.9.10"
 	id("io.gitlab.arturbosch.detekt") version("1.23.1")
+	jacoco
 }
 
 group = "bytebandits"
@@ -17,6 +18,7 @@ application {
 
 	val isDevelopment: Boolean = project.ext.has("development")
 	applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+
 }
 
 repositories {
@@ -25,7 +27,14 @@ repositories {
 
 tasks.named<Test>("test") {
 	ignoreFailures=false
+	finalizedBy(tasks.named("jacocoTestReport"))
 }
+
+tasks.named<JacocoReport>("jacocoTestReport"){
+	dependsOn(tasks.test) 
+}
+
+
 dependencies {
 	implementation("io.ktor:ktor-server-core-jvm")
 	implementation("io.ktor:ktor-server-auth-jvm")
