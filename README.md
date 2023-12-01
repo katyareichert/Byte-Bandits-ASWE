@@ -52,6 +52,12 @@ Advanced Software Engineering Fall 2023 Project
 - Grade build will run the tests
 - To run, use either IntelliJ or run directly with `gradle run` from the project [directory](/byte-bandits)
 
+### Third Party Libraries
+- Ktor framework
+- Netty Webserver
+- Logback for logging
+- Gson
+- [Deps](/byte-bandits/build.gradle.kts#L43)
 
 ### Tagged Revisions
 - Current iteration is tagged as `0.0.4-first-iteration`
