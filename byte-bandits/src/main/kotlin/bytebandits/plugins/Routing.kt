@@ -5,10 +5,13 @@ import bytebandits.encryption.EncKeyGeneration
 import bytebandits.encryption.Encryption
 import bytebandits.hashes.Hashes
 import bytebandits.interfaces.HashCheckNStore
+import bytebandits.interfaces.PwdWallet
+import bytebandits.models.PasswordEntry
 import bytebandits.models.SimpleFileRequest
 import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
 import bytebandits.viruscheck.VirusHashChecker
+import bytebandits.wallet.PassWallet
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -236,6 +239,40 @@ fun Application.configureRouting() {
 				}
 			}
 
+			route("/pwdWallet/Store/{site}/{username}/{password}/{userID?}", HttpMethod.Get) {
+				handle {
+					try {
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+						val site = call.parameters["site"]!!
+						val username = call.parameters["username"]!!
+						val password = call.parameters["password"]!!
+						val userID = call.parameters["userID"]
+
+						val entry = PasswordEntry(site, username, password)
+						PassWallet.passStore(entry, clientId, userID)
+						call.respondText(status = HttpStatusCode.OK) { "Password saved" }
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
+			route("/pwdWallet/Retrieve/{site}/{userID?}", HttpMethod.Get) {
+				handle {
+					try {
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+						val site = call.parameters["site"]!!
+						val userID = call.parameters["userID"]
+
+						val responseText = PassWallet.passRetrieve(site, clientId, userID)
+						call.respondText(status = HttpStatusCode.OK) { responseText }
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
 		}
 		route("/password/Get/{len?}/{digits?}/{case?}/{specialChars?}", HttpMethod.Get) {
 			handle {

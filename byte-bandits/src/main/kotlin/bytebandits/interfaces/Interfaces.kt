@@ -45,7 +45,7 @@ interface HashCheckNStore {
     fun hashRetrieve(hash: String, clientID: String, userID: String?): ByteArray
 }
 
-interface PassWallet {
+interface PwdWallet {
     fun passStore(passwordEntry: PasswordEntry, clientID: String, userID: String?): Boolean
-    fun passRetrieve(clientID: String, userID: String?): String
+    fun passRetrieve(site: String, clientID: String, userID: String?): String
 }
