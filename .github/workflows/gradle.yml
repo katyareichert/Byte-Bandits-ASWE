@@ -33,6 +33,10 @@ jobs:
       #uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       run: ./gradlew build 
       working-directory: ./byte-bandits
+    - name: Generate JaCoCo Badge
+      uses: cicirello/jacoco-badge-generator@v2
+      with:
+        jacoco-csv-file: /build/reports/jacoco/test/jacocoTestReport.csv
     - name: Store reports
       uses: actions/upload-artifact@v3
       with:
