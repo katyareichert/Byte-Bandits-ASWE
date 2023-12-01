@@ -57,7 +57,7 @@ Advanced Software Engineering Fall 2023 Project
 - Netty Webserver
 - Logback for logging
 - Gson
-- [here - yaml format](/byte-bandits/build.gradle.kts)
+- [Deps](/byte-bandits/build.gradle.kts)
 
 ### Tagged Revisions
 - Current iteration is tagged as `0.0.4-first-iteration`
