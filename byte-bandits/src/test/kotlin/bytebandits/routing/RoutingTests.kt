@@ -43,6 +43,28 @@ class RoutingTests {
             }
         }
     }
+    
+    @Test
+	fun `submit should work`() {
+		withTestApplication(Application::module) {
+			handleRequest(HttpMethod.Post, "storage/Submit/") {
+
+				addHeader("Authorization", "Bearer $sampleJWT")
+				val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+				val gson = Gson()
+				addHeader("Content-Type","application/json")
+				setBody(gson.toJson(obj))
+			}.apply {
+				assertEquals(HttpStatusCode.OK, response.status())
+			}
+
+			handleRequest(HttpMethod.Get, "storage/Get/value/test") {
+				addHeader("Authorization", "Bearer $sampleJWT")
+			}.apply {
+				assertEquals(HttpStatusCode.OK, response.status())
+			}
+		}
+	}
 
     @Test
     fun `gen password`() {
