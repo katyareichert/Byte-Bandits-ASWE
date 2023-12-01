@@ -12,99 +12,169 @@ import kotlin.test.assertTrue
 
 class RoutingTests {
 
-    val sampleJWT =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJqd3QtYXVkaWVuY2UiLCJpc3MiOiJodHRwczovL2p3dC1wcm92aWRlci1kb21" +
-                "haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE3MDE0NTA2MTh9.bjsON6-Rk_NRrWvw5M0Uluxcwdj9bs52wUtBsqCeRiQ"
+  val sampleJWT =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJqd3QtYXVkaWVuY2UiLCJpc3MiOiJodHRwczovL2p3dC1wcm92aWRlci1kb21" +
+            "haW4vIiwiY2xpZW50SWQiOiJzYW1wbGUiLCJleHAiOjE3MDE0NTA2MTh9.bjsON6-Rk_NRrWvw5M0Uluxcwdj9bs52wUtBsqCeRiQ"
 
 
-    @Test
-    fun `invalid endpoint should fail`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "storage/notreal").apply {
-                assertEquals(HttpStatusCode.NotFound, response.status())
-            }
-        }
+  @Test
+  fun `invalid endpoint should fail`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "storage/notreal").apply {
+        assertEquals(HttpStatusCode.NotFound, response.status())
+      }
     }
+  }
 
-    @Test
-    fun `non auth get should fail`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "storage/Get/test").apply {
-                assertEquals(HttpStatusCode.Unauthorized, response.status())
-            }
-        }
+  @Test
+  fun `non auth get should fail`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "storage/Get/test").apply {
+        assertEquals(HttpStatusCode.Unauthorized, response.status())
+      }
     }
+  }
 
-    @Test
-    fun `file not found should fail with badgateway`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "storage/Get/test") {
-                addHeader("Authorization", "Bearer $sampleJWT")
-            }.apply {
-                assertEquals(HttpStatusCode.BadGateway, response.status())
-            }
-        }
+  @Test
+  fun `file not found should fail with badgateway`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "storage/Get/test") {
+        addHeader("Authorization", "Bearer $sampleJWT")
+      }.apply {
+        assertEquals(HttpStatusCode.BadGateway, response.status())
+      }
     }
-    
-    @Test
-	fun `submit should work`() {
-		withTestApplication(Application::module) {
-			handleRequest(HttpMethod.Post, "storage/Submit/") {
+  }
 
-				addHeader("Authorization", "Bearer $sampleJWT")
-				val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
-				val gson = Gson()
-				addHeader("Content-Type","application/json")
-				setBody(gson.toJson(obj))
-			}.apply {
-				assertEquals(HttpStatusCode.OK, response.status())
-			}
+  @Test
+  fun `submit should work`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Post, "storage/Submit/") {
 
-			handleRequest(HttpMethod.Get, "storage/Get/value/test") {
-				addHeader("Authorization", "Bearer $sampleJWT")
-			}.apply {
-				assertEquals(HttpStatusCode.OK, response.status())
-			}
-		}
-	}
+        addHeader("Authorization", "Bearer $sampleJWT")
+        val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+        val gson = Gson()
+        addHeader("Content-Type","application/json")
+        setBody(gson.toJson(obj))
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+      }
 
-    @Test
-    fun `gen password`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "password/Get/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertTrue { response.content!!.length > 0 }
-            }
-        }
+      handleRequest(HttpMethod.Get, "storage/Get/value/test") {
+        addHeader("Authorization", "Bearer $sampleJWT")
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+      }
+
+      handleRequest(HttpMethod.Get, "storage/Delete/value/test") {
+        addHeader("Authorization", "Bearer $sampleJWT")
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+      }
     }
+  }
 
-    @Test
-    fun `gen password 19 chars`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "password/Get/19").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertTrue { response.content!!.length == 19 }
-            }
-        }
+  @Test
+  fun `hash should work`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Post, "hash/Check/54b0c58c7ce9f2a8b551351102ee0938") {
+
+        addHeader("Authorization", "Bearer $sampleJWT")
+        val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+        val gson = Gson()
+        addHeader("Content-Type","application/json")
+        setBody(gson.toJson(obj))
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertEquals("Hashes match", response.content)
+      }
+
+      handleRequest(HttpMethod.Post, "hash/Check/54b0c58c7ce9f2a8b551351104ee0931") {
+
+        addHeader("Authorization", "Bearer $sampleJWT")
+        val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+        val gson = Gson()
+        addHeader("Content-Type","application/json")
+        setBody(gson.toJson(obj))
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertEquals("Hashes do not match", response.content)
+      }
     }
+  }
 
+  @Test
+  fun `hash store and get should work`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Post, "hash/Get/") {
 
-    @Test
-    fun `gen passkey`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "passKey/Get/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-            }
-        }
+        addHeader("Authorization", "Bearer $sampleJWT")
+        val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+        val gson = Gson()
+        addHeader("Content-Type","application/json")
+        setBody(gson.toJson(obj))
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertEquals("54b0c58c7ce9f2a8b551351102ee0938", response.content)
+      }
+
+      handleRequest(HttpMethod.Post, "hash/Store/") {
+
+        addHeader("Authorization", "Bearer $sampleJWT")
+        val obj = WebSimpleFileRequest("dGhpcyBpcyBhIHRlc3Q=", "test", "value")
+        val gson = Gson()
+        addHeader("Content-Type","application/json")
+        setBody(gson.toJson(obj))
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+      }
+
+      handleRequest(HttpMethod.Get, "hash/Retrieve/test/54b0c58c7ce9f2a8b551351102ee0938") {
+        addHeader("Authorization", "Bearer $sampleJWT")
+      }.apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertEquals("this is a test", response.content)
+      }
     }
+  }
 
-    @Test
-    fun `gen passkey 15`() {
-        withTestApplication(Application::module) {
-            handleRequest(HttpMethod.Get, "passKey/Get/15").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                //assertTrue { response.byteContent!!.size == 15 }
-            }
-        }
+  @Test
+  fun `gen password`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "password/Get/").apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertTrue { response.content!!.length > 0 }
+      }
     }
+  }
+
+  @Test
+  fun `gen password 19 chars`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "password/Get/19").apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertTrue { response.content!!.length == 19 }
+      }
+    }
+  }
+
+
+  @Test
+  fun `gen passkey`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "passKey/Get/").apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+      }
+    }
+  }
+
+  @Test
+  fun `gen passkey 15`() {
+    withTestApplication(Application::module) {
+      handleRequest(HttpMethod.Get, "passKey/Get/15").apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        //assertTrue { response.byteContent!!.size == 15 }
+      }
+    }
+  }
 }
