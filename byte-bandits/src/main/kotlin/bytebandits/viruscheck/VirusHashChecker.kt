@@ -1,5 +1,6 @@
 package bytebandits.viruscheck
 
+import bytebandits.hashes.Hashes.Companion.calculateMD5
 import bytebandits.interfaces.VirusChecker
 import bytebandits.models.SimpleFileRequest
 import bytebandits.persistence.FilePersister
@@ -40,19 +41,6 @@ public  class VirusHashChecker {
                     bytesRead = input.read(buffer)
                 }
             }
-            val digest = md.digest()
-
-            val md5Hex = StringBuilder()
-            for (byte in digest) {
-                md5Hex.append(String.format("%02x", byte))
-            }
-
-            return md5Hex.toString()
-        }
-
-        private fun calculateMD5(byteArray: ByteArray): String {
-            val md = MessageDigest.getInstance("MD5")
-            md.update(byteArray)
             val digest = md.digest()
 
             val md5Hex = StringBuilder()

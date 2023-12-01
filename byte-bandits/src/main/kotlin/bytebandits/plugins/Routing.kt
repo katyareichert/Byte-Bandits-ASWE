@@ -3,6 +3,8 @@ package bytebandits.plugins
 import bytebandits.encryption.PassKeyGeneration
 import bytebandits.encryption.EncKeyGeneration
 import bytebandits.encryption.Encryption
+import bytebandits.hashes.Hashes
+import bytebandits.interfaces.HashCheckNStore
 import bytebandits.models.SimpleFileRequest
 import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
@@ -158,6 +160,82 @@ fun Application.configureRouting() {
 					}
 				}
 			}
+			route("/hash/Check/{hash}", HttpMethod.Post) {
+				handle {
+					try {
+						val requestData = call.receive<WebSimpleFileRequest>()
+						val request = SimpleFileRequest(
+							Base64.getDecoder().decode(requestData.contents),
+							requestData.userID,
+							requestData.fileName
+						)
+
+						val calculatedHash = Hashes.hashCheck(request)
+						val responseText = if (calculatedHash == call.parameters["hash"]) {
+							"Hashes match"
+						} else {
+							"Hashes do not match"
+						}
+						call.respondText(status = HttpStatusCode.OK) { responseText }
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
+			route("/hash/Store/", HttpMethod.Post) {
+				handle {
+					try {
+						val requestData = call.receive<WebSimpleFileRequest>()
+						val request = SimpleFileRequest(
+							Base64.getDecoder().decode(requestData.contents),
+							requestData.userID,
+							requestData.fileName
+						)
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+
+						val responseText = Hashes.hashStore(request, clientId)
+						call.respondText(status = HttpStatusCode.OK) { responseText }
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
+			route("/hash/Get/", HttpMethod.Post) {
+				handle {
+					try {
+						val requestData = call.receive<WebSimpleFileRequest>()
+						val request = SimpleFileRequest(
+							Base64.getDecoder().decode(requestData.contents),
+							requestData.userID,
+							requestData.fileName
+						)
+						val responseText = Hashes.hashCheck(request)
+
+						call.respondText(status = HttpStatusCode.OK) { responseText }
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
+			route("/hash/Retrieve/{userID}/{hash}", HttpMethod.Get) {
+				handle {
+					try {
+						val principal = call.principal<JWTPrincipal>()
+						val clientId = principal!!.payload.getClaim("clientId").asString()
+						val userID = call.parameters["userID"]
+
+						val responseText = Hashes.hashRetrieve(call.parameters["hash"]!!, clientId, userID)
+						call.respondBytes(status = HttpStatusCode.OK, provider = { responseText })
+					} catch (e: Exception) {
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
 		}
 		route("/password/Get/{len?}/{digits?}/{case?}/{specialChars?}", HttpMethod.Get) {
 			handle {
