@@ -16,10 +16,8 @@ class PersistenceTests {
         val testUserID = "testUserID"
         val testOverwrite = true
 
-        val testRequest = SimpleFileRequest(testFileContent, testUserID, testFileName)
-
         val testSimpleFilePersist =
-            FilePersister.simpleFilePersist(testRequest, testEndpointDirectory, testClientID, testOverwrite)
+            FilePersister.simpleFilePersist(testFileContent, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
 
         assert(testSimpleFilePersist)
 
@@ -43,10 +41,9 @@ class PersistenceTests {
         val testUserID = null
         val testOverwrite = true
 
-        val testRequest = SimpleFileRequest(testFileContent, testUserID, testFileName)
 
         val testSimpleFilePersist =
-            FilePersister.simpleFilePersist(testRequest, testEndpointDirectory, testClientID, testOverwrite)
+            FilePersister.simpleFilePersist(testFileContent, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
 
         assert(testSimpleFilePersist)
 
@@ -70,10 +67,8 @@ class PersistenceTests {
         val testUserID = null
         val testOverwrite = true
 
-        val testRequest = SimpleFileRequest(testFileContent, testUserID, testFileName)
-
         val testSimpleFilePersist =
-            FilePersister.simpleFilePersist(testRequest, testEndpointDirectory, testClientID, testOverwrite)
+            FilePersister.simpleFilePersist(testFileContent, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
 
         assert(testSimpleFilePersist)
 
@@ -98,9 +93,7 @@ class PersistenceTests {
         val testOverwrite = true
 
         assertFailsWith(IllegalArgumentException::class) {
-            val testRequest = SimpleFileRequest(testFileContent, testUserID, testFileName)
-
-            FilePersister.simpleFilePersist(testRequest, testEndpointDirectory, testClientID, testOverwrite)
+            FilePersister.simpleFilePersist(testFileContent, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
         }
 
         assertFailsWith(IllegalArgumentException::class) {
@@ -122,17 +115,14 @@ class PersistenceTests {
         val testUserID = "testUserID"
         val testOverwrite = false
 
-        val testRequest = SimpleFileRequest(testFileContent, testUserID, testFileName)
 
         val testSimpleFilePersist =
-            FilePersister.simpleFilePersist(testRequest, testEndpointDirectory, testClientID, testOverwrite)
+            FilePersister.simpleFilePersist(testFileContent, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
 
         assert(testSimpleFilePersist)
 
-        val testRequest2 = SimpleFileRequest(testFileContent2, testUserID, testFileName)
-
-        assertFailsWith(IllegalArgumentException::class) {
-            FilePersister.simpleFilePersist(testRequest2, testEndpointDirectory, testClientID, testOverwrite)
+        assertFailsWith<IllegalArgumentException> {
+            FilePersister.simpleFilePersist(testFileContent2, testUserID, testFileName, testEndpointDirectory, testClientID, testOverwrite)
         }
 
         val testSimpleFileRetrieve =

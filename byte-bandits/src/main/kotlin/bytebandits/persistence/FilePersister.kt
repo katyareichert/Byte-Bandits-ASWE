@@ -10,15 +10,17 @@ public class FilePersister {
     //This is a static method
     companion object : Persister {
         override fun simpleFilePersist(
-            request: SimpleFileRequest,
+            contents: ByteArray,
+            userID: String?,
+            fileName: String,
             endpointDirectory: String?,
             clientID: String?,
             overwrite: Boolean
         ): Boolean {
 
-            val path = getPath(endpointDirectory, clientID, request.userID, true)
+            val path = getPath(endpointDirectory, clientID, userID, true)
 
-            val file = File(path + File.separator + request.fileName)
+            val file = File(path + File.separator + fileName)
 
             if (!file.exists()) { //check file existence
                 if (!file.createNewFile()) { //create file and check success
@@ -28,7 +30,7 @@ public class FilePersister {
                 throw IllegalArgumentException("File already exists and overwrite is not allowed")
             }
 
-            file.writeBytes(request.contents) //write contents to file
+            file.writeBytes(contents) //write contents to file
 
             //no errors raised in file/directory creation
             return true

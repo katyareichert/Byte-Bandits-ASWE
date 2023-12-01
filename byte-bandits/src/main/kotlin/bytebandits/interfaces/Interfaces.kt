@@ -5,7 +5,9 @@ import java.io.File
 
 interface Persister {
     fun simpleFilePersist(
-        request: SimpleFileRequest,
+        contents: ByteArray,
+        userID: String?,
+        fileName: String,
         endpointDirectory: String?,
         clientID: String?,
         overwrite: Boolean
@@ -30,4 +32,8 @@ interface PassKeyGenerator {
 interface VirusChecker {
     fun virusCheck(request: SimpleFileRequest): String
     fun reportVirus(file: File): String
+}
+
+interface KeyGenerator {
+    fun generateKey(seed: String, appSecret: Boolean, salt: String?): ByteArray
 }
