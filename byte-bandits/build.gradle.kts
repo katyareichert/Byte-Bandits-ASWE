@@ -32,6 +32,11 @@ tasks.named<Test>("test") {
 
 tasks.named<JacocoReport>("jacocoTestReport"){
 	dependsOn(tasks.test) 
+	reports{
+		xml.isEnabled = true
+		csv.isEnabled = true
+		html.isEnabled = true
+	}
 }
 
 
