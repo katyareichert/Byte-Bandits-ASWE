@@ -1,6 +1,8 @@
 package bytebandits.plugins
 
 import bytebandits.encryption.PassKeyGeneration
+import bytebandits.encryption.EncKeyGeneration
+import bytebandits.encryption.Encryption
 import bytebandits.models.SimpleFileRequest
 import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
@@ -36,7 +38,13 @@ fun Application.configureRouting() {
 						)
 						val principal = call.principal<JWTPrincipal>()
 						val clientId = principal!!.payload.getClaim("clientId").asString()
-						val saved = FilePersister.simpleFilePersist(request, "storage", clientId, true)
+						val userId = request.userID
+						val fileName = request.fileName
+
+						val encryptionKey = EncKeyGeneration.generateKey(clientId, true, null)
+						val encrypted = Encryption.fileEncrypt(request.contents, encryptionKey, "AES")
+						val saved = FilePersister.simpleFilePersist(encrypted, userId, fileName,"storage", clientId, true)
+
 						call.respondText(status = HttpStatusCode.OK) { "This worked: $saved" }
 					} catch (e: Exception) {
 						logger.error("error serving request", e)
@@ -53,8 +61,11 @@ fun Application.configureRouting() {
 						val fileName = call.parameters["fileName"]!!
 						val userId = call.parameters["userId"]
 
-						val responseText = FilePersister.simpleFileRetrieve(fileName, "storage", clientId, userId)
-						call.respondText(status = HttpStatusCode.OK) { responseText.toString(Charsets.UTF_8) }
+						val encrypted = FilePersister.simpleFileRetrieve(fileName, "storage", clientId, userId)
+						val encryptionKey = EncKeyGeneration.generateKey(clientId, true, null)
+						val decrypted = Encryption.fileDecrypt(encrypted, encryptionKey, "AES")
+
+						call.respondBytes(status = HttpStatusCode.OK, provider = { decrypted })
 					} catch (e: Exception) {
 						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
 					}
