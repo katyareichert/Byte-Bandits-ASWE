@@ -37,3 +37,9 @@ interface VirusChecker {
 interface KeyGenerator {
     fun generateKey(seed: String, appSecret: Boolean, salt: String?): ByteArray
 }
+
+interface HashCheckNStore {
+    fun hashCheck(request: SimpleFileRequest): String
+    fun hashStore(request: SimpleFileRequest, clientID: String): String
+    fun hashRetrieve(hash: String, clientID: String, userID: String?): ByteArray
+}
