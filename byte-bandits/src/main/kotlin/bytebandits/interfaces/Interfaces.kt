@@ -1,5 +1,6 @@
 package bytebandits.interfaces
 
+import bytebandits.models.PasswordEntry
 import bytebandits.models.SimpleFileRequest
 import java.io.File
 
@@ -42,4 +43,9 @@ interface HashCheckNStore {
     fun hashCheck(request: SimpleFileRequest): String
     fun hashStore(request: SimpleFileRequest, clientID: String): String
     fun hashRetrieve(hash: String, clientID: String, userID: String?): ByteArray
+}
+
+interface PassWallet {
+    fun passStore(passwordEntry: PasswordEntry, clientID: String, userID: String?): Boolean
+    fun passRetrieve(clientID: String, userID: String?): String
 }
