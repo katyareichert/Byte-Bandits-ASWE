@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WebSimpleFileRequest(val contents: String, val userID: String?, val fileName: String)
+@Serializable
+data class WebJWTRequest(val username: String, val paying: Boolean)
 
 @Serializable
 data class SimpleFileRequest(val contents: ByteArray, val userID: String?, val fileName: String) {

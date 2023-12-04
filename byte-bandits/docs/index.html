@@ -689,19 +689,25 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
-            defs["SimpleFileRequest"] = {
-  "required" : [ "clientId", "principal" ],
+            defs["WebSimpleFileRequest"] = {
+  "required" : [ "contents", "fileName" ],
   "type" : "object",
   "properties" : {
-    "principal" : {
-      "type" : "JWTPrincipal",
-      "description" : "JWT Token of Client"
-    },
-    "clientId" : {
+    "contents" : {
       "type" : "string",
-      "description" : "Client ID"
+      "description" : "The content of the file."
+    },
+    "userID" : {
+      "type" : "string",
+      "description" : "The unique identifier of the user. Optional.",
+      "nullable" : true
+    },
+    "fileName" : {
+      "type" : "string",
+      "description" : "The name of the file."
     }
-  }
+  },
+  "description" : "Represents a simple file request with content, an optional user ID, and a file name."
 };
   </script>
 
@@ -720,14 +726,38 @@
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
+                    <li data-group="Default" data-name="fileDecryptB64keySchemePost" class="">
+                      <a href="#api-Default-fileDecryptB64keySchemePost">fileDecryptB64keySchemePost</a>
+                    </li>
+                    <li data-group="Default" data-name="fileEncryptB64keySchemePost" class="">
+                      <a href="#api-Default-fileEncryptB64keySchemePost">fileEncryptB64keySchemePost</a>
+                    </li>
+                    <li data-group="Default" data-name="hashCheckHashPost" class="">
+                      <a href="#api-Default-hashCheckHashPost">hashCheckHashPost</a>
+                    </li>
+                    <li data-group="Default" data-name="hashGetPost" class="">
+                      <a href="#api-Default-hashGetPost">hashGetPost</a>
+                    </li>
+                    <li data-group="Default" data-name="hashRetrieveUserIDHashGet" class="">
+                      <a href="#api-Default-hashRetrieveUserIDHashGet">hashRetrieveUserIDHashGet</a>
+                    </li>
+                    <li data-group="Default" data-name="hashStorePost" class="">
+                      <a href="#api-Default-hashStorePost">hashStorePost</a>
+                    </li>
                     <li data-group="Default" data-name="passKeyGetLenPasswordSaltGet" class="">
                       <a href="#api-Default-passKeyGetLenPasswordSaltGet">passKeyGetLenPasswordSaltGet</a>
                     </li>
                     <li data-group="Default" data-name="passwordGetLenDigitsCaseSpecialCharsGet" class="">
                       <a href="#api-Default-passwordGetLenDigitsCaseSpecialCharsGet">passwordGetLenDigitsCaseSpecialCharsGet</a>
                     </li>
-                    <li data-group="Default" data-name="storageDeleteGet" class="">
-                      <a href="#api-Default-storageDeleteGet">storageDeleteGet</a>
+                    <li data-group="Default" data-name="pwdWalletRetrieveSiteUserIDGet" class="">
+                      <a href="#api-Default-pwdWalletRetrieveSiteUserIDGet">pwdWalletRetrieveSiteUserIDGet</a>
+                    </li>
+                    <li data-group="Default" data-name="pwdWalletStoreSiteUsernamePasswordUserIDGet" class="">
+                      <a href="#api-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet">pwdWalletStoreSiteUsernamePasswordUserIDGet</a>
+                    </li>
+                    <li data-group="Default" data-name="storageDeleteFileNameUserIdGet" class="">
+                      <a href="#api-Default-storageDeleteFileNameUserIdGet">storageDeleteFileNameUserIdGet</a>
                     </li>
                     <li data-group="Default" data-name="storageGetFileNameGet" class="">
                       <a href="#api-Default-storageGetFileNameGet">storageGetFileNameGet</a>
@@ -767,6 +797,2100 @@
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
+                    <div id="api-Default-fileDecryptB64keySchemePost">
+                      <article id="api-Default-fileDecryptB64keySchemePost-0" data-group="User" data-name="fileDecryptB64keySchemePost" data-version="0">
+                        <div class="pull-left">
+                          <h1>fileDecryptB64keySchemePost</h1>
+                          <p>Decrypts a file with a specified key and scheme</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/file/decrypt/{b64key}/{scheme}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-fileDecryptB64keySchemePost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-fileDecryptB64keySchemePost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-fileDecryptB64keySchemePost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/octet-stream,text/plain"\
+-H "Content-Type: application/json"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//file/decrypt/{b64key}/{scheme}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String b64key = b64key_example; // String | 
+        String scheme = scheme_example; // String | 
+        try {
+            byte[] result = apiInstance.fileDecryptB64keySchemePost(body, b64key, scheme);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#fileDecryptB64keySchemePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String b64key = b64key_example; // String | 
+        String scheme = scheme_example; // String | 
+        try {
+            byte[] result = apiInstance.fileDecryptB64keySchemePost(body, b64key, scheme);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#fileDecryptB64keySchemePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
+String *b64key = b64key_example; // 
+String *scheme = scheme_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Decrypts a file with a specified key and scheme
+[apiInstance fileDecryptB64keySchemePostWith:body
+    b64key:b64key
+    scheme:scheme
+              completionHandler: ^(byte[] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{WebSimpleFileRequest}} 
+var b64key = b64key_example; // {{String}} 
+var scheme = scheme_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.fileDecryptB64keySchemePost(bodyb64keyscheme, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class fileDecryptB64keySchemePostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
+            var b64key = b64key_example;  // String | 
+            var scheme = scheme_example;  // String | 
+
+            try
+            {
+                // Decrypts a file with a specified key and scheme
+                byte[] result = apiInstance.fileDecryptB64keySchemePost(body, b64key, scheme);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.fileDecryptB64keySchemePost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // WebSimpleFileRequest | 
+$b64key = b64key_example; // String | 
+$scheme = scheme_example; // String | 
+
+try {
+    $result = $api_instance->fileDecryptB64keySchemePost($body, $b64key, $scheme);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->fileDecryptB64keySchemePost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
+my $b64key = b64key_example; # String | 
+my $scheme = scheme_example; # String | 
+
+eval { 
+    my $result = $api_instance->fileDecryptB64keySchemePost(body => $body, b64key => $b64key, scheme => $scheme);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->fileDecryptB64keySchemePost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileDecryptB64keySchemePost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # WebSimpleFileRequest | 
+b64key = b64key_example # String | 
+scheme = scheme_example # String | 
+
+try: 
+    # Decrypts a file with a specified key and scheme
+    api_response = api_instance.file_decrypt_b64key_scheme_post(body, b64key, scheme)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->fileDecryptB64keySchemePost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">b64key*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_fileDecryptB64keySchemePost_b64key">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">scheme*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_fileDecryptB64keySchemePost_scheme">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_fileDecryptB64keySchemePost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_fileDecryptB64keySchemePost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - File successfully decrypted </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-fileDecryptB64keySchemePost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-fileDecryptB64keySchemePost-200-schema">
+                                  <div id='responses-fileDecryptB64keySchemePost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "File successfully decrypted",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary",
+        "x-content-type" : "application/octet-stream"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/octet-stream"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-fileDecryptB64keySchemePost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-fileDecryptB64keySchemePost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-fileDecryptB64keySchemePost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-fileEncryptB64keySchemePost">
+                      <article id="api-Default-fileEncryptB64keySchemePost-0" data-group="User" data-name="fileEncryptB64keySchemePost" data-version="0">
+                        <div class="pull-left">
+                          <h1>fileEncryptB64keySchemePost</h1>
+                          <p>Encrypts a file with a specified key and scheme</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/file/encrypt/{b64key}/{scheme}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-fileEncryptB64keySchemePost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-fileEncryptB64keySchemePost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-fileEncryptB64keySchemePost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/octet-stream,text/plain"\
+-H "Content-Type: application/json"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//file/encrypt/{b64key}/{scheme}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String b64key = b64key_example; // String | 
+        String scheme = scheme_example; // String | 
+        try {
+            byte[] result = apiInstance.fileEncryptB64keySchemePost(body, b64key, scheme);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#fileEncryptB64keySchemePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String b64key = b64key_example; // String | 
+        String scheme = scheme_example; // String | 
+        try {
+            byte[] result = apiInstance.fileEncryptB64keySchemePost(body, b64key, scheme);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#fileEncryptB64keySchemePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
+String *b64key = b64key_example; // 
+String *scheme = scheme_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Encrypts a file with a specified key and scheme
+[apiInstance fileEncryptB64keySchemePostWith:body
+    b64key:b64key
+    scheme:scheme
+              completionHandler: ^(byte[] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{WebSimpleFileRequest}} 
+var b64key = b64key_example; // {{String}} 
+var scheme = scheme_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.fileEncryptB64keySchemePost(bodyb64keyscheme, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class fileEncryptB64keySchemePostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
+            var b64key = b64key_example;  // String | 
+            var scheme = scheme_example;  // String | 
+
+            try
+            {
+                // Encrypts a file with a specified key and scheme
+                byte[] result = apiInstance.fileEncryptB64keySchemePost(body, b64key, scheme);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.fileEncryptB64keySchemePost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // WebSimpleFileRequest | 
+$b64key = b64key_example; // String | 
+$scheme = scheme_example; // String | 
+
+try {
+    $result = $api_instance->fileEncryptB64keySchemePost($body, $b64key, $scheme);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->fileEncryptB64keySchemePost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
+my $b64key = b64key_example; # String | 
+my $scheme = scheme_example; # String | 
+
+eval { 
+    my $result = $api_instance->fileEncryptB64keySchemePost(body => $body, b64key => $b64key, scheme => $scheme);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->fileEncryptB64keySchemePost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-fileEncryptB64keySchemePost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # WebSimpleFileRequest | 
+b64key = b64key_example # String | 
+scheme = scheme_example # String | 
+
+try: 
+    # Encrypts a file with a specified key and scheme
+    api_response = api_instance.file_encrypt_b64key_scheme_post(body, b64key, scheme)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->fileEncryptB64keySchemePost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">b64key*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_fileEncryptB64keySchemePost_b64key">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">scheme*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_fileEncryptB64keySchemePost_scheme">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_fileEncryptB64keySchemePost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_fileEncryptB64keySchemePost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - File successfully encrypted </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-fileEncryptB64keySchemePost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-fileEncryptB64keySchemePost-200-schema">
+                                  <div id='responses-fileEncryptB64keySchemePost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "File successfully encrypted",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary",
+        "x-content-type" : "application/octet-stream"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/octet-stream"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-fileEncryptB64keySchemePost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-fileEncryptB64keySchemePost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-fileEncryptB64keySchemePost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-hashCheckHashPost">
+                      <article id="api-Default-hashCheckHashPost-0" data-group="User" data-name="hashCheckHashPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>hashCheckHashPost</h1>
+                          <p>Checks if the hash of a given file matches the specified hash</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/hash/Check/{hash}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-hashCheckHashPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashCheckHashPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashCheckHashPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-hashCheckHashPost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-hashCheckHashPost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: text/plain"\
+-H "Content-Type: application/json"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//hash/Check/{hash}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String hash = hash_example; // String | 
+        try {
+            'String' result = apiInstance.hashCheckHashPost(body, hash);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashCheckHashPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        String hash = hash_example; // String | 
+        try {
+            'String' result = apiInstance.hashCheckHashPost(body, hash);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashCheckHashPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
+String *hash = hash_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Checks if the hash of a given file matches the specified hash
+[apiInstance hashCheckHashPostWith:body
+    hash:hash
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{WebSimpleFileRequest}} 
+var hash = hash_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hashCheckHashPost(bodyhash, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-hashCheckHashPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class hashCheckHashPostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
+            var hash = hash_example;  // String | 
+
+            try
+            {
+                // Checks if the hash of a given file matches the specified hash
+                'String' result = apiInstance.hashCheckHashPost(body, hash);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.hashCheckHashPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // WebSimpleFileRequest | 
+$hash = hash_example; // String | 
+
+try {
+    $result = $api_instance->hashCheckHashPost($body, $hash);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->hashCheckHashPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
+my $hash = hash_example; # String | 
+
+eval { 
+    my $result = $api_instance->hashCheckHashPost(body => $body, hash => $hash);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->hashCheckHashPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashCheckHashPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # WebSimpleFileRequest | 
+hash = hash_example # String | 
+
+try: 
+    # Checks if the hash of a given file matches the specified hash
+    api_response = api_instance.hash_check_hash_post(body, hash)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->hashCheckHashPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">hash*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_hashCheckHashPost_hash">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_hashCheckHashPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_hashCheckHashPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Hash check result </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-hashCheckHashPost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-hashCheckHashPost-200-schema">
+                                  <div id='responses-hashCheckHashPost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Hash check result",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-hashCheckHashPost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-hashCheckHashPost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-hashCheckHashPost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-hashGetPost">
+                      <article id="api-Default-hashGetPost-0" data-group="User" data-name="hashGetPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>hashGetPost</h1>
+                          <p>Retrieves the hash of a given file</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/hash/Get/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-hashGetPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashGetPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-hashGetPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashGetPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-hashGetPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-hashGetPost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-hashGetPost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: text/plain"\
+-H "Content-Type: application/json"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//hash/Get/"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-hashGetPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        try {
+            'String' result = apiInstance.hashGetPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashGetPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-hashGetPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        try {
+            'String' result = apiInstance.hashGetPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashGetPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-hashGetPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Retrieves the hash of a given file
+[apiInstance hashGetPostWith:body
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{WebSimpleFileRequest}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hashGetPost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-hashGetPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class hashGetPostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
+
+            try
+            {
+                // Retrieves the hash of a given file
+                'String' result = apiInstance.hashGetPost(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.hashGetPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // WebSimpleFileRequest | 
+
+try {
+    $result = $api_instance->hashGetPost($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->hashGetPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
+
+eval { 
+    my $result = $api_instance->hashGetPost(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->hashGetPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashGetPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # WebSimpleFileRequest | 
+
+try: 
+    # Retrieves the hash of a given file
+    api_response = api_instance.hash_get_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->hashGetPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_hashGetPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_hashGetPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Hash successfully retrieved </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-hashGetPost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-hashGetPost-200-schema">
+                                  <div id='responses-hashGetPost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Hash successfully retrieved",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-hashGetPost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-hashGetPost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-hashGetPost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-hashRetrieveUserIDHashGet">
+                      <article id="api-Default-hashRetrieveUserIDHashGet-0" data-group="User" data-name="hashRetrieveUserIDHashGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>hashRetrieveUserIDHashGet</h1>
+                          <p>Retrieves the stored data for a given hash and userID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/hash/Retrieve/{userID}/{hash}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-hashRetrieveUserIDHashGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-hashRetrieveUserIDHashGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-hashRetrieveUserIDHashGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/octet-stream,text/plain"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//hash/Retrieve/{userID}/{hash}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        String userID = userID_example; // String | 
+        String hash = hash_example; // String | 
+        try {
+            byte[] result = apiInstance.hashRetrieveUserIDHashGet(userID, hash);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashRetrieveUserIDHashGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String userID = userID_example; // String | 
+        String hash = hash_example; // String | 
+        try {
+            byte[] result = apiInstance.hashRetrieveUserIDHashGet(userID, hash);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashRetrieveUserIDHashGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *userID = userID_example; // 
+String *hash = hash_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Retrieves the stored data for a given hash and userID
+[apiInstance hashRetrieveUserIDHashGetWith:userID
+    hash:hash
+              completionHandler: ^(byte[] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var userID = userID_example; // {{String}} 
+var hash = hash_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hashRetrieveUserIDHashGet(userID, hash, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class hashRetrieveUserIDHashGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var userID = userID_example;  // String | 
+            var hash = hash_example;  // String | 
+
+            try
+            {
+                // Retrieves the stored data for a given hash and userID
+                byte[] result = apiInstance.hashRetrieveUserIDHashGet(userID, hash);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.hashRetrieveUserIDHashGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$userID = userID_example; // String | 
+$hash = hash_example; // String | 
+
+try {
+    $result = $api_instance->hashRetrieveUserIDHashGet($userID, $hash);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->hashRetrieveUserIDHashGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $userID = userID_example; # String | 
+my $hash = hash_example; # String | 
+
+eval { 
+    my $result = $api_instance->hashRetrieveUserIDHashGet(userID => $userID, hash => $hash);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->hashRetrieveUserIDHashGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashRetrieveUserIDHashGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+userID = userID_example # String | 
+hash = hash_example # String | 
+
+try: 
+    # Retrieves the stored data for a given hash and userID
+    api_response = api_instance.hash_retrieve_user_id_hash_get(userID, hash)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->hashRetrieveUserIDHashGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">userID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_hashRetrieveUserIDHashGet_userID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">hash*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_hashRetrieveUserIDHashGet_hash">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Data successfully retrieved </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-hashRetrieveUserIDHashGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-hashRetrieveUserIDHashGet-200-schema">
+                                  <div id='responses-hashRetrieveUserIDHashGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Data successfully retrieved",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary",
+        "x-content-type" : "application/octet-stream"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/octet-stream"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-hashRetrieveUserIDHashGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-hashRetrieveUserIDHashGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-hashRetrieveUserIDHashGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-hashStorePost">
+                      <article id="api-Default-hashStorePost-0" data-group="User" data-name="hashStorePost" data-version="0">
+                        <div class="pull-left">
+                          <h1>hashStorePost</h1>
+                          <p>Stores the hash of a given file and the file itself, returns the hash</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/hash/Store/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-hashStorePost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashStorePost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-hashStorePost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-hashStorePost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-hashStorePost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-hashStorePost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-hashStorePost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: text/plain"\
+-H "Content-Type: application/json"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//hash/Store/"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-hashStorePost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        try {
+            'String' result = apiInstance.hashStorePost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashStorePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-hashStorePost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
+        try {
+            'String' result = apiInstance.hashStorePost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#hashStorePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-hashStorePost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Stores the hash of a given file and the file itself, returns the hash
+[apiInstance hashStorePostWith:body
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var body = ; // {{WebSimpleFileRequest}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hashStorePost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-hashStorePost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class hashStorePostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
+
+            try
+            {
+                // Stores the hash of a given file and the file itself, returns the hash
+                'String' result = apiInstance.hashStorePost(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.hashStorePost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // WebSimpleFileRequest | 
+
+try {
+    $result = $api_instance->hashStorePost($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->hashStorePost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
+
+eval { 
+    my $result = $api_instance->hashStorePost(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->hashStorePost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-hashStorePost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # WebSimpleFileRequest | 
+
+try: 
+    # Stores the hash of a given file and the file itself, returns the hash
+    api_response = api_instance.hash_store_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->hashStorePost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_hashStorePost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_hashStorePost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Hash successfully stored </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-hashStorePost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-hashStorePost-200-schema">
+                                  <div id='responses-hashStorePost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Hash successfully stored",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-hashStorePost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-hashStorePost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-hashStorePost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Default-passKeyGetLenPasswordSaltGet">
                       <article id="api-Default-passKeyGetLenPasswordSaltGet-0" data-group="User" data-name="passKeyGetLenPasswordSaltGet" data-version="0">
                         <div class="pull-left">
@@ -801,7 +2925,7 @@
                           <div class="tab-pane active" id="examples-Default-passKeyGetLenPasswordSaltGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/passKey/Get/{len?}/{password?}/{salt?}"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//passKey/Get/{len?}/{password?}/{salt?}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-passKeyGetLenPasswordSaltGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1118,7 +3242,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/password/Get/{len?}/{digits?}/{case?}/{specialChars?}"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//password/Get/{len?}/{digits?}/{case?}/{specialChars?}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-passwordGetLenDigitsCaseSpecialCharsGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1432,11 +3556,11 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                    <div id="api-Default-storageDeleteGet">
-                      <article id="api-Default-storageDeleteGet-0" data-group="User" data-name="storageDeleteGet" data-version="0">
+                    <div id="api-Default-pwdWalletRetrieveSiteUserIDGet">
+                      <article id="api-Default-pwdWalletRetrieveSiteUserIDGet-0" data-group="User" data-name="pwdWalletRetrieveSiteUserIDGet" data-version="0">
                         <div class="pull-left">
-                          <h1>storageDeleteGet</h1>
-                          <p>Delete file from storage</p>
+                          <h1>pwdWalletRetrieveSiteUserIDGet</h1>
+                          <p>Retrieves a stored password entry for a given site and userID</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1444,31 +3568,31 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Delete</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/pwdWallet/Retrieve/{site}/{userID}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-storageDeleteGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageDeleteGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-storageDeleteGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-storageDeleteGet-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletRetrieveSiteUserIDGet-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-storageDeleteGet-0-curl">
+                          <div class="tab-pane active" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/storage/Delete"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//pwdWallet/Retrieve/{site}/{userID}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-storageDeleteGet-0-java">
+                          <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -1482,46 +3606,55 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        String site = site_example; // String | 
+        String userID = userID_example; // String | 
         try {
-            apiInstance.storageDeleteGet(client ID);
+            'String' result = apiInstance.pwdWalletRetrieveSiteUserIDGet(site, userID);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageDeleteGet");
+            System.err.println("Exception when calling DefaultApi#pwdWalletRetrieveSiteUserIDGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-storageDeleteGet-0-android">
+                          <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
 
 public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        UUID client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+        String site = site_example; // String | 
+        String userID = userID_example; // String | 
         try {
-            apiInstance.storageDeleteGet(client ID);
+            'String' result = apiInstance.pwdWalletRetrieveSiteUserIDGet(site, userID);
+            System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#storageDeleteGet");
+            System.err.println("Exception when calling DefaultApi#pwdWalletRetrieveSiteUserIDGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-storageDeleteGet-0-groovy">
+  <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">UUID *client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // 
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *site = site_example; // 
+String *userID = userID_example; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-// Delete file from storage
-[apiInstance storageDeleteGetWith:client ID
-              completionHandler: ^(NSError* error) {
+// Retrieves a stored password entry for a given site and userID
+[apiInstance pwdWalletRetrieveSiteUserIDGetWith:site
+    userID:userID
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1529,27 +3662,28 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-javascript">
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
 var api = new SecurityToolsApi.DefaultApi()
-var client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // {{UUID}} 
+var site = site_example; // {{String}} 
+var userID = userID_example; // {{String}} 
 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.storageDeleteGet(client ID, callback);
+api.pwdWalletRetrieveSiteUserIDGet(site, userID, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-storageDeleteGet-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-csharp">
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1558,22 +3692,24 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class storageDeleteGetExample
+    public class pwdWalletRetrieveSiteUserIDGetExample
     {
         public void main()
         {
 
             var apiInstance = new DefaultApi();
-            var client ID = new UUID(); // UUID | 
+            var site = site_example;  // String | 
+            var userID = userID_example;  // String | 
 
             try
             {
-                // Delete file from storage
-                apiInstance.storageDeleteGet(client ID);
+                // Retrieves a stored password entry for a given site and userID
+                'String' result = apiInstance.pwdWalletRetrieveSiteUserIDGet(site, userID);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.storageDeleteGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.pwdWalletRetrieveSiteUserIDGet: " + e.Message );
             }
         }
     }
@@ -1581,38 +3717,42 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-php">
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // UUID | 
+$site = site_example; // String | 
+$userID = userID_example; // String | 
 
 try {
-    $api_instance->storageDeleteGet($client ID);
+    $result = $api_instance->pwdWalletRetrieveSiteUserIDGet($site, $userID);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->storageDeleteGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->pwdWalletRetrieveSiteUserIDGet: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-perl">
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d; # UUID | 
+my $site = site_example; # String | 
+my $userID = userID_example; # String | 
 
 eval { 
-    $api_instance->storageDeleteGet(client ID => $client ID);
+    my $result = $api_instance->pwdWalletRetrieveSiteUserIDGet(site => $site, userID => $userID);
+    print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->storageDeleteGet: $@\n";
+    warn "Exception when calling DefaultApi->pwdWalletRetrieveSiteUserIDGet: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-storageDeleteGet-0-python">
+                            <div class="tab-pane" id="examples-Default-pwdWalletRetrieveSiteUserIDGet-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1621,38 +3761,55 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-client ID = 38400000-8cf0-11bd-b23e-10b96e4ef00d # UUID | 
+site = site_example # String | 
+userID = userID_example # String | 
 
 try: 
-    # Delete file from storage
-    api_instance.storage_delete_get(client ID)
+    # Retrieves a stored password entry for a given site and userID
+    api_response = api_instance.pwd_wallet_retrieve_site_user_id_get(site, userID)
+    pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DefaultApi->storageDeleteGet: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->pwdWalletRetrieveSiteUserIDGet: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
                           <h2>Parameters</h2>
 
-
-                            <div class="methodsubtabletitle">Header parameters</div>
+                            <div class="methodsubtabletitle">Path parameters</div>
                             <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                  <tr><td style="width:150px;">Client ID*</td>
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">site*</td>
                                   <td>
                                   
                                   
-                                      <div id="d2e199_storageDeleteGet_client ID">
+                                      <div id="d2e199_pwdWalletRetrieveSiteUserIDGet_site">
                                           <div class="json-schema-view">
                                               <div class="primitive">
                                                   <span class="type">
-                                                      UUID
+                                                      String
                                                   </span>
-                                                      <span class="format">
-                                                          (uuid)
-                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">userID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pwdWalletRetrieveSiteUserIDGet_userID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
                                   
                                               </div>
                                                   <div class="inner required">
@@ -1667,13 +3824,771 @@ except ApiException as e:
 
 
 
+
                           <h2>Responses</h2>
-                            <h3> Status: 200 - Success </h3>
+                            <h3> Status: 200 - Password entry successfully retrieved </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pwdWalletRetrieveSiteUserIDGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pwdWalletRetrieveSiteUserIDGet-200-schema">
+                                  <div id='responses-pwdWalletRetrieveSiteUserIDGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Password entry successfully retrieved",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pwdWalletRetrieveSiteUserIDGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pwdWalletRetrieveSiteUserIDGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pwdWalletRetrieveSiteUserIDGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet">
+                      <article id="api-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0" data-group="User" data-name="pwdWalletStoreSiteUsernamePasswordUserIDGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>pwdWalletStoreSiteUsernamePasswordUserIDGet</h1>
+                          <p>Stores a password entry for a given site, username, and password</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/pwdWallet/Store/{site}/{username}/{password}/{userID}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: text/plain"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//pwdWallet/Store/{site}/{username}/{password}/{userID}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        String site = site_example; // String | 
+        String username = username_example; // String | 
+        String password = password_example; // String | 
+        String userID = userID_example; // String | 
+        try {
+            'String' result = apiInstance.pwdWalletStoreSiteUsernamePasswordUserIDGet(site, username, password, userID);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#pwdWalletStoreSiteUsernamePasswordUserIDGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String site = site_example; // String | 
+        String username = username_example; // String | 
+        String password = password_example; // String | 
+        String userID = userID_example; // String | 
+        try {
+            'String' result = apiInstance.pwdWalletStoreSiteUsernamePasswordUserIDGet(site, username, password, userID);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#pwdWalletStoreSiteUsernamePasswordUserIDGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *site = site_example; // 
+String *username = username_example; // 
+String *password = password_example; // 
+String *userID = userID_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Stores a password entry for a given site, username, and password
+[apiInstance pwdWalletStoreSiteUsernamePasswordUserIDGetWith:site
+    username:username
+    password:password
+    userID:userID
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var site = site_example; // {{String}} 
+var username = username_example; // {{String}} 
+var password = password_example; // {{String}} 
+var userID = userID_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.pwdWalletStoreSiteUsernamePasswordUserIDGet(site, username, password, userID, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class pwdWalletStoreSiteUsernamePasswordUserIDGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var site = site_example;  // String | 
+            var username = username_example;  // String | 
+            var password = password_example;  // String | 
+            var userID = userID_example;  // String | 
+
+            try
+            {
+                // Stores a password entry for a given site, username, and password
+                'String' result = apiInstance.pwdWalletStoreSiteUsernamePasswordUserIDGet(site, username, password, userID);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.pwdWalletStoreSiteUsernamePasswordUserIDGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$site = site_example; // String | 
+$username = username_example; // String | 
+$password = password_example; // String | 
+$userID = userID_example; // String | 
+
+try {
+    $result = $api_instance->pwdWalletStoreSiteUsernamePasswordUserIDGet($site, $username, $password, $userID);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->pwdWalletStoreSiteUsernamePasswordUserIDGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $site = site_example; # String | 
+my $username = username_example; # String | 
+my $password = password_example; # String | 
+my $userID = userID_example; # String | 
+
+eval { 
+    my $result = $api_instance->pwdWalletStoreSiteUsernamePasswordUserIDGet(site => $site, username => $username, password => $password, userID => $userID);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->pwdWalletStoreSiteUsernamePasswordUserIDGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pwdWalletStoreSiteUsernamePasswordUserIDGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+site = site_example # String | 
+username = username_example # String | 
+password = password_example # String | 
+userID = userID_example # String | 
+
+try: 
+    # Stores a password entry for a given site, username, and password
+    api_response = api_instance.pwd_wallet_store_site_username_password_user_id_get(site, username, password, userID)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->pwdWalletStoreSiteUsernamePasswordUserIDGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">site*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pwdWalletStoreSiteUsernamePasswordUserIDGet_site">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">username*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pwdWalletStoreSiteUsernamePasswordUserIDGet_username">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">password*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pwdWalletStoreSiteUsernamePasswordUserIDGet_password">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">userID*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pwdWalletStoreSiteUsernamePasswordUserIDGet_userID">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Password entry successfully stored </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema">
+                                  <div id='responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Password entry successfully stored",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pwdWalletStoreSiteUsernamePasswordUserIDGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 502 - Bad Gateway </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-storageDeleteFileNameUserIdGet">
+                      <article id="api-Default-storageDeleteFileNameUserIdGet-0" data-group="User" data-name="storageDeleteFileNameUserIdGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>storageDeleteFileNameUserIdGet</h1>
+                          <p>Deletes a stored file</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/storage/Delete/{fileName}/{userId}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-storageDeleteFileNameUserIdGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-storageDeleteFileNameUserIdGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: text/plain"\
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//storage/Delete/{fileName}/{userId}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        String fileName = fileName_example; // String | 
+        String userId = userId_example; // String | 
+        try {
+            'String' result = apiInstance.storageDeleteFileNameUserIdGet(fileName, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageDeleteFileNameUserIdGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String fileName = fileName_example; // String | 
+        String userId = userId_example; // String | 
+        try {
+            'String' result = apiInstance.storageDeleteFileNameUserIdGet(fileName, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#storageDeleteFileNameUserIdGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *fileName = fileName_example; // 
+String *userId = userId_example; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// Deletes a stored file
+[apiInstance storageDeleteFileNameUserIdGetWith:fileName
+    userId:userId
+              completionHandler: ^('String' output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
+
+var api = new SecurityToolsApi.DefaultApi()
+var fileName = fileName_example; // {{String}} 
+var userId = userId_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.storageDeleteFileNameUserIdGet(fileName, userId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class storageDeleteFileNameUserIdGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var fileName = fileName_example;  // String | 
+            var userId = userId_example;  // String | 
+
+            try
+            {
+                // Deletes a stored file
+                'String' result = apiInstance.storageDeleteFileNameUserIdGet(fileName, userId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.storageDeleteFileNameUserIdGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$fileName = fileName_example; // String | 
+$userId = userId_example; // String | 
+
+try {
+    $result = $api_instance->storageDeleteFileNameUserIdGet($fileName, $userId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->storageDeleteFileNameUserIdGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $fileName = fileName_example; # String | 
+my $userId = userId_example; # String | 
+
+eval { 
+    my $result = $api_instance->storageDeleteFileNameUserIdGet(fileName => $fileName, userId => $userId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->storageDeleteFileNameUserIdGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-storageDeleteFileNameUserIdGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+fileName = fileName_example # String | 
+userId = userId_example # String | 
+
+try: 
+    # Deletes a stored file
+    api_response = api_instance.storage_delete_file_name_user_id_get(fileName, userId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->storageDeleteFileNameUserIdGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">fileName*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageDeleteFileNameUserIdGet_fileName">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">userId*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_storageDeleteFileNameUserIdGet_userId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - File successfully deleted </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-storageDeleteFileNameUserIdGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-storageDeleteFileNameUserIdGet-200-schema">
+                                  <div id='responses-storageDeleteFileNameUserIdGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "File successfully deleted",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string",
+        "x-content-type" : "text/plain"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-storageDeleteFileNameUserIdGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-storageDeleteFileNameUserIdGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-storageDeleteFileNameUserIdGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
                             </div>
 
                             <h3> Status: 502 - Bad Gateway </h3>
@@ -1721,7 +4636,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-Default-storageGetFileNameGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
-"http://0.0.0.0:8080/storage/Get/{file_name}"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//storage/Get/{file_name}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-storageGetFileNameGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2015,7 +4930,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: text/plain"\
 -H "Content-Type: application/json"\
-"http://0.0.0.0:8080/storage/Submit"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//storage/Submit"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-storageSubmitPost-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2031,7 +4946,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        SimpleFileRequest body = ; // SimpleFileRequest | 
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
         try {
             apiInstance.storageSubmitPost(body);
         } catch (ApiException e) {
@@ -2049,7 +4964,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        SimpleFileRequest body = ; // SimpleFileRequest | 
+        WebSimpleFileRequest body = ; // WebSimpleFileRequest | 
         try {
             apiInstance.storageSubmitPost(body);
         } catch (ApiException e) {
@@ -2064,7 +4979,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-storageSubmitPost-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">SimpleFileRequest *body = ; // 
+                              <pre class="prettyprint"><code class="language-cpp">WebSimpleFileRequest *body = ; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -2082,7 +4997,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
                               <pre class="prettyprint"><code class="language-js">var SecurityToolsApi = require('security_tools_api');
 
 var api = new SecurityToolsApi.DefaultApi()
-var body = ; // {{SimpleFileRequest}} 
+var body = ; // {{WebSimpleFileRequest}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -2113,7 +5028,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new SimpleFileRequest(); // SimpleFileRequest | 
+            var body = new WebSimpleFileRequest(); // WebSimpleFileRequest | 
 
             try
             {
@@ -2135,7 +5050,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // SimpleFileRequest | 
+$body = ; // WebSimpleFileRequest | 
 
 try {
     $api_instance->storageSubmitPost($body);
@@ -2151,7 +5066,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::SimpleFileRequest->new(); # SimpleFileRequest | 
+my $body = WWW::SwaggerClient::Object::WebSimpleFileRequest->new(); # WebSimpleFileRequest | 
 
 eval { 
     $api_instance->storageSubmitPost(body => $body);
@@ -2170,7 +5085,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # SimpleFileRequest | 
+body =  # WebSimpleFileRequest | 
 
 try: 
     # Submit a simple file
@@ -2200,7 +5115,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/SimpleFileRequest"
+        "$ref" : "#/components/schemas/WebSimpleFileRequest"
       }
     }
   },
@@ -2285,7 +5200,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: text/plain"\
 -H "Content-Type: application/octet-stream"\
-"http://0.0.0.0:8080/virusChecker/"</code></pre>
+"http://ec2-107-22-87-117.compute-1.amazonaws.com:8080//virusChecker/"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-virusCheckerPost-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

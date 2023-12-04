@@ -1,17 +1,18 @@
 package bytebandits.plugins
 
-import bytebandits.encryption.PassKeyGeneration
 import bytebandits.encryption.EncKeyGeneration
 import bytebandits.encryption.Encryption
+import bytebandits.encryption.PassKeyGeneration
 import bytebandits.hashes.Hashes
-import bytebandits.interfaces.HashCheckNStore
-import bytebandits.interfaces.PwdWallet
 import bytebandits.models.PasswordEntry
 import bytebandits.models.SimpleFileRequest
+import bytebandits.models.WebJWTRequest
 import bytebandits.models.WebSimpleFileRequest
 import bytebandits.persistence.FilePersister
 import bytebandits.viruscheck.VirusHashChecker
 import bytebandits.wallet.PassWallet
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -31,6 +32,27 @@ fun Application.configureRouting() {
 	routing {
 		//This addds authentication, the routes are now protected
 		authenticate {
+			route("/jwt/", HttpMethod.Post) {
+				handle {
+					//test code below, need to get the fields from http request
+					try {
+						val req = call.receive<WebJWTRequest>()
+						val token = JWT.create()
+							.withAudience("jwt-audience")
+							.withIssuer("https://jwt-provider-domain/")
+							.withClaim("clientId", "sample")
+							.withClaim("username", req.username)
+							.withClaim("paying", req.paying)
+							.withExpiresAt(Date(System.currentTimeMillis() + 60000000))
+							.sign(Algorithm.HMAC256("secret"))
+						call.respondText(status = HttpStatusCode.OK) { token }
+					} catch (e: Exception) {
+						logger.error("error serving request", e)
+						call.respondText(status = HttpStatusCode.BadGateway, provider = { "This had an error" })
+					}
+				}
+			}
+
 			route("/storage/Submit/", HttpMethod.Post) {
 				handle {
 					//test code below, need to get the fields from http request
