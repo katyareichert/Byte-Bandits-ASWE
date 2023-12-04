@@ -51,7 +51,6 @@ Corresponding release is `2.0` - note that based on the instructions from OH, so
 - Our API is a code-calls-code-over-network API, not a user-facing CLI
 - Documentation for all implemented entry points can be found via our Swagger
 - For documentation, see: [here - yaml format](/byte-bandits/src/main/resources/openapi/documentation.yaml) or [here - swagger UI](https://app.swaggerhub.com/apis-docs/HugoMatousek2/security-tools_api/1.0.0)
-- TO BE ADDED BY 12/7: additional clarification for some endpoints not used by the client
 
 ### Configuration
 - Build and run instructions can be found in the Iteration 1 section [here](#build-run-test-instruction)
@@ -64,6 +63,11 @@ Corresponding release is `2.0` - note that based on the instructions from OH, so
 - TO BE ADDED BY 12/7: enhanced description of external integration tests
 - We don't use any other external API
 
+### Changes from the proposal
+- We implemented most functionality from our original proposal
+- There have been some changes to a couple of features - for example, for virus checking, we rely on a database that should be maintained separately from the service, rather than directly connecting to an external online database, or we dropped the file sharing, as we realized too late that our persistent storage architecture was not really usable for file sharing
+- We dropped the digital certificate functionality, as the actual implementation was beyond our capabilities
+- For minor things, such as support for different encryption mechanisms, we implemented the service in an extendable fashion, meaning that these could be seamasly added later on
 
 ## Iteration 1
 
