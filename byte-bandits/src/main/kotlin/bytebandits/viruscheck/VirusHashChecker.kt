@@ -3,7 +3,6 @@ package bytebandits.viruscheck
 import bytebandits.hashes.Hashes.Companion.calculateMD5
 import bytebandits.interfaces.VirusChecker
 import bytebandits.models.SimpleFileRequest
-import bytebandits.persistence.FilePersister
 import java.io.File
 import java.security.MessageDigest
 
@@ -14,15 +13,9 @@ public  class VirusHashChecker {
 
             val file = request.contents
             val searchHash = calculateMD5(file)
-            val internalDatabase = File("src/main/resources/db.txt")
+            val internalDatabase = badHashes.split('\n')
 
-            val matchFound = internalDatabase.useLines { lines ->
-                lines.any { line ->
-                    val md5Hash = line.trim()
-                    md5Hash == searchHash
-                }
-            }
-
+            val matchFound = internalDatabase.contains(searchHash)
             if (matchFound) {
                 return "File is a known virus. Please delete immediately."
             }
