@@ -11,7 +11,7 @@ Corresponding release is `2.0` - note that based on the instructions from OH, so
 ### Multiple Client Instances
 - The service supports multiple simultaneous instances of the sample client, and the service provides each instance with unique JSON Web Token (JWT) to differentiate and authorize each instance.
 - This has been tested manually and follows from our overall architecture.
-- TO BE ADDED BY 12/7: Screenshots of the tests that show the multiple instances of the client running simultaneously.
+- This will be showcased during the demo.
 
 ### Continuous Integration
 - This repository performs continuous integration. All build, analysis and testing tools are automatically run for every commit to the main branch of the codebase.
@@ -27,7 +27,6 @@ Corresponding release is `2.0` - note that based on the instructions from OH, so
 - Note that our branch coverage is lower (~50%), because we don't have tests that would trigger exceptions such as OS inability to write to a file, etc. However, these generally lead to the same outcome that we already test by other means.
 - Overall, most uncovered branches by far are things like `catch Exception` for routing when a 502 error is returned (these are sort of useless) + the base ktor skeleton code.
 - All endpoints and corresponding branches were tested manually using Postman.
-- A few endpoints that are not used by the client and were added last don't have automatic tests - TO BE ADDED BY 12/7: Extended branch coverage will be acheived by demo day.
 
 ### Bug Finder
 - Static analysis is done by CodeQL and style checking is done by Detekt.
@@ -60,7 +59,6 @@ Corresponding release is `2.0` - note that based on the instructions from OH, so
 
 ### External Integration Tests
 - External resources include our persistant files, which are checked as part of our testing. These can be found in the reports, under [Continuous Integration](#continuous-integration)
-- TO BE ADDED BY 12/7: enhanced description of external integration tests
 - We don't use any other external API
 
 ### Changes from the proposal
